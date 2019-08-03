@@ -7,19 +7,19 @@
   
   <title>fileRunServer | Ruixia,Sun&#39;s Technique Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="移植filerun服务器为了在84机器上调通phpstorm的debug功能插件，在84的原有php5.6环境里下载了一堆模块，debug调通了，但是测试组同时来报，说部门用作内部网盘的filerun软件不能访问了，继续在84机器上找问题有可能会导致debug功能不可用，干脆将它移到201服务器上。 一、确认一下php版本update-alternatives  命令用于处理linux系统中软件版">
+  <meta name="description" content="移植filerun服务器为了在84机器上调通phpstorm的debug功能插件，在84的原有php5.6环境里下载了一堆模块，debug调通了，但是测试组同事来报，说部门用作内部网盘的filerun软件不能访问了，继续在84机器上找问题有可能会导致debug功能不可用，干脆将它移到201服务器上。 一、确认一下php版本update-alternatives  命令用于处理linux系统中软件版">
 <meta name="keywords" content="linux,filerun,ubuntu,fileshare">
 <meta property="og:type" content="article">
 <meta property="og:title" content="fileRunServer">
 <meta property="og:url" content="https://sunleaf2002.github.io/2019/08/02/filerunServer/index.html">
 <meta property="og:site_name" content="Ruixia,Sun&#39;s Technique Blog">
-<meta property="og:description" content="移植filerun服务器为了在84机器上调通phpstorm的debug功能插件，在84的原有php5.6环境里下载了一堆模块，debug调通了，但是测试组同时来报，说部门用作内部网盘的filerun软件不能访问了，继续在84机器上找问题有可能会导致debug功能不可用，干脆将它移到201服务器上。 一、确认一下php版本update-alternatives  命令用于处理linux系统中软件版">
+<meta property="og:description" content="移植filerun服务器为了在84机器上调通phpstorm的debug功能插件，在84的原有php5.6环境里下载了一堆模块，debug调通了，但是测试组同事来报，说部门用作内部网盘的filerun软件不能访问了，继续在84机器上找问题有可能会导致debug功能不可用，干脆将它移到201服务器上。 一、确认一下php版本update-alternatives  命令用于处理linux系统中软件版">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://sunleaf2002.github.io/img/filerunServer.png">
-<meta property="og:updated_time" content="2019-08-02T09:27:47.669Z">
+<meta property="og:updated_time" content="2019-08-03T04:42:51.131Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="fileRunServer">
-<meta name="twitter:description" content="移植filerun服务器为了在84机器上调通phpstorm的debug功能插件，在84的原有php5.6环境里下载了一堆模块，debug调通了，但是测试组同时来报，说部门用作内部网盘的filerun软件不能访问了，继续在84机器上找问题有可能会导致debug功能不可用，干脆将它移到201服务器上。 一、确认一下php版本update-alternatives  命令用于处理linux系统中软件版">
+<meta name="twitter:description" content="移植filerun服务器为了在84机器上调通phpstorm的debug功能插件，在84的原有php5.6环境里下载了一堆模块，debug调通了，但是测试组同事来报，说部门用作内部网盘的filerun软件不能访问了，继续在84机器上找问题有可能会导致debug功能不可用，干脆将它移到201服务器上。 一、确认一下php版本update-alternatives  命令用于处理linux系统中软件版">
 <meta name="twitter:image" content="https://sunleaf2002.github.io/img/filerunServer.png">
   
     <link rel="alternate" href="/atom.xml" title="Ruixia,Sun&#39;s Technique Blog" type="application/atom+xml">
@@ -97,7 +97,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="移植filerun服务器"><a href="#移植filerun服务器" class="headerlink" title="移植filerun服务器"></a>移植filerun服务器</h1><p>为了在84机器上调通phpstorm的debug功能插件，在84的原有php5.6环境里下载了一堆模块，debug调通了，但是测试组同时来报，说部门用作内部网盘的filerun软件不能访问了，继续在84机器上找问题有可能会导致debug功能不可用，干脆将它移到201服务器上。</p>
+        <h1 id="移植filerun服务器"><a href="#移植filerun服务器" class="headerlink" title="移植filerun服务器"></a>移植filerun服务器</h1><p>为了在84机器上调通phpstorm的debug功能插件，在84的原有php5.6环境里下载了一堆模块，debug调通了，但是测试组同事来报，说部门用作内部网盘的filerun软件不能访问了，继续在84机器上找问题有可能会导致debug功能不可用，干脆将它移到201服务器上。</p>
 <h2 id="一、确认一下php版本"><a href="#一、确认一下php版本" class="headerlink" title="一、确认一下php版本"></a>一、确认一下php版本</h2><p>update-alternatives  命令用于处理linux系统中软件版本的切换<br>update-alternatives –display php<br>输出：</p>
 <pre><code>php - 自动模式
   link best version is /usr/bin/php7.3
@@ -123,7 +123,7 @@
 cannot run under PHP 7.1 or later.\n Please ask the provider of the script 
 to provide a version encoded with the ionCube Encoder for PHP 7.1. 
 in Unknown on line 0 </code></pre><p>这些文件是被用php5.6版本的加密软件加密的，不能用在php7.3版本上<br>最后吐血发现，要在 filerun/system/data/autoconfig.php  中将数据库地址改成localhost 就很快  —-早该想到的 作为OracleDBA认证专家，哈哈。</p>
-<h2 id="六、解决问题3"><a href="#六、解决问题3" class="headerlink" title="六、解决问题3"></a>六、解决问题3</h2><p><strong>又发现word文件不能下载问题，看来前面的办法无效</strong><br>先改设置 Control Panel &gt; Configuration &gt; Files &gt; Misc options &gt; Enable download accelerator : None<br>试图用libreoffice，无效，office365要购买<br>找到了一个 ONLYOFFICE插件，在docker环境运行，免得与外面的php7.3和诸模块不匹配</p>
+<h2 id="六、解决问题3"><a href="#六、解决问题3" class="headerlink" title="六、解决问题3"></a>六、解决问题3</h2><p><strong>又发现word文件不能下载问题，看来前面的办法无效</strong><br>先改设置 Control Panel &gt; Configuration &gt; Files &gt; Misc options &gt; Enable download accelerator : None<br>试图用libreoffice，无效，office365要购买<br>上filerun的官网讨论区搜索，发现onlyoffice用的挺多<br>找到了一个 ONLYOFFICE，在docker环境运行，免得与外面的php7.3和诸模块不匹配</p>
 <pre><code>docker network create --driver bridge onlyoffice
 docker pull onlyoffice/documentserver
 docker run --net onlyoffice -i -t -d -p 8080:80 --restart=always --name onlyoffice-document-server  onlyoffice/documentserver
