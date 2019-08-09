@@ -5,20 +5,15 @@
   
 
   
-  <title>cleanDevloopDir | Ruixia,Sun&#39;s Technique Blog</title>
+  <title>Tag: selenium | Ruixia,Sun&#39;s Technique Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="删除Linux循环设备/dev/loop用df -h命令查看磁盘空间发现两个loop设备 /dev/loop0       89M   89M     0  100% /snap/core/7270 /dev/loop1      254M  254M     0  100% /snap/electronic-wechat/7其中的electronic-wechat是有一次试图装微信客户端而下载的">
-<meta name="keywords" content="linux,disk,ubuntu">
-<meta property="og:type" content="article">
-<meta property="og:title" content="cleanDevloopDir">
-<meta property="og:url" content="https://sunleaf2002.github.io/2019/08/08/cleanDevloopDir/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Ruixia,Sun&#39;s Technique Blog">
+<meta property="og:url" content="https://sunleaf2002.github.io/tags/selenium/index.html">
 <meta property="og:site_name" content="Ruixia,Sun&#39;s Technique Blog">
-<meta property="og:description" content="删除Linux循环设备/dev/loop用df -h命令查看磁盘空间发现两个loop设备 /dev/loop0       89M   89M     0  100% /snap/core/7270 /dev/loop1      254M  254M     0  100% /snap/electronic-wechat/7其中的electronic-wechat是有一次试图装微信客户端而下载的">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-08T06:36:33.005Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cleanDevloopDir">
-<meta name="twitter:description" content="删除Linux循环设备/dev/loop用df -h命令查看磁盘空间发现两个loop设备 /dev/loop0       89M   89M     0  100% /snap/core/7270 /dev/loop1      254M  254M     0  100% /snap/electronic-wechat/7其中的electronic-wechat是有一次试图装微信客户端而下载的">
+<meta name="twitter:title" content="Ruixia,Sun&#39;s Technique Blog">
   
     <link rel="alternate" href="/atom.xml" title="Ruixia,Sun&#39;s Technique Blog" type="application/atom+xml">
   
@@ -69,75 +64,40 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-cleanDevloopDir" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/08/cleanDevloopDir/" class="article-date">
-  <time datetime="2019-08-08T05:44:00.000Z" itemprop="datePublished">2019-08-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      cleanDevloopDir
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2019/08/09/seleniumUseAttension/" class="archive-article-date">
+  <time datetime="2019-08-09T01:16:19.000Z" itemprop="datePublished">Aug 9</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/08/09/seleniumUseAttension/">seleniumUseAttension</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="删除Linux循环设备-dev-loop"><a href="#删除Linux循环设备-dev-loop" class="headerlink" title="删除Linux循环设备/dev/loop"></a>删除Linux循环设备/dev/loop</h2><p>用df -h命令查看磁盘空间<br>发现两个loop设备</p>
-<pre><code>/dev/loop0       89M   89M     0  100% /snap/core/7270
-/dev/loop1      254M  254M     0  100% /snap/electronic-wechat/7</code></pre><p>其中的electronic-wechat是有一次试图装微信客户端而下载的软件，不好用。</p>
-<p>查了一下，<br>dev/loop（或称vnd (vnode disk)、lofi（循环文件接口））是一种伪设备，<br>这种设备使得文件可以如同块设备一般被访问，相当于挂载的镜像文件，也没有什么用途，<br>而snap是一种ubuntu的包安装方式，大概是某次装软件用到的，可以不用。</p>
-<p>用losetup -a命令查一下当前的loop设备,与上面的一致</p>
-<pre><code>/dev/loop1: [2050]:4325623 (/var/lib/snapd/snaps/electronic-wechat_7.snap)
-/dev/loop0: [2050]:4325622 (/var/lib/snapd/snaps/core_7270.snap)</code></pre><p>apt autoremove –purge snapd</p>
-<p>卸载了很多软件 不知道会不会影响其它软件的运行 先给机器减轻负担 遇到问题再解决问题吧</p>
-<p>用df -h命令查看磁盘空间<br>上面两行不再出现</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/08/cleanDevloopDir/" data-id="cjz3iy8pv00006ysleqg4e2tj" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/disk/">disk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2019/08/09/seleniumUseAttension/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          seleniumUseAttension
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2019/08/02/filerunServer/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">fileRunServer</div>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
+
 
 </section>
         
