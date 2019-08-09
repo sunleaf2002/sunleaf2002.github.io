@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>seleniumUseAttension | Ruixia,Sun&#39;s Technique Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用selenium爬数据遇到的问题一、导入需要的库from selenium import webdriver  #导入操作web的模块 from selenium.webdriver.support.select import Select  #这行是为了操作一个select控件 import time  #为了让界面停一会  browser = webdriver.Chrome()  #打开">
+<meta property="og:type" content="article">
+<meta property="og:title" content="seleniumUseAttension">
+<meta property="og:url" content="https://sunleaf2002.github.io/2019/08/09/seleniumUseAttension/index.html">
+<meta property="og:site_name" content="Ruixia,Sun&#39;s Technique Blog">
+<meta property="og:description" content="使用selenium爬数据遇到的问题一、导入需要的库from selenium import webdriver  #导入操作web的模块 from selenium.webdriver.support.select import Select  #这行是为了操作一个select控件 import time  #为了让界面停一会  browser = webdriver.Chrome()  #打开">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-09T02:57:07.619Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="seleniumUseAttension">
+<meta name="twitter:description" content="使用selenium爬数据遇到的问题一、导入需要的库from selenium import webdriver  #导入操作web的模块 from selenium.webdriver.support.select import Select  #这行是为了操作一个select控件 import time  #为了让界面停一会  browser = webdriver.Chrome()  #打开">
+  
+    <link rel="alternate" href="/atom.xml" title="Ruixia,Sun&#39;s Technique Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Ruixia,Sun&#39;s Technique Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Record the step of upgrading......</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://sunleaf2002.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-seleniumUseAttension" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/09/seleniumUseAttension/" class="article-date">
+  <time datetime="2019-08-09T01:16:19.000Z" itemprop="datePublished">2019-08-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      seleniumUseAttension
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="使用selenium爬数据遇到的问题"><a href="#使用selenium爬数据遇到的问题" class="headerlink" title="使用selenium爬数据遇到的问题"></a>使用selenium爬数据遇到的问题</h2><h2 id="一、导入需要的库"><a href="#一、导入需要的库" class="headerlink" title="一、导入需要的库"></a>一、导入需要的库</h2><pre><code>from selenium import webdriver  #导入操作web的模块
+from selenium.webdriver.support.select import Select  #这行是为了操作一个select控件
+import time  #为了让界面停一会
+
+browser = webdriver.Chrome()  #打开chrome
+browser.maximize_window() #最大化窗口
+browser.get(&apos;http://×××.com&apos;) #访问网页</code></pre><h2 id="二、解决弹出警告框的障碍"><a href="#二、解决弹出警告框的障碍" class="headerlink" title="二、解决弹出警告框的障碍"></a>二、解决弹出警告框的障碍</h2><pre><code>time.sleep(3)
+browser.switch_to.alert.accept() #模拟直接点一下</code></pre><h2 id="三、解决登录问题"><a href="#三、解决登录问题" class="headerlink" title="三、解决登录问题"></a>三、解决登录问题</h2><pre><code>elem_user = browser.find_element_by_name(&apos;username&apos;) # 获取用户名的输入控件 ，是通过用chrome的F12查看element获得的，一下控件基本都是这个方法获得
+elem_user.clear()
+elem_user.send_keys(&apos;######&apos;) # 键入用户名
+elem_pass = browser.find_element_by_name(&apos;password&apos;)# 密码的输入控件
+elem_pass.clear()
+elem_pass.send_keys(&apos;#####&apos;)
+elem_login = browser.find_element_by_id(&apos;login&apos;)# 登录按钮控件
+elem_login.click()# 点击登录按钮
+time.sleep(2)</code></pre><h2 id="四、按文字获取控件，使用较多"><a href="#四、按文字获取控件，使用较多" class="headerlink" title="四、按文字获取控件，使用较多"></a>四、按文字获取控件，使用较多</h2><pre><code>browser.find_element_by_xpath(&quot;//*[text()=&apos;管理&apos;]&quot;).click()  #按照网页上的顺序单击按钮，等几秒，跳转后再点。。。
+time.sleep(3)</code></pre><h2 id="五、获取select控件的条目"><a href="#五、获取select控件的条目" class="headerlink" title="五、获取select控件的条目"></a>五、获取select控件的条目</h2><pre><code>list_1 =browser.find_element_by_tag_name(&apos;select&apos;)  # 用到了前面导入的Select模块
+Select(list_1).select_by_value(&quot;100&quot;) # 按值来选条目</code></pre><h2 id="六、最重要的，如果网页内有iframe控件，想获取它内部的控件"><a href="#六、最重要的，如果网页内有iframe控件，想获取它内部的控件" class="headerlink" title="六、最重要的，如果网页内有iframe控件，想获取它内部的控件"></a>六、最重要的，如果网页内有iframe控件，想获取它内部的控件</h2><pre><code>browser.switch_to_frame(&apos;main&apos;) # 先切换到这个frame，“main”是名称
+browser.find_element_by_id(&quot;add&quot;) #再继续获得frame内部的控件，否则总是取不到 ，浪费了大部分时间</code></pre><p>###七、以下是批量写文件</p>
+<pre><code>file_name =&quot;&quot;
+file_data = open(&apos;file_data_1.txt&apos;, &apos;w&apos;)
+pages=0
+while(pages&lt;20000):
+    table = browser.find_element_by_tag_name(&apos;table&apos;)  # 按tag取table表格控件
+    table_tr_list = table.find_elements_by_tag_name(&apos;tr&apos;)    # 取当前页面的所有行
+    table_cols = table_tr_list[0].find_elements_by_tag_name(&apos;th&apos;)   #取第一行的所有列
+    for r,tr in enumerate(table_tr_list, 1):        
+        table_td_list = tr.find_elements_by_tag_name(&apos;td&apos;)
+        for c,td in enumerate(table_td_list):            
+            file_data.write(td.text+&apos;\n&apos;)            
+    pages = pages + 1
+    print(pages)
+    if pages % 1000 == 0:  # 每1000页写个新文件
+        file_data.close()
+        flie_name = &apos;file_data_&apos; + str(pages) + &apos;.txt&apos; #动态生成文件名称
+        file_data = open(flie_name, &apos;w&apos;)
+    browser.find_element_by_id(&apos;iwap-gen-3_next&apos;).click()  #点击下一页
+    time.sleep(10)
+file_data.close() #关闭最后一个文件</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sunleaf2002.github.io/2019/08/09/seleniumUseAttension/" data-id="cjz3in48q0000prslo83netpt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/08/cleanDevloopDir/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">cleanDevloopDir</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/disk/">disk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filerun/">filerun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fileshare/">fileshare</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/disk/" style="font-size: 10px;">disk</a> <a href="/tags/filerun/" style="font-size: 10px;">filerun</a> <a href="/tags/fileshare/" style="font-size: 10px;">fileshare</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/08/09/seleniumUseAttension/">seleniumUseAttension</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/08/cleanDevloopDir/">cleanDevloopDir</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/02/filerunServer/">fileRunServer</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/31/linuxFtpServer/">linuxFtpServer</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 ruixia,sun<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
