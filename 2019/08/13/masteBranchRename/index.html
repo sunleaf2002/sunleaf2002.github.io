@@ -5,20 +5,20 @@
   
 
   
-  <title>cleanDevloopDir | Ruixia,Sun&#39;s Technique Blog</title>
+  <title>masteBranchRename | Ruixia,Sun&#39;s Technique Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="删除Linux循环设备/dev/loop用df -h命令查看磁盘空间发现两个loop设备 /dev/loop0       89M   89M     0  100% /snap/core/7270 /dev/loop1      254M  254M     0  100% /snap/electronic-wechat/7其中的electronic-wechat是有一次试图装微信客户端而下载的">
-<meta name="keywords" content="linux,disk,ubuntu">
+  <meta name="description" content="maste分支重命名惊险记一、当前问题做完联想海光后，要将代码应用到同方产品中，产品logo图片和文字不同，要求尽量能共用代码，只将有差异的部分放到单独的分支上。 二、基本思路生成tongfang分支，在这之上不仅改了图片，还改了登录界面的代码，而且将来的登录界面都将与同方的一致。这就意味着可将同方分支作为将来的master分支，而将原来的master分支重命名为联想分支即可。当前的本地和远程都有">
+<meta name="keywords" content="git,gitlab">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cleanDevloopDir">
-<meta property="og:url" content="https://sunleaf2002.github.io/2019/08/08/cleanDevloopDir/index.html">
+<meta property="og:title" content="masteBranchRename">
+<meta property="og:url" content="https://sunleaf2002.github.io/2019/08/13/masteBranchRename/index.html">
 <meta property="og:site_name" content="Ruixia,Sun&#39;s Technique Blog">
-<meta property="og:description" content="删除Linux循环设备/dev/loop用df -h命令查看磁盘空间发现两个loop设备 /dev/loop0       89M   89M     0  100% /snap/core/7270 /dev/loop1      254M  254M     0  100% /snap/electronic-wechat/7其中的electronic-wechat是有一次试图装微信客户端而下载的">
+<meta property="og:description" content="maste分支重命名惊险记一、当前问题做完联想海光后，要将代码应用到同方产品中，产品logo图片和文字不同，要求尽量能共用代码，只将有差异的部分放到单独的分支上。 二、基本思路生成tongfang分支，在这之上不仅改了图片，还改了登录界面的代码，而且将来的登录界面都将与同方的一致。这就意味着可将同方分支作为将来的master分支，而将原来的master分支重命名为联想分支即可。当前的本地和远程都有">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-08T06:36:33.005Z">
+<meta property="og:updated_time" content="2019-08-13T07:55:47.576Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cleanDevloopDir">
-<meta name="twitter:description" content="删除Linux循环设备/dev/loop用df -h命令查看磁盘空间发现两个loop设备 /dev/loop0       89M   89M     0  100% /snap/core/7270 /dev/loop1      254M  254M     0  100% /snap/electronic-wechat/7其中的electronic-wechat是有一次试图装微信客户端而下载的">
+<meta name="twitter:title" content="masteBranchRename">
+<meta name="twitter:description" content="maste分支重命名惊险记一、当前问题做完联想海光后，要将代码应用到同方产品中，产品logo图片和文字不同，要求尽量能共用代码，只将有差异的部分放到单独的分支上。 二、基本思路生成tongfang分支，在这之上不仅改了图片，还改了登录界面的代码，而且将来的登录界面都将与同方的一致。这就意味着可将同方分支作为将来的master分支，而将原来的master分支重命名为联想分支即可。当前的本地和远程都有">
   
     <link rel="alternate" href="/atom.xml" title="Ruixia,Sun&#39;s Technique Blog" type="application/atom+xml">
   
@@ -69,14 +69,14 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-cleanDevloopDir" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-masteBranchRename" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/08/08/cleanDevloopDir/" class="article-date">
-  <time datetime="2019-08-08T05:44:00.000Z" itemprop="datePublished">2019-08-08</time>
+    <a href="/2019/08/13/masteBranchRename/" class="article-date">
+  <time datetime="2019-08-13T06:37:56.000Z" itemprop="datePublished">2019-08-13</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
+    <a class="article-category-link" href="/categories/git/">git</a>
   </div>
 
   </div>
@@ -87,7 +87,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      cleanDevloopDir
+      masteBranchRename
     </h1>
   
 
@@ -95,23 +95,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="删除Linux循环设备-dev-loop"><a href="#删除Linux循环设备-dev-loop" class="headerlink" title="删除Linux循环设备/dev/loop"></a>删除Linux循环设备/dev/loop</h2><p>用df -h命令查看磁盘空间<br>发现两个loop设备</p>
-<pre><code>/dev/loop0       89M   89M     0  100% /snap/core/7270
-/dev/loop1      254M  254M     0  100% /snap/electronic-wechat/7</code></pre><p>其中的electronic-wechat是有一次试图装微信客户端而下载的软件，不好用。</p>
-<p>查了一下，<br>dev/loop（或称vnd (vnode disk)、lofi（循环文件接口））是一种伪设备，<br>这种设备使得文件可以如同块设备一般被访问，相当于挂载的镜像文件，也没有什么用途，<br>而snap是一种ubuntu的包安装方式，大概是某次装软件用到的，可以不用。</p>
-<p>用losetup -a命令查一下当前的loop设备,与上面的一致</p>
-<pre><code>/dev/loop1: [2050]:4325623 (/var/lib/snapd/snaps/electronic-wechat_7.snap)
-/dev/loop0: [2050]:4325622 (/var/lib/snapd/snaps/core_7270.snap)</code></pre><p>apt autoremove –purge snapd</p>
-<p>卸载了很多软件 不知道会不会影响其它软件的运行 先给机器减轻负担 遇到问题再解决问题吧</p>
-<p>用df -h命令查看磁盘空间<br>上面两行不再出现</p>
+        <h1 id="maste分支重命名惊险记"><a href="#maste分支重命名惊险记" class="headerlink" title="maste分支重命名惊险记"></a>maste分支重命名惊险记</h1><h2 id="一、当前问题"><a href="#一、当前问题" class="headerlink" title="一、当前问题"></a>一、当前问题</h2><p>做完联想海光后，要将代码应用到同方产品中，产品logo图片和文字不同，要求尽量能共用代码，只将有差异的部分放到单独的分支上。</p>
+<h2 id="二、基本思路"><a href="#二、基本思路" class="headerlink" title="二、基本思路"></a>二、基本思路</h2><p>生成tongfang分支，在这之上不仅改了图片，还改了登录界面的代码，而且将来的登录界面都将与同方的一致。<br>这就意味着可将同方分支作为将来的master分支，而将原来的master分支重命名为联想分支即可。<br>当前的本地和远程都有master分支和tongfang分支。</p>
+<h2 id="三、重命名master分支的操作过程"><a href="#三、重命名master分支的操作过程" class="headerlink" title="三、重命名master分支的操作过程"></a>三、重命名master分支的操作过程</h2><p>1.本地切换分支到tongfang分支，不能让当前分支是master分支 git checkout tongfang<br>2.本地重命名 git branch -m master lenovo  //将原来的master分支重命名为lenovo分支<br>3.在远程gitlab里，将当前的default分支改为tongfang分支<br>4.删除远程分支：git push origin :master<br>5.将重命名过的新分支提交：git push origin lenovo</p>
+<h2 id="四、发现问题"><a href="#四、发现问题" class="headerlink" title="四、发现问题"></a>四、发现问题</h2><p>试图将远程gitlab的当前分支切换到lenovo分支上，目的是将本地和远程的tongfang分支重命名为master，<br>发现新命名的lenovo分支gitlab上看不到，master分支能看到，点击后提示404找不到,只能看到tongfang分支，<br>试图将当前的default分支改为tongfang分支，不成功。</p>
+<h2 id="五、解决办法，在远程创建master分支"><a href="#五、解决办法，在远程创建master分支" class="headerlink" title="五、解决办法，在远程创建master分支"></a>五、解决办法，在远程创建master分支</h2><p>远程gitlab里，在git库的commit-&gt;branch页面，new branch创建一个名为master的分支，开始位置是tongfang分支的最后一次提交点，将当前的default分支改为lenovo分支，成功。<br>创建master分支后，一切操作都正常了，看来master分支是必须存在的。</p>
+<h2 id="六、本地找回master分支"><a href="#六、本地找回master分支" class="headerlink" title="六、本地找回master分支"></a>六、本地找回master分支</h2><p>git branch -a<br>可以看到远程的master分支，没有本地的master分支<br>git checkout master<br>git branch -a<br>本地分支结构与远程完全一样。</p>
+<h2 id="七、后续"><a href="#七、后续" class="headerlink" title="七、后续"></a>七、后续</h2><p>以后的共性修改都在master分支上，个性的改动在各厂商分支上。<br>共性修改合并到厂商分支的方法：<br>先git checkout 厂商分支<br>再git merge master </p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/08/cleanDevloopDir/" data-id="cjz9j0yu0000470sllh8yv1gs" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/13/masteBranchRename/" data-id="cjz9j3ygg0000cbslknchqqym" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/disk/">disk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gitlab/">gitlab</a></li></ul>
 
     </footer>
   </div>
@@ -119,19 +117,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/08/09/seleniumUseAttension/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          seleniumUseAttension
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/08/02/filerunServer/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/08/09/seleniumUseAttension/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">fileRunServer</div>
+      <div class="article-nav-title">seleniumUseAttension</div>
     </a>
   
 </nav>

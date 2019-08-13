@@ -66,6 +66,55 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-masteBranchRename" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/13/masteBranchRename/" class="article-date">
+  <time datetime="2019-08-13T06:37:56.000Z" itemprop="datePublished">2019-08-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/git/">git</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/13/masteBranchRename/">masteBranchRename</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="maste分支重命名惊险记"><a href="#maste分支重命名惊险记" class="headerlink" title="maste分支重命名惊险记"></a>maste分支重命名惊险记</h1><h2 id="一、当前问题"><a href="#一、当前问题" class="headerlink" title="一、当前问题"></a>一、当前问题</h2><p>做完联想海光后，要将代码应用到同方产品中，产品logo图片和文字不同，要求尽量能共用代码，只将有差异的部分放到单独的分支上。</p>
+<h2 id="二、基本思路"><a href="#二、基本思路" class="headerlink" title="二、基本思路"></a>二、基本思路</h2><p>生成tongfang分支，在这之上不仅改了图片，还改了登录界面的代码，而且将来的登录界面都将与同方的一致。<br>这就意味着可将同方分支作为将来的master分支，而将原来的master分支重命名为联想分支即可。<br>当前的本地和远程都有master分支和tongfang分支。</p>
+<h2 id="三、重命名master分支的操作过程"><a href="#三、重命名master分支的操作过程" class="headerlink" title="三、重命名master分支的操作过程"></a>三、重命名master分支的操作过程</h2><p>1.本地切换分支到tongfang分支，不能让当前分支是master分支 git checkout tongfang<br>2.本地重命名 git branch -m master lenovo  //将原来的master分支重命名为lenovo分支<br>3.在远程gitlab里，将当前的default分支改为tongfang分支<br>4.删除远程分支：git push origin :master<br>5.将重命名过的新分支提交：git push origin lenovo</p>
+<h2 id="四、发现问题"><a href="#四、发现问题" class="headerlink" title="四、发现问题"></a>四、发现问题</h2><p>试图将远程gitlab的当前分支切换到lenovo分支上，目的是将本地和远程的tongfang分支重命名为master，<br>发现新命名的lenovo分支gitlab上看不到，master分支能看到，点击后提示404找不到,只能看到tongfang分支，<br>试图将当前的default分支改为tongfang分支，不成功。</p>
+<h2 id="五、解决办法，在远程创建master分支"><a href="#五、解决办法，在远程创建master分支" class="headerlink" title="五、解决办法，在远程创建master分支"></a>五、解决办法，在远程创建master分支</h2><p>远程gitlab里，在git库的commit-&gt;branch页面，new branch创建一个名为master的分支，开始位置是tongfang分支的最后一次提交点，将当前的default分支改为lenovo分支，成功。<br>创建master分支后，一切操作都正常了，看来master分支是必须存在的。</p>
+<h2 id="六、本地找回master分支"><a href="#六、本地找回master分支" class="headerlink" title="六、本地找回master分支"></a>六、本地找回master分支</h2><p>git branch -a<br>可以看到远程的master分支，没有本地的master分支<br>git checkout master<br>git branch -a<br>本地分支结构与远程完全一样。</p>
+<h2 id="七、后续"><a href="#七、后续" class="headerlink" title="七、后续"></a>七、后续</h2><p>以后的共性修改都在master分支上，个性的改动在各厂商分支上。<br>共性修改合并到厂商分支的方法：<br>先git checkout 厂商分支<br>再git merge master </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sunleaf2002.github.io/2019/08/13/masteBranchRename/" data-id="cjz9j3ygg0000cbslknchqqym" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gitlab/">gitlab</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-seleniumUseAttension" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/08/09/seleniumUseAttension/" class="article-date">
@@ -133,7 +182,7 @@ file_data.close() #关闭最后一个文件</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/09/seleniumUseAttension/" data-id="cjz3iy8pz00016yslieppgqzr" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/09/seleniumUseAttension/" data-id="cjz9j0ytw000170sl0cqzkzcq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/selenium/">selenium</a></li></ul>
@@ -184,7 +233,7 @@ file_data.close() #关闭最后一个文件</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/08/cleanDevloopDir/" data-id="cjz3iy8pv00006ysleqg4e2tj" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/08/cleanDevloopDir/" data-id="cjz9j0yu0000470sllh8yv1gs" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/disk/">disk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
@@ -262,7 +311,7 @@ ufw allow 8080  --放开防火墙端口</code></pre><p><a href="http://192....20
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/02/filerunServer/" data-id="cjz3iy8q300046ysl6c2qgyy0" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/02/filerunServer/" data-id="cjz9j0yu1000570sl7bd9t0ld" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/filerun/">filerun</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fileshare/">fileshare</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
@@ -354,7 +403,7 @@ pasv_max_port=30010</code></pre><p>命令行执行 ufw allow 30000:30010/tcp</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/07/31/linuxFtpServer/" data-id="cjz3iy8q400056ysluhldyqnx" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/07/31/linuxFtpServer/" data-id="cjz9j0yu2000670sliwnqmyd1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ftp/">ftp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
@@ -376,7 +425,7 @@ pasv_max_port=30010</code></pre><p>命令行执行 ufw allow 30000:30010/tcp</p>
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li></ul>
     </div>
   </div>
 
@@ -386,7 +435,7 @@ pasv_max_port=30010</code></pre><p>命令行执行 ufw allow 30000:30010/tcp</p>
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/disk/">disk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filerun/">filerun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fileshare/">fileshare</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/disk/">disk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filerun/">filerun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fileshare/">fileshare</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitlab/">gitlab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
     </div>
   </div>
 
@@ -396,7 +445,7 @@ pasv_max_port=30010</code></pre><p>命令行执行 ufw allow 30000:30010/tcp</p>
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/disk/" style="font-size: 10px;">disk</a> <a href="/tags/filerun/" style="font-size: 10px;">filerun</a> <a href="/tags/fileshare/" style="font-size: 10px;">fileshare</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/selenium/" style="font-size: 10px;">selenium</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a>
+      <a href="/tags/disk/" style="font-size: 10px;">disk</a> <a href="/tags/filerun/" style="font-size: 10px;">filerun</a> <a href="/tags/fileshare/" style="font-size: 10px;">fileshare</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/selenium/" style="font-size: 10px;">selenium</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a>
     </div>
   </div>
 
@@ -416,6 +465,10 @@ pasv_max_port=30010</code></pre><p>命令行执行 ufw allow 30000:30010/tcp</p>
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/08/13/masteBranchRename/">masteBranchRename</a>
+          </li>
         
           <li>
             <a href="/2019/08/09/seleniumUseAttension/">seleniumUseAttension</a>
