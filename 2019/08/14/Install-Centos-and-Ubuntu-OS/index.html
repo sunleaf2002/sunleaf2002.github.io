@@ -5,20 +5,20 @@
   
 
   
-  <title>cleanDevloopDir | Ruixia,Sun&#39;s Technique Blog</title>
+  <title>Install Centos and Ubuntu OS | Ruixia,Sun&#39;s Technique Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="删除Linux循环设备/dev/loop用df -h命令查看磁盘空间发现两个loop设备 /dev/loop0       89M   89M     0  100% /snap/core/7270 /dev/loop1      254M  254M     0  100% /snap/electronic-wechat/7其中的electronic-wechat是有一次试图装微信客户端而下载的">
-<meta name="keywords" content="linux,disk,ubuntu">
+  <meta name="description" content="安装Centos和Ubuntu系统中遇到的问题一、centos安装的基本操作为了配置一个备用的编译服务器，重装一台机器，准备用centos7,先用ultraIso，打开镜像文件，启动写入到u盘，生成启动u盘。 听闻centos7在联想机器上总死机，为了将来在新服务器上可以装，先验证一下。 ip地址是86,装好后打算装图形界面。检查环境，发现yum 是现成的，依次执行下列命令安装成功。 yum gr">
+<meta name="keywords" content="os">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cleanDevloopDir">
-<meta property="og:url" content="https://sunleaf2002.github.io/2019/08/08/cleanDevloopDir/index.html">
+<meta property="og:title" content="Install Centos and Ubuntu OS">
+<meta property="og:url" content="https://sunleaf2002.github.io/2019/08/14/Install-Centos-and-Ubuntu-OS/index.html">
 <meta property="og:site_name" content="Ruixia,Sun&#39;s Technique Blog">
-<meta property="og:description" content="删除Linux循环设备/dev/loop用df -h命令查看磁盘空间发现两个loop设备 /dev/loop0       89M   89M     0  100% /snap/core/7270 /dev/loop1      254M  254M     0  100% /snap/electronic-wechat/7其中的electronic-wechat是有一次试图装微信客户端而下载的">
+<meta property="og:description" content="安装Centos和Ubuntu系统中遇到的问题一、centos安装的基本操作为了配置一个备用的编译服务器，重装一台机器，准备用centos7,先用ultraIso，打开镜像文件，启动写入到u盘，生成启动u盘。 听闻centos7在联想机器上总死机，为了将来在新服务器上可以装，先验证一下。 ip地址是86,装好后打算装图形界面。检查环境，发现yum 是现成的，依次执行下列命令安装成功。 yum gr">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-08T06:36:33.005Z">
+<meta property="og:updated_time" content="2019-08-14T10:42:45.829Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cleanDevloopDir">
-<meta name="twitter:description" content="删除Linux循环设备/dev/loop用df -h命令查看磁盘空间发现两个loop设备 /dev/loop0       89M   89M     0  100% /snap/core/7270 /dev/loop1      254M  254M     0  100% /snap/electronic-wechat/7其中的electronic-wechat是有一次试图装微信客户端而下载的">
+<meta name="twitter:title" content="Install Centos and Ubuntu OS">
+<meta name="twitter:description" content="安装Centos和Ubuntu系统中遇到的问题一、centos安装的基本操作为了配置一个备用的编译服务器，重装一台机器，准备用centos7,先用ultraIso，打开镜像文件，启动写入到u盘，生成启动u盘。 听闻centos7在联想机器上总死机，为了将来在新服务器上可以装，先验证一下。 ip地址是86,装好后打算装图形界面。检查环境，发现yum 是现成的，依次执行下列命令安装成功。 yum gr">
   
     <link rel="alternate" href="/atom.xml" title="Ruixia,Sun&#39;s Technique Blog" type="application/atom+xml">
   
@@ -69,14 +69,14 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-cleanDevloopDir" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Install-Centos-and-Ubuntu-OS" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/08/08/cleanDevloopDir/" class="article-date">
-  <time datetime="2019-08-08T05:44:00.000Z" itemprop="datePublished">2019-08-08</time>
+    <a href="/2019/08/14/Install-Centos-and-Ubuntu-OS/" class="article-date">
+  <time datetime="2019-08-14T10:18:16.000Z" itemprop="datePublished">2019-08-14</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
+    <a class="article-category-link" href="/categories/os/">os</a>
   </div>
 
   </div>
@@ -87,7 +87,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      cleanDevloopDir
+      Install Centos and Ubuntu OS
     </h1>
   
 
@@ -95,23 +95,43 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="删除Linux循环设备-dev-loop"><a href="#删除Linux循环设备-dev-loop" class="headerlink" title="删除Linux循环设备/dev/loop"></a>删除Linux循环设备/dev/loop</h2><p>用df -h命令查看磁盘空间<br>发现两个loop设备</p>
-<pre><code>/dev/loop0       89M   89M     0  100% /snap/core/7270
-/dev/loop1      254M  254M     0  100% /snap/electronic-wechat/7</code></pre><p>其中的electronic-wechat是有一次试图装微信客户端而下载的软件，不好用。</p>
-<p>查了一下，<br>dev/loop（或称vnd (vnode disk)、lofi（循环文件接口））是一种伪设备，<br>这种设备使得文件可以如同块设备一般被访问，相当于挂载的镜像文件，也没有什么用途，<br>而snap是一种ubuntu的包安装方式，大概是某次装软件用到的，可以不用。</p>
-<p>用losetup -a命令查一下当前的loop设备,与上面的一致</p>
-<pre><code>/dev/loop1: [2050]:4325623 (/var/lib/snapd/snaps/electronic-wechat_7.snap)
-/dev/loop0: [2050]:4325622 (/var/lib/snapd/snaps/core_7270.snap)</code></pre><p>apt autoremove –purge snapd</p>
-<p>卸载了很多软件 不知道会不会影响其它软件的运行 先给机器减轻负担 遇到问题再解决问题吧</p>
-<p>用df -h命令查看磁盘空间<br>上面两行不再出现</p>
+        <h1 id="安装Centos和Ubuntu系统中遇到的问题"><a href="#安装Centos和Ubuntu系统中遇到的问题" class="headerlink" title="安装Centos和Ubuntu系统中遇到的问题"></a>安装Centos和Ubuntu系统中遇到的问题</h1><h2 id="一、centos安装的基本操作"><a href="#一、centos安装的基本操作" class="headerlink" title="一、centos安装的基本操作"></a>一、centos安装的基本操作</h2><p>为了配置一个备用的编译服务器，重装一台机器，准备用centos7,先用ultraIso，打开镜像文件，启动写入到u盘，生成启动u盘。</p>
+<p>听闻centos7在联想机器上总死机，为了将来在新服务器上可以装，先验证一下。</p>
+<p>ip地址是86,装好后打算装图形界面。检查环境，发现yum 是现成的，依次执行下列命令安装成功。</p>
+<p>yum groupinstall “X Window System” 　//注意有引号</p>
+<p>yum grouplist</p>
+<p>yum install -y wget</p>
+<p>wget -O /etc/yum.repos.d/CentOS-Base.repo <a href="http://mirrors.aliyun.com/repo/Centos-7.repo" target="_blank" rel="noopener">http://mirrors.aliyun.com/repo/Centos-7.repo</a></p>
+<p>yum clean all //清除缓存 </p>
+<p>yum makecache //生成缓存</p>
+<p>yum groupinstall “GNOME Desktop” “Graphical Administration Tools”</p>
+<p>命令 startx 进入图形界面</p>
+<p>系统启动默认还是命令行页面的，需要进行切换。如果想要使系统启动即为图形化窗口，需要执行下面的命令</p>
+<p>ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target</p>
+<h3 id="centos启动时遇到的问题"><a href="#centos启动时遇到的问题" class="headerlink" title="centos启动时遇到的问题"></a>centos启动时遇到的问题</h3><p>重启centos7出现这个提示 大概意思就是需要通过许可信息 ，按照下面操作成功</p>
+<p>1  输入1-回车 2-回车 c-回车 c-回车，之后即可进入系统</p>
+<h3 id="centos拷贝文件时遇到的问题"><a href="#centos拷贝文件时遇到的问题" class="headerlink" title="centos拷贝文件时遇到的问题"></a>centos拷贝文件时遇到的问题</h3><p>拷贝项目文件过程中，死机，共两次，放弃centos</p>
+<h2 id="二、改为装ubuntu"><a href="#二、改为装ubuntu" class="headerlink" title="二、改为装ubuntu"></a>二、改为装ubuntu</h2><p>选择ubuntu server16.04,一路选择中文最后报错“无法安装busybox-initramfs，向目标系统中安装busybox-initramfs软件包时出现一个错误。”，后来改为在第一个页面选“English”,以后页面都选中文就没有问题了。</p>
+<p>配置了建议的所有的服务器，其中邮件服务器名称是机器名bmcCompileBak  用户名kunlun</p>
+<p>配置静态Ip </p>
+<p>auto eno1</p>
+<p>iface ens1 inet static</p>
+<p>address 192.168.200.86</p>
+<p>netmask 255.255.255.0</p>
+<p>gateway 192.168.200.254</p>
+<h3 id="运行软件的编译工作"><a href="#运行软件的编译工作" class="headerlink" title="运行软件的编译工作"></a>运行软件的编译工作</h3><p>bitbake。。。报错</p>
+<h3 id="安装项目所需的软件"><a href="#安装项目所需的软件" class="headerlink" title="安装项目所需的软件"></a>安装项目所需的软件</h3><p>sudo apt-get install -y git build-essential libsdl1.2-dev texinfo gawk chrpath diffstat<br>也报错</p>
+<h3 id="系统升级"><a href="#系统升级" class="headerlink" title="系统升级"></a>系统升级</h3><p>apt update &amp;&amp; apt upgrade</p>
+<h3 id="再安装项目所需的软件"><a href="#再安装项目所需的软件" class="headerlink" title="再安装项目所需的软件"></a>再安装项目所需的软件</h3><p>sudo apt-get install -y git build-essential libsdl1.2-dev texinfo gawk chrpath diffstat</p>
+<p>ok</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/08/cleanDevloopDir/" data-id="cjzcbxtt200004aslaak3rjar" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/14/Install-Centos-and-Ubuntu-OS/" data-id="cjzcbxttt00174aslth1cdea6" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/disk/">disk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/os/">os</a></li></ul>
 
     </footer>
   </div>
@@ -119,19 +139,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/08/09/seleniumUseAttension/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/08/15/nfs-FileServer/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          seleniumUseAttension
+          nfs-FileServer
         
       </div>
     </a>
   
   
-    <a href="/2019/08/02/filerunServer/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/08/13/masteBranchRename/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">fileRunServer</div>
+      <div class="article-nav-title">masteBranchRename</div>
     </a>
   
 </nav>

@@ -5,15 +5,20 @@
   
 
   
-  <title>Archives: 2019/7 | Ruixia,Sun&#39;s Technique Blog</title>
+  <title>nfs-FileServer | Ruixia,Sun&#39;s Technique Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Ruixia,Sun&#39;s Technique Blog">
-<meta property="og:url" content="https://sunleaf2002.github.io/archives/2019/07/index.html">
+  <meta name="description" content="nfs文件共享服务器配置过程服务器端200.1 bmcCompileBak因为要用bmcCompileBak服务器上的openbmc目录sudo apt install nfs-kernel-serversudo vim /etc/exports增加一行 /home/kunlun/rxsunSource/openbmc 192.168.200.2 (rw,sync,no_root_squash,n">
+<meta name="keywords" content="nfs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nfs-FileServer">
+<meta property="og:url" content="https://sunleaf2002.github.io/2019/08/15/nfs-FileServer/index.html">
 <meta property="og:site_name" content="Ruixia,Sun&#39;s Technique Blog">
+<meta property="og:description" content="nfs文件共享服务器配置过程服务器端200.1 bmcCompileBak因为要用bmcCompileBak服务器上的openbmc目录sudo apt install nfs-kernel-serversudo vim /etc/exports增加一行 /home/kunlun/rxsunSource/openbmc 192.168.200.2 (rw,sync,no_root_squash,n">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-15T06:57:38.846Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ruixia,Sun&#39;s Technique Blog">
+<meta name="twitter:title" content="nfs-FileServer">
+<meta name="twitter:description" content="nfs文件共享服务器配置过程服务器端200.1 bmcCompileBak因为要用bmcCompileBak服务器上的openbmc目录sudo apt install nfs-kernel-serversudo vim /etc/exports增加一行 /home/kunlun/rxsunSource/openbmc 192.168.200.2 (rw,sync,no_root_squash,n">
   
     <link rel="alternate" href="/atom.xml" title="Ruixia,Sun&#39;s Technique Blog" type="application/atom+xml">
   
@@ -64,40 +69,61 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/07/31/linuxFtpServer/" class="archive-article-date">
-  <time datetime="2019-07-31T09:39:13.000Z" itemprop="datePublished">Jul 31</time>
+        <section id="main"><article id="post-nfs-FileServer" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/15/nfs-FileServer/" class="article-date">
+  <time datetime="2019-08-15T06:13:23.000Z" itemprop="datePublished">2019-08-15</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/31/linuxFtpServer/">linuxFtpServer</a>
+    <h1 class="article-title" itemprop="name">
+      nfs-FileServer
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="nfs文件共享服务器配置过程"><a href="#nfs文件共享服务器配置过程" class="headerlink" title="nfs文件共享服务器配置过程"></a>nfs文件共享服务器配置过程</h1><h2 id="服务器端200-1-bmcCompileBak"><a href="#服务器端200-1-bmcCompileBak" class="headerlink" title="服务器端200.1 bmcCompileBak"></a>服务器端200.1 bmcCompileBak</h2><p>因为要用bmcCompileBak服务器上的openbmc目录<br>sudo apt install nfs-kernel-server<br>sudo vim /etc/exports<br>增加一行 /home/kunlun/rxsunSource/openbmc 192.168.200.2 (rw,sync,no_root_squash,no_subtree_check) //200.2是客户端地址</p>
+<p>sudo service rpcbind start<br>sudo service nfs-kernel-server start    //没有开机自启动<br>sudo /etc/init.d/nfs-kernel-server restart</p>
+<h2 id="客户端200-2"><a href="#客户端200-2" class="headerlink" title="客户端200.2"></a>客户端200.2</h2><p>sudo apt install nfs-common<br>sudo showmount -e 192.168.200.1 显示<br>Export list for 192.168.200.1:<br>/home/kunlun/rxsunSource/openbmc *  表示成功<br>sudo mount 192.168.200.1:/home/kunlun/rxsunSource/openbmc /home/kunlun/rxsunSource/openbmc //将服务端目录挂载到本地<br>sudo vim /etc/fstab   //添加开机自动挂载<br>增加一行 192.168.200.1:/home/kunlun/rxsunSource/openbmc /home/kunlun/rxsunSource/openbmc nfs rw 0 0</p>
+<h2 id="ls-本地"><a href="#ls-本地" class="headerlink" title="ls 本地"></a>ls 本地</h2><p>可在本地的/home/kunlun/rxsunSource/openbmc看到服务器上的内容</p>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sunleaf2002.github.io/2019/08/15/nfs-FileServer/" data-id="cjzcbxttc00054asl9i17qa3x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nfs/">nfs</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/14/Install-Centos-and-Ubuntu-OS/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Install Centos and Ubuntu OS</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         
