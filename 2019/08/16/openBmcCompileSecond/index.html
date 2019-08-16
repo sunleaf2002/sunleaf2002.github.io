@@ -5,20 +5,19 @@
   
 
   
-  <title>Install Centos and Ubuntu OS | Ruixia,Sun&#39;s Technique Blog</title>
+  <title>openBmcCompileSecond | Ruixia,Sun&#39;s Technique Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="安装Centos和Ubuntu系统中遇到的问题一、centos安装的基本操作为了配置一个备用的编译服务器，重装一台机器，准备用centos7,先用ultraIso，打开镜像文件，启动写入到u盘，生成启动u盘。 听闻centos7在联想机器上总死机，为了将来在新服务器上可以装，先验证一下。 ip地址是86,装好后打算装图形界面。检查环境，发现yum 是现成的，依次执行下列命令安装成功。 yum gr">
-<meta name="keywords" content="os">
+  <meta name="description" content="构建openbmc另一个厂商的Release版本一、识别厂商和改动的库需要搞清楚哪个库的修改的commit号在哪里改,这个基本上其它人都已经在openbmc.git库里面改好，只有webui需要手工改，位置在：vim meta-haiguang/meta-haiguang2/recipes-phosphor/webui/phosphor-webui_git.bb其中 meta-haiguang2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Install Centos and Ubuntu OS">
-<meta property="og:url" content="https://sunleaf2002.github.io/2019/08/14/Install-Centos-and-Ubuntu-OS/index.html">
+<meta property="og:title" content="openBmcCompileSecond">
+<meta property="og:url" content="https://sunleaf2002.github.io/2019/08/16/openBmcCompileSecond/index.html">
 <meta property="og:site_name" content="Ruixia,Sun&#39;s Technique Blog">
-<meta property="og:description" content="安装Centos和Ubuntu系统中遇到的问题一、centos安装的基本操作为了配置一个备用的编译服务器，重装一台机器，准备用centos7,先用ultraIso，打开镜像文件，启动写入到u盘，生成启动u盘。 听闻centos7在联想机器上总死机，为了将来在新服务器上可以装，先验证一下。 ip地址是86,装好后打算装图形界面。检查环境，发现yum 是现成的，依次执行下列命令安装成功。 yum gr">
+<meta property="og:description" content="构建openbmc另一个厂商的Release版本一、识别厂商和改动的库需要搞清楚哪个库的修改的commit号在哪里改,这个基本上其它人都已经在openbmc.git库里面改好，只有webui需要手工改，位置在：vim meta-haiguang/meta-haiguang2/recipes-phosphor/webui/phosphor-webui_git.bb其中 meta-haiguang2">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-14T10:42:45.829Z">
+<meta property="og:updated_time" content="2019-08-16T11:58:55.599Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Install Centos and Ubuntu OS">
-<meta name="twitter:description" content="安装Centos和Ubuntu系统中遇到的问题一、centos安装的基本操作为了配置一个备用的编译服务器，重装一台机器，准备用centos7,先用ultraIso，打开镜像文件，启动写入到u盘，生成启动u盘。 听闻centos7在联想机器上总死机，为了将来在新服务器上可以装，先验证一下。 ip地址是86,装好后打算装图形界面。检查环境，发现yum 是现成的，依次执行下列命令安装成功。 yum gr">
+<meta name="twitter:title" content="openBmcCompileSecond">
+<meta name="twitter:description" content="构建openbmc另一个厂商的Release版本一、识别厂商和改动的库需要搞清楚哪个库的修改的commit号在哪里改,这个基本上其它人都已经在openbmc.git库里面改好，只有webui需要手工改，位置在：vim meta-haiguang/meta-haiguang2/recipes-phosphor/webui/phosphor-webui_git.bb其中 meta-haiguang2">
   
     <link rel="alternate" href="/atom.xml" title="Ruixia,Sun&#39;s Technique Blog" type="application/atom+xml">
   
@@ -69,14 +68,14 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Install-Centos-and-Ubuntu-OS" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-openBmcCompileSecond" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/08/14/Install-Centos-and-Ubuntu-OS/" class="article-date">
-  <time datetime="2019-08-14T10:18:16.000Z" itemprop="datePublished">2019-08-14</time>
+    <a href="/2019/08/16/openBmcCompileSecond/" class="article-date">
+  <time datetime="2019-08-16T09:39:49.000Z" itemprop="datePublished">2019-08-16</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/os/">os</a>
+    <a class="article-category-link" href="/categories/bmc/">bmc</a>
   </div>
 
   </div>
@@ -87,7 +86,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Install Centos and Ubuntu OS
+      openBmcCompileSecond
     </h1>
   
 
@@ -95,63 +94,43 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="安装Centos和Ubuntu系统中遇到的问题"><a href="#安装Centos和Ubuntu系统中遇到的问题" class="headerlink" title="安装Centos和Ubuntu系统中遇到的问题"></a>安装Centos和Ubuntu系统中遇到的问题</h1><h2 id="一、centos安装的基本操作"><a href="#一、centos安装的基本操作" class="headerlink" title="一、centos安装的基本操作"></a>一、centos安装的基本操作</h2><p>为了配置一个备用的编译服务器，重装一台机器，准备用centos7,先用ultraIso，打开镜像文件，启动写入到u盘，生成启动u盘。</p>
-<p>听闻centos7在联想机器上总死机，为了将来在新服务器上可以装，先验证一下。</p>
-<p>ip地址是86,装好后打算装图形界面。检查环境，发现yum 是现成的，依次执行下列命令安装成功。</p>
-<p>yum groupinstall “X Window System” 　//注意有引号</p>
-<p>yum grouplist</p>
-<p>yum install -y wget</p>
-<p>wget -O /etc/yum.repos.d/CentOS-Base.repo <a href="http://mirrors.aliyun.com/repo/Centos-7.repo" target="_blank" rel="noopener">http://mirrors.aliyun.com/repo/Centos-7.repo</a></p>
-<p>yum clean all //清除缓存 </p>
-<p>yum makecache //生成缓存</p>
-<p>yum groupinstall “GNOME Desktop” “Graphical Administration Tools”</p>
-<p>命令 startx 进入图形界面</p>
-<p>系统启动默认还是命令行页面的，需要进行切换。如果想要使系统启动即为图形化窗口，需要执行下面的命令</p>
-<p>ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target</p>
-<h3 id="centos启动时遇到的问题"><a href="#centos启动时遇到的问题" class="headerlink" title="centos启动时遇到的问题"></a>centos启动时遇到的问题</h3><p>重启centos7出现这个提示 大概意思就是需要通过许可信息 ，按照下面操作成功</p>
-<p>1  输入1-回车 2-回车 c-回车 c-回车，之后即可进入系统</p>
-<h3 id="centos拷贝文件时遇到的问题"><a href="#centos拷贝文件时遇到的问题" class="headerlink" title="centos拷贝文件时遇到的问题"></a>centos拷贝文件时遇到的问题</h3><p>拷贝项目文件过程中，死机，共两次，放弃centos</p>
-<h2 id="二、改为装ubuntu"><a href="#二、改为装ubuntu" class="headerlink" title="二、改为装ubuntu"></a>二、改为装ubuntu</h2><p>选择ubuntu server16.04,一路选择中文最后报错“无法安装busybox-initramfs，向目标系统中安装busybox-initramfs软件包时出现一个错误。”，后来改为在第一个页面选“English”,以后页面都选中文就没有问题了。</p>
-<p>配置了建议的所有的服务器，其中邮件服务器名称是机器名bmcCompileBak  用户名kunlun</p>
-<p>配置静态Ip </p>
-<p>auto eno1</p>
-<p>iface ens1 inet static</p>
-<p>address 192.168.200.86</p>
-<p>netmask 255.255.255.0</p>
-<p>gateway 192.168.200.254</p>
-<h3 id="运行软件的编译工作"><a href="#运行软件的编译工作" class="headerlink" title="运行软件的编译工作"></a>运行软件的编译工作</h3><p>bitbake。。。报错</p>
-<h3 id="安装项目所需的软件"><a href="#安装项目所需的软件" class="headerlink" title="安装项目所需的软件"></a>安装项目所需的软件</h3><p>sudo apt-get install -y git build-essential libsdl1.2-dev texinfo gawk chrpath diffstat<br>也报错</p>
-<h3 id="系统升级"><a href="#系统升级" class="headerlink" title="系统升级"></a>系统升级</h3><p>apt update &amp;&amp; apt upgrade</p>
-<h3 id="再安装项目所需的软件"><a href="#再安装项目所需的软件" class="headerlink" title="再安装项目所需的软件"></a>再安装项目所需的软件</h3><p>sudo apt-get install -y git build-essential libsdl1.2-dev texinfo gawk chrpath diffstat</p>
-<p>ok</p>
+        <h1 id="构建openbmc另一个厂商的Release版本"><a href="#构建openbmc另一个厂商的Release版本" class="headerlink" title="构建openbmc另一个厂商的Release版本"></a>构建openbmc另一个厂商的Release版本</h1><h2 id="一、识别厂商和改动的库"><a href="#一、识别厂商和改动的库" class="headerlink" title="一、识别厂商和改动的库"></a>一、识别厂商和改动的库</h2><p>需要搞清楚哪个库的修改的commit号在哪里改,这个基本上其它人都已经在openbmc.git库里面改好，只有webui需要手工改，位置在：<br>vim meta-haiguang/meta-haiguang2/recipes-phosphor/webui/phosphor-webui_git.bb<br>其中 meta-haiguang2 是本次将要构建的厂商版本</p>
+<p>另外已知有温控git库做了改动, 它的修改 vim meta-phosphor/classes/skeleton-rev.bbclass可以看到,开发人员已经改好.</p>
+<h2 id="二、更新改动的库"><a href="#二、更新改动的库" class="headerlink" title="二、更新改动的库"></a>二、更新改动的库</h2><p>要删掉downloads/git2下面的webui和skeleton库,再git clone –bare 一下<br>还是选择在本地 rxsunSource/git下克隆一个源代码库 加一个remote为 downloads/git2下的库名称 ,push这里,为构建所用.</p>
+<h2 id="三、开始构建"><a href="#三、开始构建" class="headerlink" title="三、开始构建"></a>三、开始构建</h2><p>在build下 export TEMPLATECONF=meta-haiguang/meta-haiguang2/conf/<br>    rm conf/ -rf<br>在openbmc下 . openbmc-env  会生成conf目录<br>    cd conf vim local.conf  看一下</p>
+<p>git pull //取消开发人员对bitbake所用的.bb及.bbclass文件的修改<br>git tag -a v0.16-tongfang -m “Release v0.16 for tongfang”  //打tag 变动不大,注释上厂商名称<br>git status //看到刚刚改的webui的bb文件<br>git add ,git commit </p>
+<p>在build下,执行bitbake obmc-phosphor-image</p>
+<h2 id="四、构建报错"><a href="#四、构建报错" class="headerlink" title="四、构建报错:"></a>四、构建报错:</h2><p>找不到phosphor-hwmon库</p>
+<pre><code>ERROR: phosphor-hwmon-1.0+gitAUTOINC+7509bffc35-r1 do_fetch: Fetcher failure: Unable to find revision 7509bffc35ba141844d645533e0628ddd105551a in branch master even from upstream
+ERROR: phosphor-hwmon-1.0+gitAUTOINC+7509bffc35-r1 do_fetch: Fetcher failure for URL: &apos;git://github.com/openbmc/phosphor-hwmon&apos;. Unable to fetch URL from any source.
+ERROR: phosphor-hwmon-1.0+gitAUTOINC+7509bffc35-r1 do_fetch: Function failed: base_do_fetch
+ERROR: Logfile of failure stored in: /home/kunlun/rxsunSource/openbmc/build/tmp/work/armv6-openbmc-linux-gnueabi/phosphor-hwmon/1.0+gitAUTOINC+7509bffc35-r1/temp/log.do_fetch.26476
+ERROR: Task (/home/kunlun/rxsunSource/openbmc/meta-phosphor/recipes-phosphor/sensors/phosphor-hwmon_git.bb:do_fetch) failed with exit code &apos;1&apos;</code></pre><p>是因为改了这个库,bb文件已经修改,但是在本地的downloads/git2下没有找到里面的commit号,没有同步导致的,编译不过.<br>查看downloads/git2下该库已经被删掉了  ,再git clone –bare  到downloads/git2 里面.<br>在build下,执行bitbake obmc-phosphor-image又报错,是因为名字不该有.git后缀.</p>
+<p>重命名为没有.git后缀的目录,回到build下,执行bitbake obmc-phosphor-image,</p>
+<h2 id="五、又报错"><a href="#五、又报错" class="headerlink" title="五、又报错"></a>五、又报错</h2><p>还是找不到库,这次是内核linux库</p>
+<pre><code>ERROR: linux-aspeed-4.18.16+gitAUTOINC+72fbc47ed6-r0 do_fetch: Fetcher failure: Unable to find revision 72fbc47ed6c682c9ef362f622336221031dddf8d in branch dev-4.18 even from upstream
+ERROR: linux-aspeed-4.18.16+gitAUTOINC+72fbc47ed6-r0 do_fetch: Fetcher failure for URL: &apos;git://github.com/openbmc/linux;protocol=git;branch=dev-4.18&apos;. Unable to fetch URL from any source.
+ERROR: linux-aspeed-4.18.16+gitAUTOINC+72fbc47ed6-r0 do_fetch: Function failed: base_do_fetch
+ERROR: Logfile of failure stored in: /home/kunlun/rxsunSource/openbmc/build/tmp/work/haiguang2-openbmc-linux-gnueabi/linux-aspeed/4.18.16+gitAUTOINC+72fbc47ed6-r0/temp/log.do_fetch.11230
+ERROR: Task (/home/kunlun/rxsunSource/openbmc/meta-aspeed/recipes-kernel/linux/linux-aspeed_git.bb:do_fetch) failed with exit code &apos;1&apos;</code></pre><p>linux库有了变动 ,因为改了温控,是内核的,导致编译时间很久.<br>scp 后 重命名为没有.git后缀的目录,回到build下重新 执行bitbake obmc-phosphor-image,<br>成功.</p>
+<h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><p>学会读openbmc里面的变更中提到的库名,及时同步更新.<br>最好还是建立一个本地库,否则被删除后只能重新scp ,而本地库可以只git pull变更的内容,然后再push到到底的裸库中.<br>编译某个版本之前要在群里先问一下谁改动了哪个库,编译好后要发给相关开发人员,让各个人分别验证一下<br>添加远程库可以用命令行:<br>git remote add local ~/rxsunSource/openbmc/build/downloads/git2/github.com.openbmc.phosphor-webui.git</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/14/Install-Centos-and-Ubuntu-OS/" data-id="cjze0hrt8000565sll4ma9cju" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileSecond/" data-id="cjze0hrtv001p65slespwrmek" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/os/">os</a></li></ul>
-
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2019/08/15/nfs-FileServer/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          nfs-FileServer
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/08/13/masteBranchRename/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/08/16/openBmcCompileProcess/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">masteBranchRename</div>
+      <div class="article-nav-title">openBmcCompileProcess</div>
     </a>
   
 </nav>
