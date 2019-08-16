@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>openBmcCompileProcess | Ruixia,Sun&#39;s Technique Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在ubuntu server16.04上构建openbmc的Release版本一、基本过程服务器环境准备好，用bitbake编译远程和本地的git库，维护各个git库将要被编入的commit号。 二、环境准备工作bmcCompileBak上装ubuntu server16.04，所有服务器选项都勾上，配好网络地址。为了运行bitbake，要先安装build-essential，这需要先apt up">
+<meta name="keywords" content="openbmc,bmc,build,bitbake">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openBmcCompileProcess">
+<meta property="og:url" content="https://sunleaf2002.github.io/2019/08/16/openBmcCompileProcess/index.html">
+<meta property="og:site_name" content="Ruixia,Sun&#39;s Technique Blog">
+<meta property="og:description" content="在ubuntu server16.04上构建openbmc的Release版本一、基本过程服务器环境准备好，用bitbake编译远程和本地的git库，维护各个git库将要被编入的commit号。 二、环境准备工作bmcCompileBak上装ubuntu server16.04，所有服务器选项都勾上，配好网络地址。为了运行bitbake，要先安装build-essential，这需要先apt up">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-16T09:32:23.758Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="openBmcCompileProcess">
+<meta name="twitter:description" content="在ubuntu server16.04上构建openbmc的Release版本一、基本过程服务器环境准备好，用bitbake编译远程和本地的git库，维护各个git库将要被编入的commit号。 二、环境准备工作bmcCompileBak上装ubuntu server16.04，所有服务器选项都勾上，配好网络地址。为了运行bitbake，要先安装build-essential，这需要先apt up">
+  
+    <link rel="alternate" href="/atom.xml" title="Ruixia,Sun&#39;s Technique Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Ruixia,Sun&#39;s Technique Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Record the step of upgrading......</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://sunleaf2002.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-openBmcCompileProcess" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/16/openBmcCompileProcess/" class="article-date">
+  <time datetime="2019-08-16T05:49:37.000Z" itemprop="datePublished">2019-08-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bmc/">bmc</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      openBmcCompileProcess
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="在ubuntu-server16-04上构建openbmc的Release版本"><a href="#在ubuntu-server16-04上构建openbmc的Release版本" class="headerlink" title="在ubuntu server16.04上构建openbmc的Release版本"></a>在ubuntu server16.04上构建openbmc的Release版本</h1><h2 id="一、基本过程"><a href="#一、基本过程" class="headerlink" title="一、基本过程"></a>一、基本过程</h2><p>服务器环境准备好，用bitbake编译远程和本地的git库，维护各个git库将要被编入的commit号。</p>
+<h2 id="二、环境准备工作"><a href="#二、环境准备工作" class="headerlink" title="二、环境准备工作"></a>二、环境准备工作</h2><p>bmcCompileBak上装ubuntu server16.04，所有服务器选项都勾上，配好网络地址。<br>为了运行bitbake，要先安装build-essential，这需要先apt update和 upgrade。</p>
+<h2 id="三、资料准备"><a href="#三、资料准备" class="headerlink" title="三、资料准备"></a>三、资料准备</h2><p>新建目录openbmc，在openbmc下 mkdir donwlowds ，在donwlowds下mkdir git2<br>用scp命令将本地gitlab服务器上openbmc组里除了“openbmc.git”以外的git库全部拷贝到git2目录下，这一步相当于git clone –bare，都是拷贝裸库的文件。<br>以后如果某个git库有变化，都要先删除它，再从gitlab服务器上 git clone –bare 一下，或者git pull一次。<br>回到openbmc目录下 git clone openbmc.git  ,这次克隆的是源代码，是要修改的。</p>
+<h2 id="四、第一次构建"><a href="#四、第一次构建" class="headerlink" title="四、第一次构建"></a>四、第一次构建</h2><p>在openbmc目录下<br>export TEMPLATECONF=meta-haiguang/meta-haiguang1/conf/<br>在openbmc下，执行. openbmc-env命令，会生成conf目录，可以cd conf进去， vim local.conf  看一下<br>也会生成build目录，cd 到此目录下 执行bitbake obmc-phosphor-image  ，注意，不能是root用户</p>
+<h2 id="五、编译过程中的问题一"><a href="#五、编译过程中的问题一" class="headerlink" title="五、编译过程中的问题一"></a>五、编译过程中的问题一</h2><pre><code>ERROR: phosphor-webui-1.0+gitAUTOINC+aacd2a572a-r1 do_fetch: Fetcher failure: Unable to find revision aacd2a572a36abc511da08b9a7b671e1265f7299 in branch master even from upstream</code></pre><p>是找不到某个分支上的某个commit号，<br>打开我们准备编译的版本中的这个文件，<br>vim meta-haiguang/meta-haiguang1/recipes-phosphor/webui/phosphor-webui_git.bb<br>改分支和commit号为正确的值。</p>
+<h2 id="六、编译过程中的问题二"><a href="#六、编译过程中的问题二" class="headerlink" title="六、编译过程中的问题二"></a>六、编译过程中的问题二</h2><pre><code>ERROR: pflash-v6.1-r0 do_fetch: Fetcher failure: Unable to find revision bb7ae1ade9e06a854771b8ed1e26f7d58b508e84 in branch master even from upstream
+
+ERROR: obmc-phosphor-image-1.0-r0 do_generate_static: Error executing a python function in exec_python_func() autogenerated:
+The stack trace of python calls that resulted in this exception/failure was:
+File: &apos;exec_python_func() autogenerated&apos;, lineno: 2, function: &lt;module&gt;
+     0001:
+ *** 0002:do_generate_static(d) </code></pre><p> 好像是python环境没有   ubuntu server16.04 默认装2.7和3.5  切换一下就行 alias python=python3 也可以 echo alias python=python3 &gt;&gt; /home/kunlun/.bashrc   source /home/kunlun/.bashrc<br>执行bitbake obmc-phosphor-image ，仍然不对，再读错误信息，是找不到文件u-boot.bin</p>
+<pre><code>Exception: FileNotFoundError: [Errno 2] No such file or directory: &apos;/home/kunlun/rxsunSource/openbmc/build/tmp/deploy/images/haiguang1/u-boot.bin&apos;</code></pre><p>find ./ -name u-boot.bin</p>
+<pre><code>./tmp/work/haiguang1-openbmc-linux-gnueabi/u-boot-aspeed/1_v2016.07+gitAUTOINC+fc8646ea8a-r0/packages-split/u-boot-aspeed/boot/u-boot.bin
+./tmp/work/haiguang1-openbmc-linux-gnueabi/u-boot-aspeed/1_v2016.07+gitAUTOINC+fc8646ea8a-r0/package/boot/u-boot.bin
+./tmp/work/haiguang1-openbmc-linux-gnueabi/u-boot-aspeed/1_v2016.07+gitAUTOINC+fc8646ea8a-r0/build/u-boot.bin
+./tmp/work/haiguang1-openbmc-linux-gnueabi/u-boot-aspeed/1_v2016.07+gitAUTOINC+fc8646ea8a-r0/image/boot/u-boot.bin</code></pre><p>cp 第三个到 cp ./tmp/work/haiguang1-openbmc-linux-gnueabi/u-boot-aspeed/1_v2016.07+gitAUTOINC+fc8646ea8a-r0/build/u-boot.bin /home/kunlun/rxsunSource/openbmc/build/tmp/deploy/images/haiguang1/u-boot.bin<br>执行 bitbake obmc-phosphor-image编译不过去，提示需要python2.7,只好又改回来python2.7  </p>
+<h2 id="七、编译成功"><a href="#七、编译成功" class="headerlink" title="七、编译成功"></a>七、编译成功</h2><p>build下执行bitbake obmc-phosphor-image，编译成功，结果存放在/openbmc/build/tmp/deploy/images/haiguang1</p>
+<pre><code>-rw-rw-r-- 2 kunlun kunlun 33554432 8月  15 10:11 obmc-phosphor-image-haiguang1-20190815021143.static.mtd  烧录器所用
+-rw-rw-r-- 2 kunlun kunlun 33566720 8月  15 10:13 obmc-phosphor-image-haiguang1-20190815021143.static.mtd.all.tar 带配置文件的
+-rw-rw-r-- 2 kunlun kunlun 27637760 8月  15 10:12 obmc-phosphor-image-haiguang1-20190815021143.static.mtd.tar 不带配置文件的</code></pre><h2 id="八、改network库的commit号："><a href="#八、改network库的commit号：" class="headerlink" title="八、改network库的commit号："></a>八、改network库的commit号：</h2><p>有一个需求是network包要使用上一次的提交commit号，在vim meta-phosphor/classes/phosphor-networkd-rev.bbclass 中改，这是一个公共的库。<br>build下执行bitbake obmc-phosphor-image，编译成功,ftp到ftp服务器上。</p>
+<h2 id="九、测试人员发现没有版本，需要打标签"><a href="#九、测试人员发现没有版本，需要打标签" class="headerlink" title="九、测试人员发现没有版本，需要打标签"></a>九、测试人员发现没有版本，需要打标签</h2><p>先在openbmc目录下git tag查看一下，已经有v0.15之前的所有tag，再vim ./meta-phosphor/recipes-core/os-release/os-release.bbappend看到版本上上一次生成的v0.15，需要更新。<br>git describe –dirty=-release 也可以查看，已经到了v0.15<br>用git tag -a v0.16 -m “Release V0.16” 生成tag。</p>
+<h2 id="十、测试人员发现bios版本是0-0"><a href="#十、测试人员发现bios版本是0-0" class="headerlink" title="十、测试人员发现bios版本是0.0"></a>十、测试人员发现bios版本是0.0</h2><p>这是一个bug 打过tag后要再提交一次 </p>
+<pre><code>git status 
+    modified:   meta-haiguang/meta-haiguang1/recipes-phosphor/webui/phosphor-webui_git.bb
+    modified:   meta-phosphor/classes/phosphor-networkd-rev.bbclass
+git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-release/  查看结果<br>find ./ -name os-release<br>build下执行bitbake obmc-phosphor-image，编译成功,ftp到ftp服务器上。</p>
+<h2 id="十一、后续处理"><a href="#十一、后续处理" class="headerlink" title="十一、后续处理"></a>十一、后续处理</h2><p>写ReleaseNote.txt，包括本版本解决的所有bug。bug的解决方式可以是代码也可以是手册，手册修改对应的bug是哪一个，应该在发布版本时也加以说明。<br>ReleaseNote.txt,以及测试人员的用户手册和测试报告，都放到ftp服务器上。<br>为了易于分发，要分包压缩20m以下<br>做一个md5  将分包的文件解包为单个文件，用md5sum生成密码，再用“certulti –hashfile 文件名 md5” 验证md5码是否正确，发给用户。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileProcess/" data-id="cjzdr96l20000beslw2q9810t" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bitbake/">bitbake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/15/nfs-FileServer/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">nfs-FileServer</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/bmc/">bmc</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/os/">os</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitbake/">bitbake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bmc/">bmc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/build/">build</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disk/">disk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filerun/">filerun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fileshare/">fileshare</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitlab/">gitlab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nfs/">nfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openbmc/">openbmc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/bitbake/" style="font-size: 10px;">bitbake</a> <a href="/tags/bmc/" style="font-size: 10px;">bmc</a> <a href="/tags/build/" style="font-size: 10px;">build</a> <a href="/tags/disk/" style="font-size: 10px;">disk</a> <a href="/tags/filerun/" style="font-size: 10px;">filerun</a> <a href="/tags/fileshare/" style="font-size: 10px;">fileshare</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/nfs/" style="font-size: 10px;">nfs</a> <a href="/tags/openbmc/" style="font-size: 10px;">openbmc</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/selenium/" style="font-size: 10px;">selenium</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/08/16/openBmcCompileProcess/">openBmcCompileProcess</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/15/nfs-FileServer/">nfs-FileServer</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/14/Install-Centos-and-Ubuntu-OS/">Install Centos and Ubuntu OS</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/13/masteBranchRename/">masteBranchRename</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/09/seleniumUseAttension/">seleniumUseAttension</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 ruixia,sun<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
