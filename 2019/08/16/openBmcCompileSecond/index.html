@@ -7,17 +7,18 @@
   
   <title>openBmcCompileSecond | Ruixia,Sun&#39;s Technique Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="构建openbmc另一个厂商的Release版本一、识别厂商和改动的库需要搞清楚哪个库的修改的commit号在哪里改,这个基本上其它人都已经在openbmc.git库里面改好，只有webui需要手工改，位置在：vim meta-haiguang/meta-haiguang2/recipes-phosphor/webui/phosphor-webui_git.bb其中 meta-haiguang2">
+  <meta name="description" content="构建openbmc另一个厂商的Release版本一、识别厂商和改动的库需要搞清楚哪个库的修改的commit号在哪里改,开发人员都已经在openbmc.git库里面改好，只有webui需要手工改，位置在：vim meta-haiguang/meta-haiguang2/recipes-phosphor/webui/phosphor-webui_git.bb,其中 meta-haiguang2 是本次">
+<meta name="keywords" content="openbmc,bmc,build,bitbake">
 <meta property="og:type" content="article">
 <meta property="og:title" content="openBmcCompileSecond">
 <meta property="og:url" content="https://sunleaf2002.github.io/2019/08/16/openBmcCompileSecond/index.html">
 <meta property="og:site_name" content="Ruixia,Sun&#39;s Technique Blog">
-<meta property="og:description" content="构建openbmc另一个厂商的Release版本一、识别厂商和改动的库需要搞清楚哪个库的修改的commit号在哪里改,这个基本上其它人都已经在openbmc.git库里面改好，只有webui需要手工改，位置在：vim meta-haiguang/meta-haiguang2/recipes-phosphor/webui/phosphor-webui_git.bb其中 meta-haiguang2">
+<meta property="og:description" content="构建openbmc另一个厂商的Release版本一、识别厂商和改动的库需要搞清楚哪个库的修改的commit号在哪里改,开发人员都已经在openbmc.git库里面改好，只有webui需要手工改，位置在：vim meta-haiguang/meta-haiguang2/recipes-phosphor/webui/phosphor-webui_git.bb,其中 meta-haiguang2 是本次">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-16T11:58:55.599Z">
+<meta property="og:updated_time" content="2019-08-16T12:39:08.986Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="openBmcCompileSecond">
-<meta name="twitter:description" content="构建openbmc另一个厂商的Release版本一、识别厂商和改动的库需要搞清楚哪个库的修改的commit号在哪里改,这个基本上其它人都已经在openbmc.git库里面改好，只有webui需要手工改，位置在：vim meta-haiguang/meta-haiguang2/recipes-phosphor/webui/phosphor-webui_git.bb其中 meta-haiguang2">
+<meta name="twitter:description" content="构建openbmc另一个厂商的Release版本一、识别厂商和改动的库需要搞清楚哪个库的修改的commit号在哪里改,开发人员都已经在openbmc.git库里面改好，只有webui需要手工改，位置在：vim meta-haiguang/meta-haiguang2/recipes-phosphor/webui/phosphor-webui_git.bb,其中 meta-haiguang2 是本次">
   
     <link rel="alternate" href="/atom.xml" title="Ruixia,Sun&#39;s Technique Blog" type="application/atom+xml">
   
@@ -94,11 +95,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="构建openbmc另一个厂商的Release版本"><a href="#构建openbmc另一个厂商的Release版本" class="headerlink" title="构建openbmc另一个厂商的Release版本"></a>构建openbmc另一个厂商的Release版本</h1><h2 id="一、识别厂商和改动的库"><a href="#一、识别厂商和改动的库" class="headerlink" title="一、识别厂商和改动的库"></a>一、识别厂商和改动的库</h2><p>需要搞清楚哪个库的修改的commit号在哪里改,这个基本上其它人都已经在openbmc.git库里面改好，只有webui需要手工改，位置在：<br>vim meta-haiguang/meta-haiguang2/recipes-phosphor/webui/phosphor-webui_git.bb<br>其中 meta-haiguang2 是本次将要构建的厂商版本</p>
+        <h1 id="构建openbmc另一个厂商的Release版本"><a href="#构建openbmc另一个厂商的Release版本" class="headerlink" title="构建openbmc另一个厂商的Release版本"></a>构建openbmc另一个厂商的Release版本</h1><h2 id="一、识别厂商和改动的库"><a href="#一、识别厂商和改动的库" class="headerlink" title="一、识别厂商和改动的库"></a>一、识别厂商和改动的库</h2><p>需要搞清楚哪个库的修改的commit号在哪里改,开发人员都已经在openbmc.git库里面改好，只有webui需要手工改，位置在：<br>vim meta-haiguang/meta-haiguang2/recipes-phosphor/webui/phosphor-webui_git.bb,其中 meta-haiguang2 是本次将要构建的厂商版本</p>
 <p>另外已知有温控git库做了改动, 它的修改 vim meta-phosphor/classes/skeleton-rev.bbclass可以看到,开发人员已经改好.</p>
 <h2 id="二、更新改动的库"><a href="#二、更新改动的库" class="headerlink" title="二、更新改动的库"></a>二、更新改动的库</h2><p>要删掉downloads/git2下面的webui和skeleton库,再git clone –bare 一下<br>还是选择在本地 rxsunSource/git下克隆一个源代码库 加一个remote为 downloads/git2下的库名称 ,push这里,为构建所用.</p>
 <h2 id="三、开始构建"><a href="#三、开始构建" class="headerlink" title="三、开始构建"></a>三、开始构建</h2><p>在build下 export TEMPLATECONF=meta-haiguang/meta-haiguang2/conf/<br>    rm conf/ -rf<br>在openbmc下 . openbmc-env  会生成conf目录<br>    cd conf vim local.conf  看一下</p>
-<p>git pull //取消开发人员对bitbake所用的.bb及.bbclass文件的修改<br>git tag -a v0.16-tongfang -m “Release v0.16 for tongfang”  //打tag 变动不大,注释上厂商名称<br>git status //看到刚刚改的webui的bb文件<br>git add ,git commit </p>
+<p>git pull //获取开发人员对bitbake所用的.bb及.bbclass文件的修改<br>git tag -a v0.16.1 -m “Release v0.16 for tongfang”  //打tag 变动不大,注释上厂商名称<br>git status //看到刚刚改的webui的bb文件<br>git add ,git commit </p>
 <p>在build下,执行bitbake obmc-phosphor-image</p>
 <h2 id="四、构建报错"><a href="#四、构建报错" class="headerlink" title="四、构建报错:"></a>四、构建报错:</h2><p>找不到phosphor-hwmon库</p>
 <pre><code>ERROR: phosphor-hwmon-1.0+gitAUTOINC+7509bffc35-r1 do_fetch: Fetcher failure: Unable to find revision 7509bffc35ba141844d645533e0628ddd105551a in branch master even from upstream
@@ -113,14 +114,38 @@ ERROR: linux-aspeed-4.18.16+gitAUTOINC+72fbc47ed6-r0 do_fetch: Fetcher failure f
 ERROR: linux-aspeed-4.18.16+gitAUTOINC+72fbc47ed6-r0 do_fetch: Function failed: base_do_fetch
 ERROR: Logfile of failure stored in: /home/kunlun/rxsunSource/openbmc/build/tmp/work/haiguang2-openbmc-linux-gnueabi/linux-aspeed/4.18.16+gitAUTOINC+72fbc47ed6-r0/temp/log.do_fetch.11230
 ERROR: Task (/home/kunlun/rxsunSource/openbmc/meta-aspeed/recipes-kernel/linux/linux-aspeed_git.bb:do_fetch) failed with exit code &apos;1&apos;</code></pre><p>linux库有了变动 ,因为改了温控,是内核的,导致编译时间很久.<br>scp 后 重命名为没有.git后缀的目录,回到build下重新 执行bitbake obmc-phosphor-image,<br>成功.</p>
+<h2 id="六、构建后测试发现错误"><a href="#六、构建后测试发现错误" class="headerlink" title="六、构建后测试发现错误"></a>六、构建后测试发现错误</h2><p>开发人员提交修改的库,已经修改bb文件,只需要删掉后重新git clone –bare 并改名去掉.git<br>编译报错</p>
+<pre><code>ERROR: /home/kunlun/rxsunSource/openbmc/meta/recipes-core/os-release/os-release.bb: Error executing a python function in &lt;code&gt;:  --:--:--
+The stack trace of python calls that resulted in this exception/failure was:
+File: &apos;&lt;code&gt;&apos;, lineno: 12, function: &lt;module&gt;
+     0008:__anon_35__home_kunlun_rxsunSource_openbmc_meta_classes_devshell_bbclass(d)
+     0009:__anon_105__home_kunlun_rxsunSource_openbmc_meta_classes_sstate_bbclass(d)
+     0010:__anon_20__home_kunlun_rxsunSource_openbmc_meta_classes_blacklist_bbclass(d)
+     0011:__anon_50__home_kunlun_rxsunSource_openbmc_meta_classes_allarch_bbclass(d)
+ *** 0012:__anon_28__home_kunlun_rxsunSource_openbmc_meta_phosphor_recipes_core_os_release_os_release_bbappend(d)
+File: &apos;/home/kunlun/rxsunSource/openbmc/meta-phosphor/recipes-core/os-release/os-release.bbappend&apos;, lineno: 23, function: __anon_28__home_kunlun_rxsunSource_openbmc_meta_phosphor_recipes_core_os_release_os_release_bbappend
+     0019:        d.setVar(&apos;VERSION_ID&apos;, version_id)
+     0020:        versionList = &quot;rc&quot;
+     0021:        versionList = version_id.split(&apos;-&apos;)
+     0022:        version = versionList[0] + &quot;-&quot; + versionList[1]
+ *** 0023:        d.setVar(&apos;VERSION&apos;, version)
+     0024:
+     0025:    build_id = run_git(d, &apos;describe --abbrev=0&apos;)
+     0026:    if build_id:
+     0027:        d.setVar(&apos;BUILD_ID&apos;, build_id)
+Exception: IndexError: list index out of range
+
+ERROR: Failed to parse recipe: /home/kunlun/rxsunSource/openbmc/meta/recipes-core/os-release/os-release.bb</code></pre><p>解决办法,回退openbmc库到之前某个版本<br>git reset –hard 到 8f0bc988f7924e11899d64b48290a2bdad62891d  ,再git pull<br>bitbake又报错<br>git status  add commit  –可能还是打tag引起的问题,有时间修改一下这个文件<br>再bitbake</p>
 <h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><p>学会读openbmc里面的变更中提到的库名,及时同步更新.<br>最好还是建立一个本地库,否则被删除后只能重新scp ,而本地库可以只git pull变更的内容,然后再push到到底的裸库中.<br>编译某个版本之前要在群里先问一下谁改动了哪个库,编译好后要发给相关开发人员,让各个人分别验证一下<br>添加远程库可以用命令行:<br>git remote add local ~/rxsunSource/openbmc/build/downloads/git2/github.com.openbmc.phosphor-webui.git</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileSecond/" data-id="cjze0hrtv001p65slespwrmek" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileSecond/" data-id="cjze3ga9h000aetsl3ztj26ic" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bitbake/">bitbake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
+
     </footer>
   </div>
   
@@ -166,7 +191,7 @@ ERROR: Task (/home/kunlun/rxsunSource/openbmc/meta-aspeed/recipes-kernel/linux/l
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/bitbake/" style="font-size: 10px;">bitbake</a> <a href="/tags/bmc/" style="font-size: 10px;">bmc</a> <a href="/tags/build/" style="font-size: 10px;">build</a> <a href="/tags/disk/" style="font-size: 10px;">disk</a> <a href="/tags/filerun/" style="font-size: 10px;">filerun</a> <a href="/tags/fileshare/" style="font-size: 10px;">fileshare</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/nfs/" style="font-size: 10px;">nfs</a> <a href="/tags/openbmc/" style="font-size: 10px;">openbmc</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/selenium/" style="font-size: 10px;">selenium</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a>
+      <a href="/tags/bitbake/" style="font-size: 15px;">bitbake</a> <a href="/tags/bmc/" style="font-size: 15px;">bmc</a> <a href="/tags/build/" style="font-size: 15px;">build</a> <a href="/tags/disk/" style="font-size: 10px;">disk</a> <a href="/tags/filerun/" style="font-size: 10px;">filerun</a> <a href="/tags/fileshare/" style="font-size: 10px;">fileshare</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/nfs/" style="font-size: 10px;">nfs</a> <a href="/tags/openbmc/" style="font-size: 15px;">openbmc</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/selenium/" style="font-size: 10px;">selenium</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a>
     </div>
   </div>
 
