@@ -66,6 +66,258 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-使用git支撑构建过程之代码同步" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/17/使用git支撑构建过程之代码同步/" class="article-date">
+  <time datetime="2019-08-17T14:00:46.000Z" itemprop="datePublished">2019-08-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/git/">git</a>►<a class="article-category-link" href="/categories/git/openbmc/">openbmc</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/17/使用git支撑构建过程之代码同步/">使用git支撑构建过程之代码同步</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明:"></a>环境说明:</h2><p>中心代码库在192.168.120.200的gitlab上,以刚刚克隆下来的tttt库为例<br>开发机器kunlunsec,用来修改tttt库的代码<br>编译服务器bmcCompileBak,其中的目录/home/kunlun/rxsunSource/gitSource是用来存放源代码库的,目录/home/kunlun/rxsunSource/openbmc/build/downloads/git2是为构建工具准备的裸库存放的位置.</p>
+<h2 id="试验目标"><a href="#试验目标" class="headerlink" title="试验目标:"></a>试验目标:</h2><p>1.开发机器kunlunsec上的改动能通过192.168.120.200服务器同步到编译服务器bmcCompileBak上的源代码库里<br>2.编译服务器bmcCompileBak上同步后的源代码库能推送(git push)到编译服务器bmcCompileBak本地的构建目录下/home/kunlun/rxsunSource/openbmc/build/downloads/git2</p>
+<img src="/img/dataFlow.png" title="[100] [80]">
+
+
+<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路:"></a>基本思路:</h2><p>在编译服务器bmcCompileBak的源代码库/home/kunlun/rxsunSource/gitSource/tttt中设置两个remote仓库,一个是中心代码库192.168.120.200上的tttt.git裸库,命名为origin,另一个是/home/kunlun/rxsunSource/openbmc/build/downloads/git2里的tttt.git裸库,命名为local.然后从origin拉取(git pull)代码变更,推送(git push)到local上.</p>
+<h2 id="步骤一-在编译服务器bmcCompileBak上克隆源代码库和裸库到各自的目的地"><a href="#步骤一-在编译服务器bmcCompileBak上克隆源代码库和裸库到各自的目的地" class="headerlink" title="步骤一:在编译服务器bmcCompileBak上克隆源代码库和裸库到各自的目的地"></a>步骤一:在编译服务器bmcCompileBak上克隆源代码库和裸库到各自的目的地</h2><p>克隆下来试验用的源代码库,在home/kunlun/rxsunSource/gitSource下<br>cd /home/kunlun/rxsunSource/gitSource<br>git clone <a href="mailto:git@192.168.120.200" target="_blank" rel="noopener">git@192.168.120.200</a>:qa/tttt.git</p>
+<p>到存放所有的裸库的文件夹,克隆裸库下来.<br>cd /home/kunlun/rxsunSource/openbmc/build/downloads/git2/<br>git clone –bare <a href="mailto:git@192.168.120.200" target="_blank" rel="noopener">git@192.168.120.200</a>:qa/tttt.git<br>这里的库是为构建所用的.</p>
+<h2 id="步骤二-在编译服务器bmcCompileBak上为源代码库添加第二个远程库-就是刚刚克隆下来的裸库"><a href="#步骤二-在编译服务器bmcCompileBak上为源代码库添加第二个远程库-就是刚刚克隆下来的裸库" class="headerlink" title="步骤二:在编译服务器bmcCompileBak上为源代码库添加第二个远程库,就是刚刚克隆下来的裸库"></a>步骤二:在编译服务器bmcCompileBak上为源代码库添加第二个远程库,就是刚刚克隆下来的裸库</h2><p>进入目录 cd  /home/kunlun/rxsunSource/gitSource/tttt/<br>git remote add local /home/kunlun/rxsunSource/openbmc/build/downloads/git2/tttt.git<br>查看一下,第一种是命令行查看,第二种是查看config文件,看到增加了一个名为”local”的远程库</p>
+<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git remote
+local
+origin    
+kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ cat .git/config 
+[core]
+    repositoryformatversion = 0
+    filemode = true
+    bare = false
+    logallrefupdates = true
+[remote &quot;origin&quot;]
+    url = git@192.168.120.200:qa/tttt.git
+    fetch = +refs/heads/*:refs/remotes/origin/*
+[branch &quot;master&quot;]
+    remote = origin
+    merge = refs/heads/master
+[remote &quot;local&quot;]
+    url = /home/kunlun/rxsunSource/openbmc/build/downloads/git2/tttt.git
+    fetch = +refs/heads/*:refs/remotes/local/*</code></pre><h2 id="步骤三-在开发机kunlunsec上模拟开发过程中两个分支的代码提交"><a href="#步骤三-在开发机kunlunsec上模拟开发过程中两个分支的代码提交" class="headerlink" title="步骤三:在开发机kunlunsec上模拟开发过程中两个分支的代码提交"></a>步骤三:在开发机kunlunsec上模拟开发过程中两个分支的代码提交</h2><p>换到开发机kunlunsec上tttt进行操作并提交</p>
+<pre><code>kunlun@kunlunsec:~/tmp$ git clone git@192.168.120.200:qa/tttt.git
+正克隆到 &apos;tttt&apos;...  
+接收对象中: 100% (20/20), 完成.
+检查连接... 完成。
+kunlun@kunlunsec:~/tmp$ cd tttt/
+kunlun@kunlunsec:~/tmp/tttt$ ll
+-rw-rw-r-- 1 kunlun kunlun   21 8月  17 18:55 a.txt</code></pre><p>查看当前分支</p>
+<pre><code>kunlun@kunlunsec:~/tmp/tttt$ git branch -a
+* master
+  remotes/origin/HEAD -&gt; origin/master
+  remotes/origin/master
+  remotes/origin/test
+为master分支添加文件b.txt,并commit,push
+kunlun@kunlunsec:~/tmp/tttt$ touch b.txt
+kunlun@kunlunsec:~/tmp/tttt$ echo &quot;test next remote repo&quot;&gt;b.txt
+kunlun@kunlunsec:~/tmp/tttt$ cat b.txt 
+test next remote repo
+kunlun@kunlunsec:~/tmp/tttt$ git add .
+kunlun@kunlunsec:~/tmp/tttt$ git commit -m &quot;next remote test&quot;
+[master 310edf3] next remote test
+ 1 file changed, 1 insertion(+)
+ create mode 100644 b.txt
+kunlun@kunlunsec:~/tmp/tttt$ git push</code></pre><p>切换到tttt库的另一个分支test,模拟实际开发中的另一个厂商代码:</p>
+<pre><code>kunlun@kunlunsec:~/tmp/tttt$ git checkout test
+分支 test 设置为跟踪来自 origin 的远程分支 test。
+切换到一个新分支 &apos;test&apos;
+kunlun@kunlunsec:~/tmp/tttt$ git branch -a
+  master
+* test
+  remotes/origin/HEAD -&gt; origin/master
+  remotes/origin/master
+  remotes/origin/test
+kunlun@kunlunsec:~/tmp/tttt$ ll
+总用量 16
+drwxrwxr-x 4 kunlun kunlun 4096 8月  17 19:03 ./
+drwxrwxr-x 3 kunlun kunlun 4096 8月  17 18:55 ../
+-rw-rw-r-- 1 kunlun kunlun    0 8月  17 19:03 ddd.txt</code></pre><p>看到test分支下的文件与master分支的文件是不同的.<br>为test分支添加文件eee.txt,并commit,push</p>
+<pre><code>kunlun@kunlunsec:~/tmp/tttt$ echo &quot;another file to test branch&quot;&gt;eee.txt
+kunlun@kunlunsec:~/tmp/tttt$ cat eee.txt 
+another file to test branch
+kunlun@kunlunsec:~/tmp/tttt$ git add .
+kunlun@kunlunsec:~/tmp/tttt$ git commit -m &quot;another file to test branch&quot;
+[test d983cbf] another file to test branch
+ 1 file changed, 1 insertion(+)
+ create mode 100644 eee.txt
+kunlun@kunlunsec:~/tmp/tttt$ git push</code></pre><p>以上操作是在tttt库的master分支上增加了文件b.txt,在test分支上增加了文件eee.txt,并推送到192.168.120.200中心代码服务器上.</p>
+<h2 id="步骤四-在bmcCompileBak编译服务器上依次拉取master分支和test分支的代码"><a href="#步骤四-在bmcCompileBak编译服务器上依次拉取master分支和test分支的代码" class="headerlink" title="步骤四:在bmcCompileBak编译服务器上依次拉取master分支和test分支的代码"></a>步骤四:在bmcCompileBak编译服务器上依次拉取master分支和test分支的代码</h2><p>回到bmcCompileBak编译服务器上 </p>
+<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git branch -a //查看当前分支
+* master
+  remotes/origin/HEAD -&gt; origin/master
+  remotes/origin/master
+  remotes/origin/test
+
+kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git pull origin master //与名为origin的远程库,即192.168.120.200中心代码服务器同步master分支的代码
+From 192.168.120.200:qa/tttt
+ * branch            master     -&gt; FETCH_HEAD
+Updating fce3d3b..310edf3
+Fast-forward
+ b.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 b.txt
+
+kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ ll   //看到新增加的b.txt文件被同步下来
+total 24
+drwxrwxr-x 4 kunlun kunlun 4096 8月  17 19:24 ./
+drwxrwxr-x 8 kunlun kunlun 4096 8月  17 18:32 ../
+-rw-rw-r-- 1 kunlun kunlun   21 8月  17 18:29 a.txt
+-rw-rw-r-- 1 kunlun kunlun   22 8月  17 19:24 b.txt</code></pre><p>再同步test分支的代码</p>
+<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git pull origin test  //这时git给出一个merge操作,确定
+remote: Counting objects: 6, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+From 192.168.120.200:qa/tttt
+ * branch            test       -&gt; FETCH_HEAD
+   2f18328..d983cbf  test       -&gt; origin/test
+Merge made by the &apos;recursive&apos; strategy.
+ ddd.txt | 0
+ eee.txt | 1 +
+ 2 files changed, 1 insertion(+)
+ create mode 100644 ddd.txt
+ create mode 100644 eee.txt</code></pre><p>查看log,发现本地库里包括了在开发机器上两个分支上的提交,并记录了刚刚的合并动作</p>
+<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git log  
+commit 9d816d31f5244890927ab1c3b5a846a5bcb651ca
+Merge: 310edf3 d983cbf
+Author: rxsun &lt;rxsun@bios.zd-tech.com.cn&gt;
+Date:   Sat Aug 17 19:24:52 2019 +0800
+    Merge branch &apos;test&apos; of 192.168.120.200:qa/tttt
+commit d983cbf670c31d58cde88da7371f71a6bad7f846
+Author: rxsun &lt;“rxsun@zd-tech.com.cn&gt;
+Date:   Sat Aug 17 19:21:44 2019 +0800
+    another file to test branch
+commit 310edf371ad05051308aa49601d709064403909e
+Author: rxsun &lt;“rxsun@zd-tech.com.cn&gt;
+Date:   Sat Aug 17 18:56:55 2019 +0800
+    next remote test</code></pre><p>查看工作区状态,当前工作区是干净的</p>
+<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git status  
+On branch master
+Your branch is ahead of &apos;origin/master&apos; by 3 commits.
+  (use &quot;git push&quot; to publish your local commits)
+nothing to commit, working directory clean</code></pre><p>确认当前所在的分支,还是master</p>
+<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git branch -a  
+* master
+  remotes/origin/HEAD -&gt; origin/master
+  remotes/origin/master
+  remotes/origin/test</code></pre><p>查看本地文件,包括了master分支的a.txt,b.txt, 以及test分支的ddd.txt和eee.txt.</p>
+<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ ll
+drwxrwxr-x 4 kunlun kunlun 4096 8月  17 19:24 ./
+drwxrwxr-x 8 kunlun kunlun 4096 8月  17 18:32 ../
+-rw-rw-r-- 1 kunlun kunlun   21 8月  17 18:29 a.txt
+-rw-rw-r-- 1 kunlun kunlun   22 8月  17 19:24 b.txt
+-rw-rw-r-- 1 kunlun kunlun    0 8月  17 19:24 ddd.txt
+-rw-rw-r-- 1 kunlun kunlun   28 8月  17 19:24 eee.txt</code></pre><p>可见,在master分支上, git pull origin master和 git pull origin test  都执行的话,会将test分支的内容也拉取到master分支里面 ,这明显不符合要求.</p>
+<p>回退到拉取代码之前的commit号</p>
+<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git reset --hard fbf549d38c71d56171a2cb23cfc4a5218953e943  这是本次操作之前的一个commit号</code></pre><p>查看当前内容</p>
+<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ ll  
+-rw-rw-r-- 1 kunlun kunlun   16 8月  17 19:58 a.txt</code></pre><p>就回到了本次拉取操作之前的状态</p>
+<h2 id="步骤五-在bmcCompileBak编译服务器上只拉取master分支"><a href="#步骤五-在bmcCompileBak编译服务器上只拉取master分支" class="headerlink" title="步骤五:在bmcCompileBak编译服务器上只拉取master分支"></a>步骤五:在bmcCompileBak编译服务器上只拉取master分支</h2><p>只同步master分支,查看结果,这个结果是符合预期的 </p>
+<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git pull origin master  
+kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ ll
+-rw-rw-r-- 1 kunlun kunlun   21 8月  17 20:00 a.txt
+-rw-rw-r-- 1 kunlun kunlun   22 8月  17 20:00 b.txt</code></pre><h2 id="步骤六-在bmcCompileBak编译服务器上将master分支推送到local的远程仓库里master分支上"><a href="#步骤六-在bmcCompileBak编译服务器上将master分支推送到local的远程仓库里master分支上" class="headerlink" title="步骤六:在bmcCompileBak编译服务器上将master分支推送到local的远程仓库里master分支上"></a>步骤六:在bmcCompileBak编译服务器上将master分支推送到local的远程仓库里master分支上</h2><p>执行push,推送的目的地是本地的名为local的远程仓库里master分支上,就是步骤一中克隆下来的裸库/home/kunlun/rxsunSource/openbmc/build/downloads/git2/tttt.git</p>
+<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git push local master
+Counting objects: 3, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 336 bytes | 0 bytes/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To /home/kunlun/rxsunSource/openbmc/build/downloads/git2/tttt.git
+   fce3d3b..310edf3  master -&gt; master</code></pre><p>进入裸库看一下branch和log,已经同步成功</p>
+<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ cd /home/kunlun/rxsunSource/openbmc/build/downloads/git2/tttt.git
+kunlun@bmcCompileBak:~/rxsunSource/openbmc/build/downloads/git2/tttt.git$ git branch -a
+* master
+  test
+kunlun@bmcCompileBak:~/rxsunSource/openbmc/build/downloads/git2/tttt.git$ git log
+commit 310edf371ad05051308aa49601d709064403909e
+Author: rxsun &lt;“rxsun@zd-tech.com.cn&gt;
+Date:   Sat Aug 17 18:56:55 2019 +0800
+    next remote test</code></pre><h2 id="步骤七-在bmcCompileBak编译服务器上同步origin的远程仓库里test分支变化源代码库里"><a href="#步骤七-在bmcCompileBak编译服务器上同步origin的远程仓库里test分支变化源代码库里" class="headerlink" title="步骤七:在bmcCompileBak编译服务器上同步origin的远程仓库里test分支变化源代码库里"></a>步骤七:在bmcCompileBak编译服务器上同步origin的远程仓库里test分支变化源代码库里</h2><p>再回到tttt的源代码库里,切换到tset分支.</p>
+<pre><code>kunlun@bmcCompileBak:cd ~/rxsunSource/gitSource/tttt
+kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git checkout test
+Branch test set up to track remote branch test from origin.
+Switched to a new branch &apos;test&apos;
+kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ ll
+-rw-rw-r-- 1 kunlun kunlun    0 8月  17 20:06 ddd.txt
+-rw-rw-r-- 1 kunlun kunlun   28 8月  17 20:06 eee.txt</code></pre><p>发现这种checkout操作会自动拉下远程origin仓库test分支的所有内容.</p>
+<p>复习一下,origin和local远程库的地址,origin是中心代码库,在192.168.120.200上,local在bmcCompileBak编译服务器上,是供构建使用的</p>
+<pre><code>[remote &quot;origin&quot;]
+    url = git@192.168.120.200:qa/tttt.git
+[remote &quot;local&quot;]
+    url = /home/kunlun/rxsunSource/openbmc/build/downloads/git2/tttt.git</code></pre><h2 id="步骤八-在bmcCompileBak编译服务器上同步test分支的变化到local的远程仓库里test分支上"><a href="#步骤八-在bmcCompileBak编译服务器上同步test分支的变化到local的远程仓库里test分支上" class="headerlink" title="步骤八:在bmcCompileBak编译服务器上同步test分支的变化到local的远程仓库里test分支上"></a>步骤八:在bmcCompileBak编译服务器上同步test分支的变化到local的远程仓库里test分支上</h2><p>将源代码库里test分支的内容push到本地的名为local的远程仓库里test分支上</p>
+<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$  git push local test
+Counting objects: 3, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 355 bytes | 0 bytes/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To /home/kunlun/rxsunSource/openbmc/build/downloads/git2/tttt.git
+   2f18328..d983cbf  test -&gt; test</code></pre><p>查看当前分支</p>
+<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ cd /home/kunlun/rxsunSource/openbmc/build/downloads/git2/tttt.git
+kunlun@bmcCompileBak:~/rxsunSource/openbmc/build/downloads/git2/tttt.git$ git branch -a
+* master
+  test</code></pre><p>试图在裸库里切换到test分支,发现不能操作,这种方法没法验证test分支是否被推送上来了.</p>
+<pre><code>kunlun@bmcCompileBak:~/rxsunSource/openbmc/build/downloads/git2/tttt.git$ git checkout test  
+fatal: This operation must be run in a work tree</code></pre><h2 id="步骤九-在bmcCompileBak编译服务器上验证test分支的变化被推送到了local远程仓库"><a href="#步骤九-在bmcCompileBak编译服务器上验证test分支的变化被推送到了local远程仓库" class="headerlink" title="步骤九:在bmcCompileBak编译服务器上验证test分支的变化被推送到了local远程仓库"></a>步骤九:在bmcCompileBak编译服务器上验证test分支的变化被推送到了local远程仓库</h2><p>在bmcCompileBak编译服务器上,到另一个目录再clone一份test分支的内容,从/home/kunlun/rxsunSource/openbmc/build/downloads/git2/tttt.git ,看看结果</p>
+<pre><code>kunlun@bmcCompileBak:~/rxsunSource$ mkdir tmp
+kunlun@bmcCompileBak:~/rxsunSource$ cd tmp
+kunlun@bmcCompileBak:~/rxsunSource/tmp$ git clone /home/kunlun/rxsunSource/openbmc/build/downloads/git2/tttt.git
+Cloning into &apos;tttt&apos;...
+done.
+kunlun@bmcCompileBak:~/rxsunSource/tmp$ cd tttt/
+kunlun@bmcCompileBak:~/rxsunSource/tmp/tttt$ git branch -a
+* master
+  remotes/origin/HEAD -&gt; origin/master
+  remotes/origin/master
+  remotes/origin/test
+kunlun@bmcCompileBak:~/rxsunSource/tmp/tttt$ git checkout test
+Branch test set up to track remote branch test from origin.
+Switched to a new branch &apos;test&apos;
+kunlun@bmcCompileBak:~/rxsunSource/tmp/tttt$ ll
+-rw-rw-r-- 1 kunlun kunlun    0 8月  17 20:14 ddd.txt
+-rw-rw-r-- 1 kunlun kunlun   28 8月  17 20:14 eee.txt</code></pre><p>结果是符合预期的,证明test分支到local远程库的推送是成功的.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h2><p>编译服务器bmcCompileBak上的源代码库可以设置两个远程仓库,一个对应着中心代码库,从这里拉取下来代码,另一个对应着本地的构建代码库,推送代码到这个库.并且,可以实现不同分支的拉取和推送.<br>这种机制是能够为构建服务的.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sunleaf2002.github.io/2019/08/17/使用git支撑构建过程之代码同步/" data-id="cjzfmal3s001bp4slz1z9vf7z" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-openBmcCompileSecond" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/08/16/openBmcCompileSecond/" class="article-date">
@@ -138,7 +390,7 @@ ERROR: Failed to parse recipe: /home/kunlun/rxsunSource/openbmc/meta/recipes-cor
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileSecond/" data-id="cjze3ga9h000aetsl3ztj26ic" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileSecond/" data-id="cjzfmal4i001mp4slytimfjvk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bitbake/">bitbake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
@@ -208,7 +460,7 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileProcess/" data-id="cjze3ga9g0009etsls7os5rio" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileProcess/" data-id="cjzfmal37000hp4slamsk6fq5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bitbake/">bitbake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
@@ -254,7 +506,7 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/15/nfs-FileServer/" data-id="cjze3ga9e0006etslln9kwfbf" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/15/nfs-FileServer/" data-id="cjzfmal36000gp4slchc2piqu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nfs/">nfs</a></li></ul>
@@ -325,7 +577,7 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/14/Install-Centos-and-Ubuntu-OS/" data-id="cjze3ga9d0005etsl8unugu0t" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/14/Install-Centos-and-Ubuntu-OS/" data-id="cjzfmal3r001ap4sl7cjcbgd3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/os/">os</a></li></ul>
@@ -374,7 +626,7 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/13/masteBranchRename/" data-id="cjze3ga9c0004etslmlq2x1ec" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/13/masteBranchRename/" data-id="cjzfmal39000lp4sljpztxkir" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gitlab/">gitlab</a></li></ul>
@@ -453,7 +705,7 @@ file_data.close() #关闭最后一个文件</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/09/seleniumUseAttension/" data-id="cjze3ga990001etsl139v154o" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/09/seleniumUseAttension/" data-id="cjzfmal2x0001p4sls31fyhyi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/selenium/">selenium</a></li></ul>
@@ -504,7 +756,7 @@ file_data.close() #关闭最后一个文件</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/08/cleanDevloopDir/" data-id="cjze3ga950000etslumpuylp5" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/08/cleanDevloopDir/" data-id="cjzfmal2u0000p4sli9j4sv2w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/disk/">disk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
@@ -582,7 +834,7 @@ ufw allow 8080  --放开防火墙端口</code></pre><p><a href="http://192....20
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/02/filerunServer/" data-id="cjze3ga9j000eetslbu693e8q" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/02/filerunServer/" data-id="cjzfmal38000jp4sl16dwndvn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/filerun/">filerun</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fileshare/">fileshare</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
@@ -674,7 +926,7 @@ pasv_max_port=30010</code></pre><p>命令行执行 ufw allow 30000:30010/tcp</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/07/31/linuxFtpServer/" data-id="cjze3ga9k000getslsh5k9oo3" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/07/31/linuxFtpServer/" data-id="cjzfmal4j001np4slid9pqkr9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ftp/">ftp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
@@ -696,7 +948,7 @@ pasv_max_port=30010</code></pre><p>命令行执行 ufw allow 30000:30010/tcp</p>
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/bmc/">bmc</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/os/">os</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/bmc/">bmc</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/openbmc/">openbmc</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/os/">os</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li></ul>
     </div>
   </div>
 
@@ -716,7 +968,7 @@ pasv_max_port=30010</code></pre><p>命令行执行 ufw allow 30000:30010/tcp</p>
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/bitbake/" style="font-size: 15px;">bitbake</a> <a href="/tags/bmc/" style="font-size: 15px;">bmc</a> <a href="/tags/build/" style="font-size: 15px;">build</a> <a href="/tags/disk/" style="font-size: 10px;">disk</a> <a href="/tags/filerun/" style="font-size: 10px;">filerun</a> <a href="/tags/fileshare/" style="font-size: 10px;">fileshare</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/nfs/" style="font-size: 10px;">nfs</a> <a href="/tags/openbmc/" style="font-size: 15px;">openbmc</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/selenium/" style="font-size: 10px;">selenium</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a>
+      <a href="/tags/bitbake/" style="font-size: 15px;">bitbake</a> <a href="/tags/bmc/" style="font-size: 15px;">bmc</a> <a href="/tags/build/" style="font-size: 20px;">build</a> <a href="/tags/disk/" style="font-size: 10px;">disk</a> <a href="/tags/filerun/" style="font-size: 10px;">filerun</a> <a href="/tags/fileshare/" style="font-size: 10px;">fileshare</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/nfs/" style="font-size: 10px;">nfs</a> <a href="/tags/openbmc/" style="font-size: 20px;">openbmc</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/selenium/" style="font-size: 10px;">selenium</a> <a href="/tags/ubuntu/" style="font-size: 20px;">ubuntu</a>
     </div>
   </div>
 
@@ -738,6 +990,10 @@ pasv_max_port=30010</code></pre><p>命令行执行 ufw allow 30000:30010/tcp</p>
       <ul>
         
           <li>
+            <a href="/2019/08/17/使用git支撑构建过程之代码同步/">使用git支撑构建过程之代码同步</a>
+          </li>
+        
+          <li>
             <a href="/2019/08/16/openBmcCompileSecond/">openBmcCompileSecond</a>
           </li>
         
@@ -751,10 +1007,6 @@ pasv_max_port=30010</code></pre><p>命令行执行 ufw allow 30000:30010/tcp</p>
         
           <li>
             <a href="/2019/08/14/Install-Centos-and-Ubuntu-OS/">Install Centos and Ubuntu OS</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/13/masteBranchRename/">masteBranchRename</a>
           </li>
         
       </ul>
