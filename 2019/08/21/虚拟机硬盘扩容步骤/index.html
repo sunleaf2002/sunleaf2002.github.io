@@ -5,15 +5,23 @@
   
 
   
-  <title>Category: python | Ruixia,Sun&#39;s Technique Blog</title>
+  <title>虚拟机硬盘扩容步骤 | Ruixia,Sun&#39;s Technique Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Ruixia,Sun&#39;s Technique Blog">
-<meta property="og:url" content="https://sunleaf2002.github.io/categories/python/index.html">
+  <meta name="description" content="昨天看到80.82机器上的运行redmine服务器的虚拟机rxsunweb的空间不够,原来创建的时候只有30G,太小.依次执行以下步骤进行扩容. 1.先关闭虚拟机2.为了确保虚拟机的安全,另存一份进行操作.拷贝rxsunweb虚拟机 从C:\Users\Administrator\VirtualBox VMs\rxsunweb到D:\virtualBox_redmine\rxsunweb3.到虚拟">
+<meta name="keywords" content="linux,disk,virtulbox">
+<meta property="og:type" content="article">
+<meta property="og:title" content="虚拟机硬盘扩容步骤">
+<meta property="og:url" content="https://sunleaf2002.github.io/2019/08/21/虚拟机硬盘扩容步骤/index.html">
 <meta property="og:site_name" content="Ruixia,Sun&#39;s Technique Blog">
+<meta property="og:description" content="昨天看到80.82机器上的运行redmine服务器的虚拟机rxsunweb的空间不够,原来创建的时候只有30G,太小.依次执行以下步骤进行扩容. 1.先关闭虚拟机2.为了确保虚拟机的安全,另存一份进行操作.拷贝rxsunweb虚拟机 从C:\Users\Administrator\VirtualBox VMs\rxsunweb到D:\virtualBox_redmine\rxsunweb3.到虚拟">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://sunleaf2002.github.io/img/virtualbox-11.png">
+<meta property="og:image" content="https://sunleaf2002.github.io/img/virtualbox-22.png">
+<meta property="og:updated_time" content="2019-08-21T01:11:20.524Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ruixia,Sun&#39;s Technique Blog">
+<meta name="twitter:title" content="虚拟机硬盘扩容步骤">
+<meta name="twitter:description" content="昨天看到80.82机器上的运行redmine服务器的虚拟机rxsunweb的空间不够,原来创建的时候只有30G,太小.依次执行以下步骤进行扩容. 1.先关闭虚拟机2.为了确保虚拟机的安全,另存一份进行操作.拷贝rxsunweb虚拟机 从C:\Users\Administrator\VirtualBox VMs\rxsunweb到D:\virtualBox_redmine\rxsunweb3.到虚拟">
+<meta name="twitter:image" content="https://sunleaf2002.github.io/img/virtualbox-11.png">
   
     <link rel="alternate" href="/atom.xml" title="Ruixia,Sun&#39;s Technique Blog" type="application/atom+xml">
   
@@ -64,40 +72,71 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/08/09/seleniumUseAttension/" class="archive-article-date">
-  <time datetime="2019-08-09T01:16:19.000Z" itemprop="datePublished">Aug 9</time>
+        <section id="main"><article id="post-虚拟机硬盘扩容步骤" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/21/虚拟机硬盘扩容步骤/" class="article-date">
+  <time datetime="2019-08-21T00:53:59.000Z" itemprop="datePublished">2019-08-21</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/09/seleniumUseAttension/">seleniumUseAttension</a>
+    <h1 class="article-title" itemprop="name">
+      虚拟机硬盘扩容步骤
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>昨天看到80.82机器上的运行redmine服务器的虚拟机rxsunweb的空间不够,原来创建的时候只有30G,太小.<br>依次执行以下步骤进行扩容.</p>
+<p>1.先关闭虚拟机<br>2.为了确保虚拟机的安全,另存一份进行操作.<br>拷贝rxsunweb虚拟机 从C:\Users\Administrator\VirtualBox VMs\rxsunweb到D:\virtualBox_redmine\rxsunweb<br>3.到虚拟机窗口的设置-存储-控制器菜单中添加一个磁盘文件 100G ，文件名为<br>D:\virtualBox_redmine\rxsunweb\redmine_disk_2.vdi，<br>原来的D:\virtualBox_redmine\rxsunweb\rxsunweb-disk2.vmdk 只有30G左右<br>4.启动虚拟机，进去看df –h</p>
+<img src="/img/virtualbox-11.png" title="[100] [80] [title ftp [alt ftp]]">
+<p>5．fdisk -l查看新硬盘/dev/sdb 已经识别到</p>
+<img src="/img/virtualbox-22.png" title="[100] [80] [title ftp [alt ftp]]">
+<p>6.对新硬盘分区fdisk /dev/sdb<br>依次输入：</p>
+<pre><code>n          #新分区
+p          #选择分区类型
+t           #更改分区类型
+Hex code (type L to list codes): 8e
+w          #保存分区结果</code></pre><p>7.让系统重新读取分区表：# partprobe /dev/sdb<br>8.创建物理卷（PV） # pvcreate /dev/sdb1<br>9.查看物理卷信息： pvdisplay<br>10.将pv加到vg中 vgextend cl  /dev/sdb1<br>11.将所有剩余空间全部划入LV  lvextend -l +100%FREE /dev/mapper/cl-root<br>12.最后一步 关键是最后一步 用 xfs_growfs   /dev/mapper/cl-root 然后df –h 看到根目录空间已经变大</p>
+<p>以上虚拟机扩容及挂载 参考了<a href="https://yq.aliyun.com/articles/486074" target="_blank" rel="noopener">https://yq.aliyun.com/articles/486074</a><br>最后一步参考了<a href="https://blog.csdn.net/qq_33932782/article/details/76612965" target="_blank" rel="noopener">https://blog.csdn.net/qq_33932782/article/details/76612965</a></p>
+<p>启动redmine<br>83机器上 cd  /usr/local/redmine<br>执行启动redmine 的命令： ruby script/rails server webrick –e development<br>systemctl  stop firewalld 关闭防火墙<br>参考了<a href="https://blog.csdn.net/Honnyee/article/details/81535464的firewalld命令" target="_blank" rel="noopener">https://blog.csdn.net/Honnyee/article/details/81535464的firewalld命令</a> 后来发现直接在虚拟机里关闭防火墙最简单</p>
+<p>从其它机器上访问83机器的3000端口,可看到redmine页面,操作成功.</p>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sunleaf2002.github.io/2019/08/21/虚拟机硬盘扩容步骤/" data-id="cjzkk7b0w000m56sl48ri7w66" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/disk/">disk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/virtulbox/">virtulbox</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/17/使用git支撑构建过程之代码同步/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">使用git支撑构建过程之代码同步</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         
