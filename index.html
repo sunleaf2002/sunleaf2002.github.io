@@ -66,6 +66,90 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Redhat7-5新机器开箱记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/21/Redhat7-5新机器开箱记/" class="article-date">
+  <time datetime="2019-08-21T07:39:43.000Z" itemprop="datePublished">2019-08-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/21/Redhat7-5新机器开箱记/">Redhat7.5新机器开箱记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>改ip地址:192.168.0.18<br>用cat /etc/sysconfig/network-scripts/ifcfg-em1  查看修改结果<br>在工作机器上 ssh <a href="mailto:root@192.168.0.18" target="_blank" rel="noopener">root@192.168.0.18</a><br><a href="mailto:root@192.168.0.18" target="_blank" rel="noopener">root@192.168.0.18</a>‘s password:<br>[root@localhost ~]#passwd 改root口令<br>[root@localhost ~]#  hostnamectl status  –查看机器名</p>
+<pre><code> Static hostname: localhost.localdomain
+       Icon name: computer-server
+         Chassis: server
+      Machine ID: bc98e8946b7d40cda73d69f3bbe2ba33
+         Boot ID: 8276bea2f951438ea775d6468aa67ade
+Operating System: Red Hat Enterprise Linux Server 7.5 (Maipo)
+     CPE OS Name: cpe:/o:redhat:enterprise_linux:7.5:GA:server
+          Kernel: Linux 3.10.0-862.el7.x86_64
+    Architecture: x86-64</code></pre><p>[root@localhost ~]# cat /proc/cpuinfo –看cpu<br>[root@localhost ~]# cat /proc/meminfo –看内存<br>[root@localhost ~]#  hostnamectl set-hostname bmcCompileMst  —改机器名<br>[root@localhost ~]# cat /etc/hostname<br>bmccompilemst<br>登出,再进入<br>[root@bmccompilemst ~]# cat /proc/scsi/scsi  —查看raid5 不知道什么意思<br>Attached devices:<br>Host: scsi0 Channel: 02 Id: 00 Lun: 00<br>  Vendor: DELL     Model: PERC H730P Mini  Rev: 4.29<br>  Type:   Direct-Access                    ANSI  SCSI revision: 05<br>Host: scsi10 Channel: 00 Id: 00 Lun: 00<br>  Vendor: HL-DT-ST Model: DVD+-RW GTA0N    Rev: A3C0<br>  Type:   CD-ROM                           ANSI  SCSI revision: 05<br>[kunlun@bmccompilemst openbmc]$ cat /etc/os-release –看os版本</p>
+<pre><code>NAME=&quot;Red Hat Enterprise Linux Server&quot;
+VERSION=&quot;7.5 (Maipo)&quot;
+ID=&quot;rhel&quot;
+ID_LIKE=&quot;fedora&quot;
+VARIANT=&quot;Server&quot;
+VARIANT_ID=&quot;server&quot;
+VERSION_ID=&quot;7.5&quot;
+PRETTY_NAME=&quot;Red Hat Enterprise Linux Server 7.5 (Maipo)&quot;
+ANSI_COLOR=&quot;0;31&quot;
+CPE_NAME=&quot;cpe:/o:redhat:enterprise_linux:7.5:GA:server&quot;
+HOME_URL=&quot;https://www.redhat.com/&quot;
+BUG_REPORT_URL=&quot;https://bugzilla.redhat.com/&quot;
+REDHAT_BUGZILLA_PRODUCT=&quot;Red Hat Enterprise Linux 7&quot;
+REDHAT_BUGZILLA_PRODUCT_VERSION=7.5
+REDHAT_SUPPORT_PRODUCT=&quot;Red Hat Enterprise Linux&quot;
+REDHAT_SUPPORT_PRODUCT_VERSION=&quot;7.5&quot;</code></pre><p>[kunlun@bmccompilemst openbmc]$useradd -d /home/kunlun -m -s /bin/bash kunlun –增加用户<br>[kunlun@bmccompilemst openbmc]$vim /etc/sudoers 权限不够   给kunlun用户加管理权限  –失败<br>[root@bmccompilemst ~]# ll  /etc/sudoers<br>-r–r—–. 1 root root 3938 11月 30 2017 /etc/sudoers<br>[root@bmccompilemst ~]# chmod u+w /etc/sudoers  —给sudoers文件加w的权限<br>[root@bmccompilemst ~]# passwd –改口令<br>[root@bmccompilemst ~]# vim /etc/sudoers<br>[root@bmccompilemst ~]# chmod u-w /etc/sudoers  取消sudoers文件w权限<br>在root行下增加kunlun用户:<br>root    ALL=(ALL)       ALL<br>kunlun  ALL=(ALL)       ALL</p>
+<img src="/img/sudoersFile.png" title="[100] [80] [title ftp [alt ftp]]">
+
+<p>以下处理yum源的问题,因为redhat源是收费的,网上建议用阿里云的<br>[root@bmccompilemst ~]# mkdir /home/yum/ 并进入<br>[kunlun@bmccompilemst yum]$ rpm -qa | grep yum</p>
+<pre><code>yum-langpacks-0.4.2-7.el7.noarch
+yum-3.4.3-158.el7.noarch
+yum-metadata-parser-1.1.4-10.el7.x86_64
+yum-utils-1.1.31-45.el7.noarch
+PackageKit-yum-1.1.5-1.el7.x86_64
+yum-rhn-plugin-2.0.1-10.el7.noarch</code></pre><p>[kunlun@bmccompilemst yum]$ sudo su<br>[sudo] kunlun 的密码：<br>[root@bmccompilemst yum]# rpm -qa | grep yum | xargs rpm -e –nodeps  –删除yum<br>从阿里云下载yum需要的软件:</p>
+<pre><code>wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-metadata-parser-1.1.4-10.el7.x86_64.rpm
+wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-utils-1.1.31-50.el7.noarch.rpm
+wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-3.4.3-161.el7.centos.noarch.rpm
+wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-plugin-fastestmirror-1.1.31-50.el7.noarch.rpm
+wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/python-urlgrabber-3.10-9.el7.noarch.rpm</code></pre><p>[root@bmccompilemst yum]# wget -O /etc/yum.repos.d/CentOS-Base.repo <a href="http://mirrors.aliyun.com/repo/Centos-7.repo" target="_blank" rel="noopener">http://mirrors.aliyun.com/repo/Centos-7.repo</a><br>正在保存至: “/etc/yum.repos.d/CentOS-Base.repo”<br>vim /etc/yum.repos.d/CentOS-Base.repo<br>:%s/$releasever/7/g  —将$releasever替换为7</p>
+<p>[root@bmccompilemst yum]# rpm -ivh  yum-metadata-parser-1.1.4-10.el7.x86_64.rpm   yum-utils-1.1.31-50.el7.noarch.rpm  yum-3.4.3-161.el7.centos.noarch.rpm yum-plugin-fastestmirror-1.1.31-50.el7.noarch.rpm  python-urlgrabber-3.10-9.el7.noarch.rpm –force –nodeps</p>
+<p>yum 可用了,再执行一下命令<br>yum clear all<br>yum makecache<br>yum update</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sunleaf2002.github.io/2019/08/21/Redhat7-5新机器开箱记/" data-id="cjzkzatj3000eeqslotezohfo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redhat/">redhat</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-虚拟机硬盘扩容步骤" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/08/21/虚拟机硬盘扩容步骤/" class="article-date">
@@ -110,7 +194,7 @@ w          #保存分区结果</code></pre><p>7.让系统重新读取分区表�
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/21/虚拟机硬盘扩容步骤/" data-id="cjzkk7b0w000m56sl48ri7w66" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/21/虚拟机硬盘扩容步骤/" data-id="cjzkzvhkk0000wnslfcpt9aki" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/disk/">disk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/virtulbox/">virtulbox</a></li></ul>
@@ -362,7 +446,7 @@ kunlun@bmcCompileBak:~/rxsunSource/tmp/tttt$ ll
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/17/使用git支撑构建过程之代码同步/" data-id="cjzkk7b23001u56slq533mvyo" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/17/使用git支撑构建过程之代码同步/" data-id="cjzkzatjr0021eqsl39ao2mx8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
@@ -446,7 +530,7 @@ ERROR: Failed to parse recipe: /home/kunlun/rxsunSource/openbmc/meta/recipes-cor
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileSecond/" data-id="cjzkk7b0w000l56slibq8t67e" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileSecond/" data-id="cjzkzatj1000aeqslrnurn7ln" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bitbake/">bitbake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
@@ -516,7 +600,7 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileProcess/" data-id="cjzkk7b1l000v56slr01nz5y8" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileProcess/" data-id="cjzkzatj00009eqsl7cvsiq3x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bitbake/">bitbake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
@@ -562,7 +646,7 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/15/nfs-FileServer/" data-id="cjzkk7b0q000456slac35bkzq" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/15/nfs-FileServer/" data-id="cjzkzatiy0005eqslpqkqcg3g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nfs/">nfs</a></li></ul>
@@ -633,7 +717,7 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/14/Install-Centos-and-Ubuntu-OS/" data-id="cjzkk7b1k000r56sluw7rua53" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/14/Install-Centos-and-Ubuntu-OS/" data-id="cjzkzatiz0006eqslyugvcg4r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/os/">os</a></li></ul>
@@ -682,7 +766,7 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/13/masteBranchRename/" data-id="cjzkk7b1j000q56sls6fwatrz" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/13/masteBranchRename/" data-id="cjzkzatiy0004eqslid0dyu2w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gitlab/">gitlab</a></li></ul>
@@ -761,7 +845,7 @@ file_data.close() #关闭最后一个文件</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/09/seleniumUseAttension/" data-id="cjzkk7b0n000156sl60lrst5x" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/09/seleniumUseAttension/" data-id="cjzkzativ0001eqsle0zajrau" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/selenium/">selenium</a></li></ul>
@@ -812,88 +896,10 @@ file_data.close() #关闭最后一个文件</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/08/cleanDevloopDir/" data-id="cjzkk7b0j000056slie9aqo4b" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/08/cleanDevloopDir/" data-id="cjzkzatir0000eqsljpe9kjoo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/disk/">disk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-filerunServer" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/02/filerunServer/" class="article-date">
-  <time datetime="2019-08-02T07:23:33.000Z" itemprop="datePublished">2019-08-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/02/filerunServer/">fileRunServer</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="移植filerun服务器"><a href="#移植filerun服务器" class="headerlink" title="移植filerun服务器"></a>移植filerun服务器</h1><p>为了在84机器上调通phpstorm的debug功能插件，在84的原有php5.6环境里下载了一堆模块，debug调通了，但是测试组同事来报，说部门用作内部网盘的filerun软件不能访问了，继续在84机器上找问题有可能会导致debug功能不可用，干脆将它移到201服务器上。</p>
-<h2 id="一、确认一下php版本"><a href="#一、确认一下php版本" class="headerlink" title="一、确认一下php版本"></a>一、确认一下php版本</h2><p>update-alternatives  命令用于处理linux系统中软件版本的切换<br>update-alternatives –display php<br>输出：</p>
-<pre><code>php - 自动模式
-  link best version is /usr/bin/php7.3
- 链接目前指向 /usr/bin/php7.3
-  link php is /usr/bin/php
-  slave php.1.gz is /usr/share/man/man1/php.1.gz
-/usr/bin/php5.6 - 优先级 56
-  次要 php.1.gz：/usr/share/man/man1/php5.6.1.gz
-/usr/bin/php7.3 - 优先级 73
-  次要 php.1.gz：/usr/share/man/man1/php7.3.1.gz</code></pre><p>update-alternatives –config php<br>    有 2 个候选项可用于替换 php (提供 /usr/bin/php)。</p>
-<pre><code>  选择       路径           优先级  状态
-------------------------------------------------------------
-* 0            /usr/bin/php7.3   73        自动模式
-  1            /usr/bin/php5.6   56        手动模式
-  2            /usr/bin/php7.3   73        手动模式
-
-要维持当前值[*]请按&lt;回车键&gt;，或者键入选择的编号：1</code></pre><p>切换php版本也可用 a2dismod php5.6 及 a2enmod php7.3，这里不用再改。</p>
-<h2 id="二、安装filerun所需的php模块"><a href="#二、安装filerun所需的php模块" class="headerlink" title="二、安装filerun所需的php模块"></a>二、安装filerun所需的php模块</h2><p>命令行敲php命令，报有些php模块没加载，可是在网页的phpinfo里却看到是已经加载，后来发现在/etc/php/7.3/cli/ 和 /etc/php/7.3/apache/ 下面各有一个php.ini，加载的模块也不一样，所以命令行下php报某个模块没有加载是指cli目录下，会与phpinfo里的不一样。<br>安装curl模块用命令 apt install php7.3-curl，其它的类似<br>只有ionCube比较麻烦，filerun必须要，用来加密它的源代码用的。按照这个链接装好。<br><a href="https://blog.csdn.net/forLightWay/article/details/78888583" target="_blank" rel="noopener">https://blog.csdn.net/forLightWay/article/details/78888583</a></p>
-<h2 id="三、下载软件并安装配置"><a href="#三、下载软件并安装配置" class="headerlink" title="三、下载软件并安装配置"></a>三、下载软件并安装配置</h2><p>上官网 <a href="https://filerun.com/download" target="_blank" rel="noopener">https://filerun.com/download</a><br>下载软件 FileRun_2019_06_01_PHP_71-73.zip, 按照官网的<br><a href="http://blog.filerun.com/how-to-install-filerun-on-ubuntu-16/" target="_blank" rel="noopener">http://blog.filerun.com/how-to-install-filerun-on-ubuntu-16/</a> 进行安装配置<br>将  /etc/php/7.3/apache2/conf.d/filerun.ini 中display_errors          = Off   改成 on<br>数据库先创建一个新的，指定目录到/data1/biosfiles<br>然后 vim system/data/autoconfig.php  将数据库配置到老数据库上成功 ！！！<br>filerun2  以后可以删除</p>
-<h2 id="四、解决问题1"><a href="#四、解决问题1" class="headerlink" title="四、解决问题1"></a>四、解决问题1</h2><p><strong>word文件双击报错</strong><br>将/etc/php/7.3/apache2/php.ini 中  ;com.allow_dcom = true 的注释去掉 ，解决了 201上面filerun中word双击报错问题，至少可以双击下载</p>
-<h2 id="五、解决问题2"><a href="#五、解决问题2" class="headerlink" title="五、解决问题2"></a>五、解决问题2</h2><p><strong>访问慢</strong><br>从数据库远程方面找原因，将filerun数据库从84移动到201上 改配置文件 system/data# vim autoconfig.php ，还是慢<br>从新版软件方面找原因，将老的filerun文件装到201的php7.3环境，不能运行<br>查看201 日志 /var/log/apache2/error.log 发现  filerun  的这个老版本FileRun_2017_03_18_PHP7.zip 在201上不能运行 原因是 ： </p>
-<pre><code>The file index.php was encoded by the ionCube Encoder for PHP 5.6 and
-cannot run under PHP 7.1 or later.\n Please ask the provider of the script 
-to provide a version encoded with the ionCube Encoder for PHP 7.1. 
-in Unknown on line 0 </code></pre><p>这些文件是被用php5.6版本的加密软件加密的，不能用在php7.3版本上<br>最后吐血发现，要在 filerun/system/data/autoconfig.php  中将数据库地址改成localhost 就很快  —-早该想到的 作为OracleDBA认证专家，哈哈。</p>
-<h2 id="六、解决问题3"><a href="#六、解决问题3" class="headerlink" title="六、解决问题3"></a>六、解决问题3</h2><p><strong>又发现word文件不能下载问题，看来前面的办法无效</strong><br>先改设置 Control Panel &gt; Configuration &gt; Files &gt; Misc options &gt; Enable download accelerator : None<br>试图用libreoffice，无效，office365要购买<br>上filerun的官网讨论区搜索，发现onlyoffice用的挺多<br>找到了一个 ONLYOFFICE，在docker环境运行，免得与外面的php7.3和诸模块不匹配</p>
-<pre><code>docker network create --driver bridge onlyoffice
-docker pull onlyoffice/documentserver
-docker run --net onlyoffice -i -t -d -p 8080:80 --restart=always --name onlyoffice-document-server  onlyoffice/documentserver
-ufw allow 8080  --放开防火墙端口</code></pre><p><a href="http://192....201:8080" target="_blank" rel="noopener">http://192....201:8080</a> 即可访问onlyoffice<br>Control Panel &gt; Configuration &gt; Files &gt;Plugin-&gt;中 关联 到onlyoffice的地址  <a href="http://192....201:8080" target="_blank" rel="noopener">http://192....201:8080</a> ，并在Defaults中设置为office文档的设置默认打开方式，ok<br>不仅可以预览下载，还可以在线编辑，非常好用。</p>
-<h2 id="七、解决问题4"><a href="#七、解决问题4" class="headerlink" title="七、解决问题4"></a>七、解决问题4</h2><p><strong>不能下载几百兆的文件</strong><br>这个服务器存了很多测试环境的镜像，要解决这个问题<br>vim /var/log/apache2/error.log  发现  PHP Fatal error:  Allowed memory size of<br>使用ps -aux | sort -k4nr | head -10命令查看内存占用前10的进程  没有结果<br>多次在/etc/php/7.3/apache/php.ini下改memory_limit，重启apache2都没有效果，后来<br>vim /etc/php/7.3/apache2/conf.d/filerun.ini  改memory_limit 为4196  就行了<br>可见在php.ini  之外 ，可以为自己的应用设置php内存的可用大小 真牛 ！</p>
-<h2 id="八、解决问题5"><a href="#八、解决问题5" class="headerlink" title="八、解决问题5"></a>八、解决问题5</h2><p><strong>网页上还是只能下载2G以内的文件</strong><br>不知道是不是系统限制，干脆另外建一个ftp服务器，可参考文档 <a href="/2019/07/31/linuxFtpServer/">搭建vsftp服务器</a>,将ftp目录设置为filerun存在文件的目录，太大的镜像走ftp吧，速度也会快一些。</p>
-<h2 id="九、总结"><a href="#九、总结" class="headerlink" title="九、总结"></a>九、总结</h2><p>filerun是加密运行的，不能一步步debug<br>遇到问题开阔思维，逐步收小范围，直到锁定目标。</p>
-<img src="/img/filerunServer.png" title="[100] [80] [title ftp [alt ftp]]">
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/02/filerunServer/" data-id="cjzkk7b1i000p56slkokxz5o1" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/filerun/">filerun</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fileshare/">fileshare</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
 
     </footer>
   </div>
@@ -927,7 +933,7 @@ ufw allow 8080  --放开防火墙端口</code></pre><p><a href="http://192....20
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitbake/">bitbake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bmc/">bmc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/build/">build</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disk/">disk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filerun/">filerun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fileshare/">fileshare</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitlab/">gitlab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nfs/">nfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openbmc/">openbmc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtulbox/">virtulbox</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitbake/">bitbake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bmc/">bmc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/build/">build</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disk/">disk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filerun/">filerun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fileshare/">fileshare</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitlab/">gitlab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nfs/">nfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openbmc/">openbmc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redhat/">redhat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtulbox/">virtulbox</a></li></ul>
     </div>
   </div>
 
@@ -937,7 +943,7 @@ ufw allow 8080  --放开防火墙端口</code></pre><p><a href="http://192....20
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/bitbake/" style="font-size: 13.33px;">bitbake</a> <a href="/tags/bmc/" style="font-size: 13.33px;">bmc</a> <a href="/tags/build/" style="font-size: 16.67px;">build</a> <a href="/tags/disk/" style="font-size: 13.33px;">disk</a> <a href="/tags/filerun/" style="font-size: 10px;">filerun</a> <a href="/tags/fileshare/" style="font-size: 10px;">fileshare</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/nfs/" style="font-size: 10px;">nfs</a> <a href="/tags/openbmc/" style="font-size: 16.67px;">openbmc</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/selenium/" style="font-size: 10px;">selenium</a> <a href="/tags/ubuntu/" style="font-size: 16.67px;">ubuntu</a> <a href="/tags/virtulbox/" style="font-size: 10px;">virtulbox</a>
+      <a href="/tags/bitbake/" style="font-size: 13.33px;">bitbake</a> <a href="/tags/bmc/" style="font-size: 13.33px;">bmc</a> <a href="/tags/build/" style="font-size: 16.67px;">build</a> <a href="/tags/disk/" style="font-size: 13.33px;">disk</a> <a href="/tags/filerun/" style="font-size: 10px;">filerun</a> <a href="/tags/fileshare/" style="font-size: 10px;">fileshare</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/nfs/" style="font-size: 10px;">nfs</a> <a href="/tags/openbmc/" style="font-size: 16.67px;">openbmc</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redhat/" style="font-size: 10px;">redhat</a> <a href="/tags/selenium/" style="font-size: 10px;">selenium</a> <a href="/tags/ubuntu/" style="font-size: 16.67px;">ubuntu</a> <a href="/tags/virtulbox/" style="font-size: 10px;">virtulbox</a>
     </div>
   </div>
 
@@ -959,6 +965,10 @@ ufw allow 8080  --放开防火墙端口</code></pre><p><a href="http://192....20
       <ul>
         
           <li>
+            <a href="/2019/08/21/Redhat7-5新机器开箱记/">Redhat7.5新机器开箱记</a>
+          </li>
+        
+          <li>
             <a href="/2019/08/21/虚拟机硬盘扩容步骤/">虚拟机硬盘扩容步骤</a>
           </li>
         
@@ -972,10 +982,6 @@ ufw allow 8080  --放开防火墙端口</code></pre><p><a href="http://192....20
         
           <li>
             <a href="/2019/08/16/openBmcCompileProcess/">openBmcCompileProcess</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/15/nfs-FileServer/">nfs-FileServer</a>
           </li>
         
       </ul>

@@ -5,20 +5,22 @@
   
 
   
-  <title>seleniumUseAttension | Ruixia,Sun&#39;s Technique Blog</title>
+  <title>Redhat7.5新机器开箱记 | Ruixia,Sun&#39;s Technique Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="使用selenium爬数据遇到的问题一、导入需要的库from selenium import webdriver  #导入操作web的模块 from selenium.webdriver.support.select import Select  #这行是为了操作一个select控件 import time  #为了让界面停一会  browser = webdriver.Chrome()  #打开">
-<meta name="keywords" content="python,selenium">
+  <meta name="description" content="改ip地址:192.168.0.18用cat /etc/sysconfig/network-scripts/ifcfg-em1  查看修改结果在工作机器上 ssh root@192.168.0.18root@192.168.0.18‘s password:[root@localhost ~]#passwd 改root口令[root@localhost ~]#  hostnamectl status">
+<meta name="keywords" content="linux,redhat">
 <meta property="og:type" content="article">
-<meta property="og:title" content="seleniumUseAttension">
-<meta property="og:url" content="https://sunleaf2002.github.io/2019/08/09/seleniumUseAttension/index.html">
+<meta property="og:title" content="Redhat7.5新机器开箱记">
+<meta property="og:url" content="https://sunleaf2002.github.io/2019/08/21/Redhat7-5新机器开箱记/index.html">
 <meta property="og:site_name" content="Ruixia,Sun&#39;s Technique Blog">
-<meta property="og:description" content="使用selenium爬数据遇到的问题一、导入需要的库from selenium import webdriver  #导入操作web的模块 from selenium.webdriver.support.select import Select  #这行是为了操作一个select控件 import time  #为了让界面停一会  browser = webdriver.Chrome()  #打开">
+<meta property="og:description" content="改ip地址:192.168.0.18用cat /etc/sysconfig/network-scripts/ifcfg-em1  查看修改结果在工作机器上 ssh root@192.168.0.18root@192.168.0.18‘s password:[root@localhost ~]#passwd 改root口令[root@localhost ~]#  hostnamectl status">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-09T03:02:05.334Z">
+<meta property="og:image" content="https://sunleaf2002.github.io/img/sudoersFile.png">
+<meta property="og:updated_time" content="2019-08-21T08:31:06.398Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="seleniumUseAttension">
-<meta name="twitter:description" content="使用selenium爬数据遇到的问题一、导入需要的库from selenium import webdriver  #导入操作web的模块 from selenium.webdriver.support.select import Select  #这行是为了操作一个select控件 import time  #为了让界面停一会  browser = webdriver.Chrome()  #打开">
+<meta name="twitter:title" content="Redhat7.5新机器开箱记">
+<meta name="twitter:description" content="改ip地址:192.168.0.18用cat /etc/sysconfig/network-scripts/ifcfg-em1  查看修改结果在工作机器上 ssh root@192.168.0.18root@192.168.0.18‘s password:[root@localhost ~]#passwd 改root口令[root@localhost ~]#  hostnamectl status">
+<meta name="twitter:image" content="https://sunleaf2002.github.io/img/sudoersFile.png">
   
     <link rel="alternate" href="/atom.xml" title="Ruixia,Sun&#39;s Technique Blog" type="application/atom+xml">
   
@@ -69,14 +71,14 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-seleniumUseAttension" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Redhat7-5新机器开箱记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/08/09/seleniumUseAttension/" class="article-date">
-  <time datetime="2019-08-09T01:16:19.000Z" itemprop="datePublished">2019-08-09</time>
+    <a href="/2019/08/21/Redhat7-5新机器开箱记/" class="article-date">
+  <time datetime="2019-08-21T07:39:43.000Z" itemprop="datePublished">2019-08-21</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/python/">python</a>
+    <a class="article-category-link" href="/categories/linux/">linux</a>
   </div>
 
   </div>
@@ -87,7 +89,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      seleniumUseAttension
+      Redhat7.5新机器开箱记
     </h1>
   
 
@@ -95,51 +97,56 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="使用selenium爬数据遇到的问题"><a href="#使用selenium爬数据遇到的问题" class="headerlink" title="使用selenium爬数据遇到的问题"></a>使用selenium爬数据遇到的问题</h2><h2 id="一、导入需要的库"><a href="#一、导入需要的库" class="headerlink" title="一、导入需要的库"></a>一、导入需要的库</h2><pre><code>from selenium import webdriver  #导入操作web的模块
-from selenium.webdriver.support.select import Select  #这行是为了操作一个select控件
-import time  #为了让界面停一会
+        <p>改ip地址:192.168.0.18<br>用cat /etc/sysconfig/network-scripts/ifcfg-em1  查看修改结果<br>在工作机器上 ssh <a href="mailto:root@192.168.0.18" target="_blank" rel="noopener">root@192.168.0.18</a><br><a href="mailto:root@192.168.0.18" target="_blank" rel="noopener">root@192.168.0.18</a>‘s password:<br>[root@localhost ~]#passwd 改root口令<br>[root@localhost ~]#  hostnamectl status  –查看机器名</p>
+<pre><code> Static hostname: localhost.localdomain
+       Icon name: computer-server
+         Chassis: server
+      Machine ID: bc98e8946b7d40cda73d69f3bbe2ba33
+         Boot ID: 8276bea2f951438ea775d6468aa67ade
+Operating System: Red Hat Enterprise Linux Server 7.5 (Maipo)
+     CPE OS Name: cpe:/o:redhat:enterprise_linux:7.5:GA:server
+          Kernel: Linux 3.10.0-862.el7.x86_64
+    Architecture: x86-64</code></pre><p>[root@localhost ~]# cat /proc/cpuinfo –看cpu<br>[root@localhost ~]# cat /proc/meminfo –看内存<br>[root@localhost ~]#  hostnamectl set-hostname bmcCompileMst  —改机器名<br>[root@localhost ~]# cat /etc/hostname<br>bmccompilemst<br>登出,再进入<br>[root@bmccompilemst ~]# cat /proc/scsi/scsi  —查看raid5 不知道什么意思<br>Attached devices:<br>Host: scsi0 Channel: 02 Id: 00 Lun: 00<br>  Vendor: DELL     Model: PERC H730P Mini  Rev: 4.29<br>  Type:   Direct-Access                    ANSI  SCSI revision: 05<br>Host: scsi10 Channel: 00 Id: 00 Lun: 00<br>  Vendor: HL-DT-ST Model: DVD+-RW GTA0N    Rev: A3C0<br>  Type:   CD-ROM                           ANSI  SCSI revision: 05<br>[kunlun@bmccompilemst openbmc]$ cat /etc/os-release –看os版本</p>
+<pre><code>NAME=&quot;Red Hat Enterprise Linux Server&quot;
+VERSION=&quot;7.5 (Maipo)&quot;
+ID=&quot;rhel&quot;
+ID_LIKE=&quot;fedora&quot;
+VARIANT=&quot;Server&quot;
+VARIANT_ID=&quot;server&quot;
+VERSION_ID=&quot;7.5&quot;
+PRETTY_NAME=&quot;Red Hat Enterprise Linux Server 7.5 (Maipo)&quot;
+ANSI_COLOR=&quot;0;31&quot;
+CPE_NAME=&quot;cpe:/o:redhat:enterprise_linux:7.5:GA:server&quot;
+HOME_URL=&quot;https://www.redhat.com/&quot;
+BUG_REPORT_URL=&quot;https://bugzilla.redhat.com/&quot;
+REDHAT_BUGZILLA_PRODUCT=&quot;Red Hat Enterprise Linux 7&quot;
+REDHAT_BUGZILLA_PRODUCT_VERSION=7.5
+REDHAT_SUPPORT_PRODUCT=&quot;Red Hat Enterprise Linux&quot;
+REDHAT_SUPPORT_PRODUCT_VERSION=&quot;7.5&quot;</code></pre><p>[kunlun@bmccompilemst openbmc]$useradd -d /home/kunlun -m -s /bin/bash kunlun –增加用户<br>[kunlun@bmccompilemst openbmc]$vim /etc/sudoers 权限不够   给kunlun用户加管理权限  –失败<br>[root@bmccompilemst ~]# ll  /etc/sudoers<br>-r–r—–. 1 root root 3938 11月 30 2017 /etc/sudoers<br>[root@bmccompilemst ~]# chmod u+w /etc/sudoers  —给sudoers文件加w的权限<br>[root@bmccompilemst ~]# passwd –改口令<br>[root@bmccompilemst ~]# vim /etc/sudoers<br>[root@bmccompilemst ~]# chmod u-w /etc/sudoers  取消sudoers文件w权限<br>在root行下增加kunlun用户:<br>root    ALL=(ALL)       ALL<br>kunlun  ALL=(ALL)       ALL</p>
+<img src="/img/sudoersFile.png" title="[100] [80] [title ftp [alt ftp]]">
 
-browser = webdriver.Chrome()  #打开chrome
-browser.maximize_window() #最大化窗口
-browser.get(&apos;http://×××.com&apos;) #访问网页</code></pre><h2 id="二、解决弹出警告框的障碍"><a href="#二、解决弹出警告框的障碍" class="headerlink" title="二、解决弹出警告框的障碍"></a>二、解决弹出警告框的障碍</h2><pre><code>time.sleep(3)
-browser.switch_to.alert.accept() #模拟直接点一下弹出框</code></pre><h2 id="三、解决登录问题"><a href="#三、解决登录问题" class="headerlink" title="三、解决登录问题"></a>三、解决登录问题</h2><pre><code>elem_user = browser.find_element_by_name(&apos;username&apos;) # 获取用户名的输入控件 ，是通过用chrome的F12查看element获得的，一下控件基本都是这个方法获得
-elem_user.clear()
-elem_user.send_keys(&apos;######&apos;) # 键入用户名
-elem_pass = browser.find_element_by_name(&apos;password&apos;)# 密码的输入控件
-elem_pass.clear()
-elem_pass.send_keys(&apos;#####&apos;)
-elem_login = browser.find_element_by_id(&apos;login&apos;)# 登录按钮控件
-elem_login.click()# 点击登录按钮
-time.sleep(2)</code></pre><h2 id="四、按文字获取控件，使用较多"><a href="#四、按文字获取控件，使用较多" class="headerlink" title="四、按文字获取控件，使用较多"></a>四、按文字获取控件，使用较多</h2><pre><code>browser.find_element_by_xpath(&quot;//*[text()=&apos;管理&apos;]&quot;).click()  #按照网页上的顺序单击按钮，等几秒，跳转后再点。。。
-time.sleep(3)</code></pre><h2 id="五、获取select控件的条目"><a href="#五、获取select控件的条目" class="headerlink" title="五、获取select控件的条目"></a>五、获取select控件的条目</h2><pre><code>list_1 =browser.find_element_by_tag_name(&apos;select&apos;)  # 用到了前面导入的Select模块
-Select(list_1).select_by_value(&quot;100&quot;) # 按值来选条目</code></pre><h2 id="六、最重要的，如果网页内有iframe控件，想获取它内部的控件"><a href="#六、最重要的，如果网页内有iframe控件，想获取它内部的控件" class="headerlink" title="六、最重要的，如果网页内有iframe控件，想获取它内部的控件"></a>六、最重要的，如果网页内有iframe控件，想获取它内部的控件</h2><pre><code>browser.switch_to_frame(&apos;main&apos;) # 先切换到这个frame，“main”是名称
-browser.find_element_by_id(&quot;add&quot;) #再继续获得frame内部的控件，否则总是取不到 ，浪费了大部分时间</code></pre><h2 id="七、以下是批量写文件"><a href="#七、以下是批量写文件" class="headerlink" title="七、以下是批量写文件"></a>七、以下是批量写文件</h2><pre><code>file_name =&quot;&quot;
-file_data = open(&apos;file_data_1.txt&apos;, &apos;w&apos;)
-pages=0
-while(pages&lt;20000):
-    table = browser.find_element_by_tag_name(&apos;table&apos;)  # 按tag取table表格控件
-    table_tr_list = table.find_elements_by_tag_name(&apos;tr&apos;)    # 取当前页面的所有行
-    table_cols = table_tr_list[0].find_elements_by_tag_name(&apos;th&apos;)   #取第一行的所有列
-    for r,tr in enumerate(table_tr_list, 1):        
-        table_td_list = tr.find_elements_by_tag_name(&apos;td&apos;)
-        for c,td in enumerate(table_td_list):            
-            file_data.write(td.text+&apos;\n&apos;)            
-    pages = pages + 1
-    print(pages)
-    if pages % 1000 == 0:  # 每1000页写个新文件
-        file_data.close()
-        flie_name = &apos;file_data_&apos; + str(pages) + &apos;.txt&apos; #动态生成文件名称
-        file_data = open(flie_name, &apos;w&apos;)
-    browser.find_element_by_id(&apos;iwap-gen-3_next&apos;).click()  #点击下一页
-    time.sleep(10)
-file_data.close() #关闭最后一个文件</code></pre>
+<p>以下处理yum源的问题,因为redhat源是收费的,网上建议用阿里云的<br>[root@bmccompilemst ~]# mkdir /home/yum/ 并进入<br>[kunlun@bmccompilemst yum]$ rpm -qa | grep yum</p>
+<pre><code>yum-langpacks-0.4.2-7.el7.noarch
+yum-3.4.3-158.el7.noarch
+yum-metadata-parser-1.1.4-10.el7.x86_64
+yum-utils-1.1.31-45.el7.noarch
+PackageKit-yum-1.1.5-1.el7.x86_64
+yum-rhn-plugin-2.0.1-10.el7.noarch</code></pre><p>[kunlun@bmccompilemst yum]$ sudo su<br>[sudo] kunlun 的密码：<br>[root@bmccompilemst yum]# rpm -qa | grep yum | xargs rpm -e –nodeps  –删除yum<br>从阿里云下载yum需要的软件:</p>
+<pre><code>wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-metadata-parser-1.1.4-10.el7.x86_64.rpm
+wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-utils-1.1.31-50.el7.noarch.rpm
+wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-3.4.3-161.el7.centos.noarch.rpm
+wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-plugin-fastestmirror-1.1.31-50.el7.noarch.rpm
+wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/python-urlgrabber-3.10-9.el7.noarch.rpm</code></pre><p>[root@bmccompilemst yum]# wget -O /etc/yum.repos.d/CentOS-Base.repo <a href="http://mirrors.aliyun.com/repo/Centos-7.repo" target="_blank" rel="noopener">http://mirrors.aliyun.com/repo/Centos-7.repo</a><br>正在保存至: “/etc/yum.repos.d/CentOS-Base.repo”<br>vim /etc/yum.repos.d/CentOS-Base.repo<br>:%s/$releasever/7/g  —将$releasever替换为7</p>
+<p>[root@bmccompilemst yum]# rpm -ivh  yum-metadata-parser-1.1.4-10.el7.x86_64.rpm   yum-utils-1.1.31-50.el7.noarch.rpm  yum-3.4.3-161.el7.centos.noarch.rpm yum-plugin-fastestmirror-1.1.31-50.el7.noarch.rpm  python-urlgrabber-3.10-9.el7.noarch.rpm –force –nodeps</p>
+<p>yum 可用了,再执行一下命令<br>yum clear all<br>yum makecache<br>yum update</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/09/seleniumUseAttension/" data-id="cjzkzativ0001eqsle0zajrau" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/21/Redhat7-5新机器开箱记/" data-id="cjzkzatj3000eeqslotezohfo" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/selenium/">selenium</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redhat/">redhat</a></li></ul>
 
     </footer>
   </div>
@@ -147,19 +154,10 @@ file_data.close() #关闭最后一个文件</code></pre>
     
 <nav id="article-nav">
   
-    <a href="/2019/08/13/masteBranchRename/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          masteBranchRename
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/08/08/cleanDevloopDir/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/08/21/虚拟机硬盘扩容步骤/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">cleanDevloopDir</div>
+      <div class="article-nav-title">虚拟机硬盘扩容步骤</div>
     </a>
   
 </nav>
