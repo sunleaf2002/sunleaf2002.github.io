@@ -16,7 +16,7 @@
 <meta property="og:description" content="改ip地址:192.168.0.18用cat /etc/sysconfig/network-scripts/ifcfg-em1  查看修改结果在工作机器上 ssh root@192.168.0.18root@192.168.0.18‘s password:[root@localhost ~]#passwd 改root口令[root@localhost ~]#  hostnamectl status">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://sunleaf2002.github.io/img/sudoersFile.png">
-<meta property="og:updated_time" content="2019-08-21T08:31:06.398Z">
+<meta property="og:updated_time" content="2019-08-22T00:17:25.195Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redhat7.5新机器开箱记">
 <meta name="twitter:description" content="改ip地址:192.168.0.18用cat /etc/sysconfig/network-scripts/ifcfg-em1  查看修改结果在工作机器上 ssh root@192.168.0.18root@192.168.0.18‘s password:[root@localhost ~]#passwd 改root口令[root@localhost ~]#  hostnamectl status">
@@ -101,8 +101,8 @@
 <pre><code> Static hostname: localhost.localdomain
        Icon name: computer-server
          Chassis: server
-      Machine ID: bc98e8946b7d40cda73d69f3bbe2ba33
-         Boot ID: 8276bea2f951438ea775d6468aa67ade
+      Machine ID: *****************
+         Boot ID: *****************
 Operating System: Red Hat Enterprise Linux Server 7.5 (Maipo)
      CPE OS Name: cpe:/o:redhat:enterprise_linux:7.5:GA:server
           Kernel: Linux 3.10.0-862.el7.x86_64
@@ -136,14 +136,14 @@ yum-rhn-plugin-2.0.1-10.el7.noarch</code></pre><p>[kunlun@bmccompilemst yum]$ su
 wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-utils-1.1.31-50.el7.noarch.rpm
 wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-3.4.3-161.el7.centos.noarch.rpm
 wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-plugin-fastestmirror-1.1.31-50.el7.noarch.rpm
-wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/python-urlgrabber-3.10-9.el7.noarch.rpm</code></pre><p>[root@bmccompilemst yum]# wget -O /etc/yum.repos.d/CentOS-Base.repo <a href="http://mirrors.aliyun.com/repo/Centos-7.repo" target="_blank" rel="noopener">http://mirrors.aliyun.com/repo/Centos-7.repo</a><br>正在保存至: “/etc/yum.repos.d/CentOS-Base.repo”<br>vim /etc/yum.repos.d/CentOS-Base.repo<br>:%s/$releasever/7/g  —将$releasever替换为7</p>
+wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/python-urlgrabber-3.10-9.el7.noarch.rpm</code></pre><p>[root@bmccompilemst yum]# wget -O /etc/yum.repos.d/CentOS-Base.repo <a href="http://mirrors.aliyun.com/repo/Centos-7.repo" target="_blank" rel="noopener">http://mirrors.aliyun.com/repo/Centos-7.repo</a><br>正在保存至: “/etc/yum.repos.d/CentOS-Base.repo”<br>[root@bmccompilemst yum]# vim /etc/yum.repos.d/CentOS-Base.repo<br>:%s/$releasever/7/g  —将$releasever替换为7</p>
 <p>[root@bmccompilemst yum]# rpm -ivh  yum-metadata-parser-1.1.4-10.el7.x86_64.rpm   yum-utils-1.1.31-50.el7.noarch.rpm  yum-3.4.3-161.el7.centos.noarch.rpm yum-plugin-fastestmirror-1.1.31-50.el7.noarch.rpm  python-urlgrabber-3.10-9.el7.noarch.rpm –force –nodeps</p>
 <p>yum 可用了,再执行一下命令<br>yum clear all<br>yum makecache<br>yum update</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/21/Redhat7-5新机器开箱记/" data-id="cjzkzatj3000eeqslotezohfo" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/21/Redhat7-5新机器开箱记/" data-id="cjzlxsnaf000ekasl003jp3wd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redhat/">redhat</a></li></ul>
