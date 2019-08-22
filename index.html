@@ -66,6 +66,69 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Redhat上openbmc构建步骤" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/22/Redhat上openbmc构建步骤/" class="article-date">
+  <time datetime="2019-08-22T00:51:45.000Z" itemprop="datePublished">2019-08-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>►<a class="article-category-link" href="/categories/linux/bmc/">bmc</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/22/Redhat上openbmc构建步骤/">Redhat上openbmc构建步骤</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>redhat7 自带git</p>
+<p>生成公钥并放到git服务器上<br>ssh-keygen<br>cat ~/.ssh/id_rsa.pub  拷贝到gitlab服务器的用户ssh key下</p>
+<p>克隆openbmc构建所用的库<br>mkdir ~/rxsunSource<br>cd rxsunSource<br>git clone <a href="mailto:git@192.168" target="_blank" rel="noopener">git@192.168</a>.*.200:openbmc/openbmc.git<br>cd openbmc</p>
+<p>准备构建,报缺少python3的错,根据错误提示,总结出需要提前安装以下支撑软件</p>
+<pre><code>yum -y install http://mirror.centos.org/centos/7/os/x86_64/Packages/libffi-devel-3.0.13-18.el7.x86_64.rpm
+yum -y install openssl-devel bzip2-devel expat-devel gdbm-devel readline-devel sqlite-devel gcc gcc-c++ zlib*
+yum install  sqlite3   
+yum install  sqlite-devel.x86_64
+yum install chrpath.x86_64
+yum install texinfo</code></pre><p>再装python3.7</p>
+<pre><code>mkdir ~/rxsunTools
+cd rxsunTools
+wget https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tgz
+tar -xzvf Python-3.7.4.tgz
+cd Python-3.7.4
+./configure 
+make
+make install
+ln -s /home/rxsunTools/Python-3.7.4/python /usr/bin/python3</code></pre><p>命令行执行python3  ,看到版本为python3.7.4</p>
+<p>继续构建步骤:<br>在openbmc/build下<br>1.创建目录dowonloads/git2 拷贝裸库<br>2.删除原来的配置文件目录 rm conf/ -rf  只有环境变量改变 就要删除<br>3.设置环境变量  export TEMPLATECONF=meta-haiguang/meta-haiguang1/conf/<br>4.生成配置文件目录 在openbmc下 . openbmc-env  会生成conf目录<br>5.自动进入build目录,执行 bitbake obmc-phosphor-image  —不能是root用户</p>
+<p>往dowonloads/git2 拷贝裸库 一般会用git clone –bare命令,比较慢, 最好用scp命令,这需要解决口令问题:<br>在120.200上 vim <del>/.ssh/authorized_keys 将刚刚ssh-keygen生成的</del>/.ssh/id_rsa.pub内容拷贝到末尾,即可无口令拷贝</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sunleaf2002.github.io/2019/08/22/Redhat上openbmc构建步骤/" data-id="cjzlza6pl000lhtsli75pm77u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redhat/">redhat</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Redhat7-5新机器开箱记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/08/21/Redhat7-5新机器开箱记/" class="article-date">
@@ -138,7 +201,7 @@ wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/python-urlgrabber-3.
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/21/Redhat7-5新机器开箱记/" data-id="cjzlxsnaf000ekasl003jp3wd" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/21/Redhat7-5新机器开箱记/" data-id="cjzlza6pi000ehtsld332w58e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redhat/">redhat</a></li></ul>
@@ -194,7 +257,7 @@ w          #保存分区结果</code></pre><p>7.让系统重新读取分区表�
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/21/虚拟机硬盘扩容步骤/" data-id="cjzlxsnah000gkasl04zpxs7j" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/21/虚拟机硬盘扩容步骤/" data-id="cjzlza6pk000ghtslosz08z9y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/disk/">disk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/virtulbox/">virtulbox</a></li></ul>
@@ -446,7 +509,7 @@ kunlun@bmcCompileBak:~/rxsunSource/tmp/tttt$ ll
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/17/使用git支撑构建过程之代码同步/" data-id="cjzlxsnb60027kasl7o9swgnz" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/17/使用git支撑构建过程之代码同步/" data-id="cjzlza6q3002ihtsljhioxgey" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
@@ -530,7 +593,7 @@ ERROR: Failed to parse recipe: /home/kunlun/rxsunSource/openbmc/meta/recipes-cor
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileSecond/" data-id="cjzlxsnae000akasl3qvkrfre" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileSecond/" data-id="cjzlza6ph000ahtslapofo66c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bitbake/">bitbake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
@@ -600,7 +663,7 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileProcess/" data-id="cjzlxsnad0009kaslx3l6yfqc" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileProcess/" data-id="cjzlza6pg0009htsl7gtx3d3f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bitbake/">bitbake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
@@ -646,7 +709,7 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/15/nfs-FileServer/" data-id="cjzlxsnac0006kasl6yox17b1" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/15/nfs-FileServer/" data-id="cjzlza6pf0006htsl9eragu5f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nfs/">nfs</a></li></ul>
@@ -717,7 +780,7 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/14/Install-Centos-and-Ubuntu-OS/" data-id="cjzlxsnac0005kaslqyr6v89o" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/14/Install-Centos-and-Ubuntu-OS/" data-id="cjzlza6pe0005htslisragear" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/os/">os</a></li></ul>
@@ -766,7 +829,7 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/13/masteBranchRename/" data-id="cjzlxsnab0004kaslu6avsts9" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/13/masteBranchRename/" data-id="cjzlza6pc0004htslaei6ut1e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gitlab/">gitlab</a></li></ul>
@@ -845,61 +908,10 @@ file_data.close() #关闭最后一个文件</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/09/seleniumUseAttension/" data-id="cjzlxsna80001kaslyo8qp5p8" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/09/seleniumUseAttension/" data-id="cjzlza6p50000htslrjdlws20" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/selenium/">selenium</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-cleanDevloopDir" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/08/cleanDevloopDir/" class="article-date">
-  <time datetime="2019-08-08T05:44:00.000Z" itemprop="datePublished">2019-08-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/08/cleanDevloopDir/">cleanDevloopDir</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="删除Linux循环设备-dev-loop"><a href="#删除Linux循环设备-dev-loop" class="headerlink" title="删除Linux循环设备/dev/loop"></a>删除Linux循环设备/dev/loop</h2><p>用df -h命令查看磁盘空间<br>发现两个loop设备</p>
-<pre><code>/dev/loop0       89M   89M     0  100% /snap/core/7270
-/dev/loop1      254M  254M     0  100% /snap/electronic-wechat/7</code></pre><p>其中的electronic-wechat是有一次试图装微信客户端而下载的软件，不好用。</p>
-<p>查了一下，<br>dev/loop（或称vnd (vnode disk)、lofi（循环文件接口））是一种伪设备，<br>这种设备使得文件可以如同块设备一般被访问，相当于挂载的镜像文件，也没有什么用途，<br>而snap是一种ubuntu的包安装方式，大概是某次装软件用到的，可以不用。</p>
-<p>用losetup -a命令查一下当前的loop设备,与上面的一致</p>
-<pre><code>/dev/loop1: [2050]:4325623 (/var/lib/snapd/snaps/electronic-wechat_7.snap)
-/dev/loop0: [2050]:4325622 (/var/lib/snapd/snaps/core_7270.snap)</code></pre><p>apt autoremove –purge snapd</p>
-<p>卸载了很多软件 不知道会不会影响其它软件的运行 先给机器减轻负担 遇到问题再解决问题吧</p>
-<p>用df -h命令查看磁盘空间<br>上面两行不再出现</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/08/cleanDevloopDir/" data-id="cjzlxsna40000kaslzcalnry2" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/disk/">disk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
 
     </footer>
   </div>
@@ -923,7 +935,7 @@ file_data.close() #关闭最后一个文件</code></pre>
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/bmc/">bmc</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/openbmc/">openbmc</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/os/">os</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/bmc/">bmc</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/git/openbmc/">openbmc</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/bmc/">bmc</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/os/">os</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li></ul>
     </div>
   </div>
 
@@ -943,7 +955,7 @@ file_data.close() #关闭最后一个文件</code></pre>
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/bitbake/" style="font-size: 13.33px;">bitbake</a> <a href="/tags/bmc/" style="font-size: 13.33px;">bmc</a> <a href="/tags/build/" style="font-size: 16.67px;">build</a> <a href="/tags/disk/" style="font-size: 13.33px;">disk</a> <a href="/tags/filerun/" style="font-size: 10px;">filerun</a> <a href="/tags/fileshare/" style="font-size: 10px;">fileshare</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/nfs/" style="font-size: 10px;">nfs</a> <a href="/tags/openbmc/" style="font-size: 16.67px;">openbmc</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redhat/" style="font-size: 10px;">redhat</a> <a href="/tags/selenium/" style="font-size: 10px;">selenium</a> <a href="/tags/ubuntu/" style="font-size: 16.67px;">ubuntu</a> <a href="/tags/virtulbox/" style="font-size: 10px;">virtulbox</a>
+      <a href="/tags/bitbake/" style="font-size: 12.5px;">bitbake</a> <a href="/tags/bmc/" style="font-size: 15px;">bmc</a> <a href="/tags/build/" style="font-size: 15px;">build</a> <a href="/tags/disk/" style="font-size: 12.5px;">disk</a> <a href="/tags/filerun/" style="font-size: 10px;">filerun</a> <a href="/tags/fileshare/" style="font-size: 10px;">fileshare</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/nfs/" style="font-size: 10px;">nfs</a> <a href="/tags/openbmc/" style="font-size: 17.5px;">openbmc</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redhat/" style="font-size: 12.5px;">redhat</a> <a href="/tags/selenium/" style="font-size: 10px;">selenium</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/virtulbox/" style="font-size: 10px;">virtulbox</a>
     </div>
   </div>
 
@@ -965,6 +977,10 @@ file_data.close() #关闭最后一个文件</code></pre>
       <ul>
         
           <li>
+            <a href="/2019/08/22/Redhat上openbmc构建步骤/">Redhat上openbmc构建步骤</a>
+          </li>
+        
+          <li>
             <a href="/2019/08/21/Redhat7-5新机器开箱记/">Redhat7.5新机器开箱记</a>
           </li>
         
@@ -978,10 +994,6 @@ file_data.close() #关闭最后一个文件</code></pre>
         
           <li>
             <a href="/2019/08/16/openBmcCompileSecond/">openBmcCompileSecond</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/16/openBmcCompileProcess/">openBmcCompileProcess</a>
           </li>
         
       </ul>
