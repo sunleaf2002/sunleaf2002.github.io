@@ -5,15 +5,20 @@
   
 
   
-  <title>Archives | Ruixia,Sun&#39;s Technique Blog</title>
+  <title>自动化构建工具的需求描述 | Ruixia,Sun&#39;s Technique Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Ruixia,Sun&#39;s Technique Blog">
-<meta property="og:url" content="https://sunleaf2002.github.io/archives/index.html">
+  <meta name="description" content="一.环境:1.gitlab代码库是中心代码服务器2.编译服务器bmcCompileBak的openbmc/build/downloads/git2目录下是裸库3.编译服务器bmcCompileBak的gitSource目录下是源代码,源代码库里的每一个.git/config文件中都有两个remote push地址,一个是缺省的master,指向中心代码库,另一个是手工增加的,命名为local,指向">
+<meta name="keywords" content="openbmc,bmc,build">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自动化构建工具的需求描述">
+<meta property="og:url" content="https://sunleaf2002.github.io/2019/08/23/自动化构建工具的需求描述/index.html">
 <meta property="og:site_name" content="Ruixia,Sun&#39;s Technique Blog">
+<meta property="og:description" content="一.环境:1.gitlab代码库是中心代码服务器2.编译服务器bmcCompileBak的openbmc/build/downloads/git2目录下是裸库3.编译服务器bmcCompileBak的gitSource目录下是源代码,源代码库里的每一个.git/config文件中都有两个remote push地址,一个是缺省的master,指向中心代码库,另一个是手工增加的,命名为local,指向">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-23T07:28:42.840Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ruixia,Sun&#39;s Technique Blog">
+<meta name="twitter:title" content="自动化构建工具的需求描述">
+<meta name="twitter:description" content="一.环境:1.gitlab代码库是中心代码服务器2.编译服务器bmcCompileBak的openbmc/build/downloads/git2目录下是裸库3.编译服务器bmcCompileBak的gitSource目录下是源代码,源代码库里的每一个.git/config文件中都有两个remote push地址,一个是缺省的master,指向中心代码库,另一个是手工增加的,命名为local,指向">
   
     <link rel="alternate" href="/atom.xml" title="Ruixia,Sun&#39;s Technique Blog" type="application/atom+xml">
   
@@ -64,216 +69,80 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/08/23/自动化构建工具的需求描述/" class="archive-article-date">
-  <time datetime="2019-08-23T07:22:11.000Z" itemprop="datePublished">Aug 23</time>
+        <section id="main"><article id="post-自动化构建工具的需求描述" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/23/自动化构建工具的需求描述/" class="article-date">
+  <time datetime="2019-08-23T07:22:11.000Z" itemprop="datePublished">2019-08-23</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bmc/">bmc</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/23/自动化构建工具的需求描述/">自动化构建工具的需求描述</a>
+    <h1 class="article-title" itemprop="name">
+      自动化构建工具的需求描述
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/08/22/Redhat上openbmc构建步骤/" class="archive-article-date">
-  <time datetime="2019-08-22T00:51:45.000Z" itemprop="datePublished">Aug 22</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/22/Redhat上openbmc构建步骤/">Redhat上openbmc构建步骤</a>
-    </h1>
-  
+        <h3 id="一-环境"><a href="#一-环境" class="headerlink" title="一.环境:"></a>一.环境:</h3><p>1.gitlab代码库是中心代码服务器<br>2.编译服务器bmcCompileBak的openbmc/build/downloads/git2目录下是裸库<br>3.编译服务器bmcCompileBak的gitSource目录下是源代码,源代码库里的每一个.git/config文件中都有两个remote push地址,一个是缺省的master,指向中心代码库,另一个是手工增加的,命名为local,指向openbmc/build/downloads/git2里对应的裸库地址</p>
+<h3 id="二-思路"><a href="#二-思路" class="headerlink" title="二.思路"></a>二.思路</h3><p>1.开发机器,例如kunlunsec上的改动能通过192.168.120.200中心代码服务器同步到编译服务器bmcCompileBak上的源代码库里<br>2.编译服务器bmcCompileBak上同步后的源代码库能推送(git push)到编译服务器bmcCompileBak下的/home/kunlun/rxsunSource/openbmc/build/downloads/git2</p>
+<h3 id="三-所需要参数"><a href="#三-所需要参数" class="headerlink" title="三.所需要参数:"></a>三.所需要参数:</h3><p>1.一级版本: 如下文中的meta-haiguang<br>2.二级版本: 如下文中的meta-haiguang1<br>3.一个数组input_repo[]: 库名repo_name;分支名branch_name; 提交号commit_id; 文件名file_name;</p>
+<h3 id="四-代码同步的脚本"><a href="#四-代码同步的脚本" class="headerlink" title="四.代码同步的脚本"></a>四.代码同步的脚本</h3><p>在编译服务器的gitSource目录下,循环数组input_repo</p>
+<pre><code>cd input_repo[i].repo_name
+git pull origin input_repo[i].branch_name
+git push local input_repo[i].branch_name
+cd ..</code></pre><h3 id="五-传递commit变更的脚本"><a href="#五-传递commit变更的脚本" class="headerlink" title="五.传递commit变更的脚本"></a>五.传递commit变更的脚本</h3><p>在编译服务器的openbmc目录下,循环数组input_repo<br>修改file_name,如meta-phosphor/recipes-phosphor/datetime/phosphor-time-manager_git.bb 中的两个参数:<br>KBRANCH ?= input_repo[i].branch_name<br>SRCREV =  input_repo[i].commit_id</p>
+<h3 id="六-构建的脚本"><a href="#六-构建的脚本" class="headerlink" title="六.构建的脚本"></a>六.构建的脚本</h3><p>在openbmc目录下运行这个sh文件:</p>
+<pre><code>cd build
+rm conf/ -rf
+export TEMPLATECONF=meta-haiguang/meta-haiguang1/conf/
+cd ..
+. openbmc-env
+bitbake obmc-phosphor-image  </code></pre><h3 id="七-传到服务器的脚本"><a href="#七-传到服务器的脚本" class="headerlink" title="七.传到服务器的脚本"></a>七.传到服务器的脚本</h3><p>要将地址路径和日期作为参数传入.</p>
+<pre><code>lftp  192.168.200.***
+cd rxsun/openbmc-v28
+mput ~/rxsunSource/openbmc-v28/build/tmp/deploy/images/haiguang1/obmc-phosphor-image-haiguang1-20190822*.static.mtd .
+exit
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/08/21/Redhat7-5新机器开箱记/" class="archive-article-date">
-  <time datetime="2019-08-21T07:39:43.000Z" itemprop="datePublished">Aug 21</time>
-</a>
+lftp bmc:***@192.168.120.***
+cd openbmc/tmp/rxsun/openbmc-v28
+mput ~/rxsunSource/openbmc-v28/build/tmp/deploy/images/haiguang1/obmc-phosphor-image-haiguang1-20190822*.static.mtd  .
+exit</code></pre>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/21/Redhat7-5新机器开箱记/">Redhat7.5新机器开箱记</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/08/21/虚拟机硬盘扩容步骤/" class="archive-article-date">
-  <time datetime="2019-08-21T00:53:59.000Z" itemprop="datePublished">Aug 21</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sunleaf2002.github.io/2019/08/23/自动化构建工具的需求描述/" data-id="cjznsieum000gu9sl19u61z5a" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/21/虚拟机硬盘扩容步骤/">虚拟机硬盘扩容步骤</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/08/17/使用git支撑构建过程之代码同步/" class="archive-article-date">
-  <time datetime="2019-08-17T14:00:46.000Z" itemprop="datePublished">Aug 17</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/17/使用git支撑构建过程之代码同步/">使用git支撑构建过程之代码同步</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/22/Redhat上openbmc构建步骤/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Redhat上openbmc构建步骤</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/08/16/openBmcCompileSecond/" class="archive-article-date">
-  <time datetime="2019-08-16T09:39:49.000Z" itemprop="datePublished">Aug 16</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/16/openBmcCompileSecond/">openBmcCompileSecond</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/08/16/openBmcCompileProcess/" class="archive-article-date">
-  <time datetime="2019-08-16T05:49:37.000Z" itemprop="datePublished">Aug 16</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/16/openBmcCompileProcess/">openBmcCompileProcess</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/08/15/nfs-FileServer/" class="archive-article-date">
-  <time datetime="2019-08-15T06:13:23.000Z" itemprop="datePublished">Aug 15</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/15/nfs-FileServer/">nfs-FileServer</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/08/14/Install-Centos-and-Ubuntu-OS/" class="archive-article-date">
-  <time datetime="2019-08-14T10:18:16.000Z" itemprop="datePublished">Aug 14</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/14/Install-Centos-and-Ubuntu-OS/">Install Centos and Ubuntu OS</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/08/13/masteBranchRename/" class="archive-article-date">
-  <time datetime="2019-08-13T06:37:56.000Z" itemprop="datePublished">Aug 13</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/13/masteBranchRename/">masteBranchRename</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-  </nav>
 
 </section>
         

@@ -66,6 +66,71 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-自动化构建工具的需求描述" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/23/自动化构建工具的需求描述/" class="article-date">
+  <time datetime="2019-08-23T07:22:11.000Z" itemprop="datePublished">2019-08-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bmc/">bmc</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/23/自动化构建工具的需求描述/">自动化构建工具的需求描述</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一-环境"><a href="#一-环境" class="headerlink" title="一.环境:"></a>一.环境:</h3><p>1.gitlab代码库是中心代码服务器<br>2.编译服务器bmcCompileBak的openbmc/build/downloads/git2目录下是裸库<br>3.编译服务器bmcCompileBak的gitSource目录下是源代码,源代码库里的每一个.git/config文件中都有两个remote push地址,一个是缺省的master,指向中心代码库,另一个是手工增加的,命名为local,指向openbmc/build/downloads/git2里对应的裸库地址</p>
+<h3 id="二-思路"><a href="#二-思路" class="headerlink" title="二.思路"></a>二.思路</h3><p>1.开发机器,例如kunlunsec上的改动能通过192.168.120.200中心代码服务器同步到编译服务器bmcCompileBak上的源代码库里<br>2.编译服务器bmcCompileBak上同步后的源代码库能推送(git push)到编译服务器bmcCompileBak下的/home/kunlun/rxsunSource/openbmc/build/downloads/git2</p>
+<h3 id="三-所需要参数"><a href="#三-所需要参数" class="headerlink" title="三.所需要参数:"></a>三.所需要参数:</h3><p>1.一级版本: 如下文中的meta-haiguang<br>2.二级版本: 如下文中的meta-haiguang1<br>3.一个数组input_repo[]: 库名repo_name;分支名branch_name; 提交号commit_id; 文件名file_name;</p>
+<h3 id="四-代码同步的脚本"><a href="#四-代码同步的脚本" class="headerlink" title="四.代码同步的脚本"></a>四.代码同步的脚本</h3><p>在编译服务器的gitSource目录下,循环数组input_repo</p>
+<pre><code>cd input_repo[i].repo_name
+git pull origin input_repo[i].branch_name
+git push local input_repo[i].branch_name
+cd ..</code></pre><h3 id="五-传递commit变更的脚本"><a href="#五-传递commit变更的脚本" class="headerlink" title="五.传递commit变更的脚本"></a>五.传递commit变更的脚本</h3><p>在编译服务器的openbmc目录下,循环数组input_repo<br>修改file_name,如meta-phosphor/recipes-phosphor/datetime/phosphor-time-manager_git.bb 中的两个参数:<br>KBRANCH ?= input_repo[i].branch_name<br>SRCREV =  input_repo[i].commit_id</p>
+<h3 id="六-构建的脚本"><a href="#六-构建的脚本" class="headerlink" title="六.构建的脚本"></a>六.构建的脚本</h3><p>在openbmc目录下运行这个sh文件:</p>
+<pre><code>cd build
+rm conf/ -rf
+export TEMPLATECONF=meta-haiguang/meta-haiguang1/conf/
+cd ..
+. openbmc-env
+bitbake obmc-phosphor-image  </code></pre><h3 id="七-传到服务器的脚本"><a href="#七-传到服务器的脚本" class="headerlink" title="七.传到服务器的脚本"></a>七.传到服务器的脚本</h3><p>要将地址路径和日期作为参数传入.</p>
+<pre><code>lftp  192.168.200.***
+cd rxsun/openbmc-v28
+mput ~/rxsunSource/openbmc-v28/build/tmp/deploy/images/haiguang1/obmc-phosphor-image-haiguang1-20190822*.static.mtd .
+exit
+
+lftp bmc:***@192.168.120.***
+cd openbmc/tmp/rxsun/openbmc-v28
+mput ~/rxsunSource/openbmc-v28/build/tmp/deploy/images/haiguang1/obmc-phosphor-image-haiguang1-20190822*.static.mtd  .
+exit</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sunleaf2002.github.io/2019/08/23/自动化构建工具的需求描述/" data-id="cjznsieum000gu9sl19u61z5a" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Redhat上openbmc构建步骤" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/08/22/Redhat上openbmc构建步骤/" class="article-date">
@@ -117,7 +182,7 @@ ln -s /home/rxsunTools/Python-3.7.4/python /usr/bin/python3</code></pre><p>命�
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/22/Redhat上openbmc构建步骤/" data-id="cjzlze539000kp9sljshlfp34" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/22/Redhat上openbmc构建步骤/" data-id="cjznsieul000eu9slz84wwmu9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redhat/">redhat</a></li></ul>
@@ -201,7 +266,7 @@ wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/python-urlgrabber-3.
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/21/Redhat7-5新机器开箱记/" data-id="cjzlze535000ep9sl7mpanxhp" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/21/Redhat7-5新机器开箱记/" data-id="cjznsieu20006u9slu028yk9n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redhat/">redhat</a></li></ul>
@@ -257,7 +322,7 @@ w          #保存分区结果</code></pre><p>7.让系统重新读取分区表�
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/21/虚拟机硬盘扩容步骤/" data-id="cjzlze537000gp9slvvx8usoy" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/21/虚拟机硬盘扩容步骤/" data-id="cjznsieuj000au9slqhutd1p1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/disk/">disk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/virtulbox/">virtulbox</a></li></ul>
@@ -509,7 +574,7 @@ kunlun@bmcCompileBak:~/rxsunSource/tmp/tttt$ ll
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/17/使用git支撑构建过程之代码同步/" data-id="cjzlze53o002hp9slxuviiw64" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/17/使用git支撑构建过程之代码同步/" data-id="cjznsievk002mu9slx3d0wb6j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
@@ -593,7 +658,7 @@ ERROR: Failed to parse recipe: /home/kunlun/rxsunSource/openbmc/meta/recipes-cor
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileSecond/" data-id="cjzlze534000ap9slufqngkg2" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileSecond/" data-id="cjznsieu20005u9sl72jh5zzv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bitbake/">bitbake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
@@ -663,7 +728,7 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileProcess/" data-id="cjzlze5330009p9slm8y8ps1a" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileProcess/" data-id="cjznsievg002gu9slh2sug3ft" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bitbake/">bitbake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
@@ -709,7 +774,7 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/15/nfs-FileServer/" data-id="cjzlze5310006p9sljb6puk64" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/15/nfs-FileServer/" data-id="cjznsieu10004u9slcistjqps" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nfs/">nfs</a></li></ul>
@@ -780,7 +845,7 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/14/Install-Centos-and-Ubuntu-OS/" data-id="cjzlze5300005p9slj2l1irm1" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/14/Install-Centos-and-Ubuntu-OS/" data-id="cjznsieus000su9slsotxk1yi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/os/">os</a></li></ul>
@@ -829,89 +894,10 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/13/masteBranchRename/" data-id="cjzlze52z0004p9sltfsf8swi" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/13/masteBranchRename/" data-id="cjznsieui0009u9slv7jca60o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gitlab/">gitlab</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-seleniumUseAttension" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/09/seleniumUseAttension/" class="article-date">
-  <time datetime="2019-08-09T01:16:19.000Z" itemprop="datePublished">2019-08-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/python/">python</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/09/seleniumUseAttension/">seleniumUseAttension</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="使用selenium爬数据遇到的问题"><a href="#使用selenium爬数据遇到的问题" class="headerlink" title="使用selenium爬数据遇到的问题"></a>使用selenium爬数据遇到的问题</h2><h2 id="一、导入需要的库"><a href="#一、导入需要的库" class="headerlink" title="一、导入需要的库"></a>一、导入需要的库</h2><pre><code>from selenium import webdriver  #导入操作web的模块
-from selenium.webdriver.support.select import Select  #这行是为了操作一个select控件
-import time  #为了让界面停一会
-
-browser = webdriver.Chrome()  #打开chrome
-browser.maximize_window() #最大化窗口
-browser.get(&apos;http://×××.com&apos;) #访问网页</code></pre><h2 id="二、解决弹出警告框的障碍"><a href="#二、解决弹出警告框的障碍" class="headerlink" title="二、解决弹出警告框的障碍"></a>二、解决弹出警告框的障碍</h2><pre><code>time.sleep(3)
-browser.switch_to.alert.accept() #模拟直接点一下弹出框</code></pre><h2 id="三、解决登录问题"><a href="#三、解决登录问题" class="headerlink" title="三、解决登录问题"></a>三、解决登录问题</h2><pre><code>elem_user = browser.find_element_by_name(&apos;username&apos;) # 获取用户名的输入控件 ，是通过用chrome的F12查看element获得的，一下控件基本都是这个方法获得
-elem_user.clear()
-elem_user.send_keys(&apos;######&apos;) # 键入用户名
-elem_pass = browser.find_element_by_name(&apos;password&apos;)# 密码的输入控件
-elem_pass.clear()
-elem_pass.send_keys(&apos;#####&apos;)
-elem_login = browser.find_element_by_id(&apos;login&apos;)# 登录按钮控件
-elem_login.click()# 点击登录按钮
-time.sleep(2)</code></pre><h2 id="四、按文字获取控件，使用较多"><a href="#四、按文字获取控件，使用较多" class="headerlink" title="四、按文字获取控件，使用较多"></a>四、按文字获取控件，使用较多</h2><pre><code>browser.find_element_by_xpath(&quot;//*[text()=&apos;管理&apos;]&quot;).click()  #按照网页上的顺序单击按钮，等几秒，跳转后再点。。。
-time.sleep(3)</code></pre><h2 id="五、获取select控件的条目"><a href="#五、获取select控件的条目" class="headerlink" title="五、获取select控件的条目"></a>五、获取select控件的条目</h2><pre><code>list_1 =browser.find_element_by_tag_name(&apos;select&apos;)  # 用到了前面导入的Select模块
-Select(list_1).select_by_value(&quot;100&quot;) # 按值来选条目</code></pre><h2 id="六、最重要的，如果网页内有iframe控件，想获取它内部的控件"><a href="#六、最重要的，如果网页内有iframe控件，想获取它内部的控件" class="headerlink" title="六、最重要的，如果网页内有iframe控件，想获取它内部的控件"></a>六、最重要的，如果网页内有iframe控件，想获取它内部的控件</h2><pre><code>browser.switch_to_frame(&apos;main&apos;) # 先切换到这个frame，“main”是名称
-browser.find_element_by_id(&quot;add&quot;) #再继续获得frame内部的控件，否则总是取不到 ，浪费了大部分时间</code></pre><h2 id="七、以下是批量写文件"><a href="#七、以下是批量写文件" class="headerlink" title="七、以下是批量写文件"></a>七、以下是批量写文件</h2><pre><code>file_name =&quot;&quot;
-file_data = open(&apos;file_data_1.txt&apos;, &apos;w&apos;)
-pages=0
-while(pages&lt;20000):
-    table = browser.find_element_by_tag_name(&apos;table&apos;)  # 按tag取table表格控件
-    table_tr_list = table.find_elements_by_tag_name(&apos;tr&apos;)    # 取当前页面的所有行
-    table_cols = table_tr_list[0].find_elements_by_tag_name(&apos;th&apos;)   #取第一行的所有列
-    for r,tr in enumerate(table_tr_list, 1):        
-        table_td_list = tr.find_elements_by_tag_name(&apos;td&apos;)
-        for c,td in enumerate(table_td_list):            
-            file_data.write(td.text+&apos;\n&apos;)            
-    pages = pages + 1
-    print(pages)
-    if pages % 1000 == 0:  # 每1000页写个新文件
-        file_data.close()
-        flie_name = &apos;file_data_&apos; + str(pages) + &apos;.txt&apos; #动态生成文件名称
-        file_data = open(flie_name, &apos;w&apos;)
-    browser.find_element_by_id(&apos;iwap-gen-3_next&apos;).click()  #点击下一页
-    time.sleep(10)
-file_data.close() #关闭最后一个文件</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/09/seleniumUseAttension/" data-id="cjzlze52v0001p9sljr8web89" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/selenium/">selenium</a></li></ul>
 
     </footer>
   </div>
@@ -955,7 +941,7 @@ file_data.close() #关闭最后一个文件</code></pre>
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/bitbake/" style="font-size: 12.5px;">bitbake</a> <a href="/tags/bmc/" style="font-size: 15px;">bmc</a> <a href="/tags/build/" style="font-size: 15px;">build</a> <a href="/tags/disk/" style="font-size: 12.5px;">disk</a> <a href="/tags/filerun/" style="font-size: 10px;">filerun</a> <a href="/tags/fileshare/" style="font-size: 10px;">fileshare</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/nfs/" style="font-size: 10px;">nfs</a> <a href="/tags/openbmc/" style="font-size: 17.5px;">openbmc</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redhat/" style="font-size: 12.5px;">redhat</a> <a href="/tags/selenium/" style="font-size: 10px;">selenium</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/virtulbox/" style="font-size: 10px;">virtulbox</a>
+      <a href="/tags/bitbake/" style="font-size: 12px;">bitbake</a> <a href="/tags/bmc/" style="font-size: 16px;">bmc</a> <a href="/tags/build/" style="font-size: 16px;">build</a> <a href="/tags/disk/" style="font-size: 12px;">disk</a> <a href="/tags/filerun/" style="font-size: 10px;">filerun</a> <a href="/tags/fileshare/" style="font-size: 10px;">fileshare</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/git/" style="font-size: 12px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/nfs/" style="font-size: 10px;">nfs</a> <a href="/tags/openbmc/" style="font-size: 18px;">openbmc</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redhat/" style="font-size: 12px;">redhat</a> <a href="/tags/selenium/" style="font-size: 10px;">selenium</a> <a href="/tags/ubuntu/" style="font-size: 14px;">ubuntu</a> <a href="/tags/virtulbox/" style="font-size: 10px;">virtulbox</a>
     </div>
   </div>
 
@@ -977,6 +963,10 @@ file_data.close() #关闭最后一个文件</code></pre>
       <ul>
         
           <li>
+            <a href="/2019/08/23/自动化构建工具的需求描述/">自动化构建工具的需求描述</a>
+          </li>
+        
+          <li>
             <a href="/2019/08/22/Redhat上openbmc构建步骤/">Redhat上openbmc构建步骤</a>
           </li>
         
@@ -990,10 +980,6 @@ file_data.close() #关闭最后一个文件</code></pre>
         
           <li>
             <a href="/2019/08/17/使用git支撑构建过程之代码同步/">使用git支撑构建过程之代码同步</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/16/openBmcCompileSecond/">openBmcCompileSecond</a>
           </li>
         
       </ul>
