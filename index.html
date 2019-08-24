@@ -66,6 +66,55 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-填补openbmc编译过程中的一个坑" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/24/填补openbmc编译过程中的一个坑/" class="article-date">
+  <time datetime="2019-08-24T13:17:49.000Z" itemprop="datePublished">2019-08-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/bmc/">bmc</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/24/填补openbmc编译过程中的一个坑/">填补openbmc编译过程中的一个坑</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>编译老版本同方代码:</p>
+<h3 id="1-注意要替换为meta-haiguang2的环境变量"><a href="#1-注意要替换为meta-haiguang2的环境变量" class="headerlink" title="1.注意要替换为meta-haiguang2的环境变量"></a>1.注意要替换为meta-haiguang2的环境变量</h3><p>export TEMPLATECONF=meta-haiguang/meta-haiguang2/conf/</p>
+<h3 id="2-报错"><a href="#2-报错" class="headerlink" title="2.报错"></a>2.报错</h3><p>pflash的库就是skiboot库  是skiboot中的一部分<br>WARNING: pflash-v6.1-r0 do_fetch: Failed to fetch URL git://github.com/open-power/skiboot.git;nobranch=1, attempting MIRRORS if available<br>ERROR: pflash-v6.1-r0 do_fetch: Fetcher failure: Unable to find revision bb7ae1ade9e06a854771b8ed1e26f7d58b508e84 in branch master even from upstream<br>ERROR: pflash-v6.1-r0 do_fetch: Fetcher failure for URL: ‘git://github.com/open-power/skiboot.git;nobranch=1’. Unable to fetch URL from any source.<br>ERROR: pflash-v6.1-r0 do_fetch: Function failed: base_do_fetch<br>ERROR: Logfile of failure stored in: /home/kunlun/rxsunSource/openbmc-origin/build/tmp/work/armv6-openbmc-linux-gnueabi/pflash/v6.1-r0/temp/log.do_fetch.65823<br>ERROR: Task (/home/kunlun/rxsunSource/openbmc-origin/meta-openpower/recipes-bsp/skiboot/pflash.bb:do_fetch) failed with exit code ‘1’<br>一直报错 核实各文件内容的一致性没有问题 </p>
+<h3 id="3-删掉build下的tmp-cache-sstate-cache三个临时目录"><a href="#3-删掉build下的tmp-cache-sstate-cache三个临时目录" class="headerlink" title="3.删掉build下的tmp cache sstate-cache三个临时目录"></a>3.删掉build下的tmp cache sstate-cache三个临时目录</h3><p>重编译 报错改为<br>fatal: Refusing to fetch into current branch refs/heads/master of non-bare repository<br>ERROR: pflash-v6.1-r0 do_fetch: Fetcher failure for URL: ‘git://github.com/open-power/skiboot.git;nobranch=1’. Unable to fetch URL from any source.<br>ERROR: pflash-v6.1-r0 do_fetch: Function failed: base_do_fetch<br>ERROR: Logfile of failure stored in: /home/kunlun/rxsunSource/openbmc-origin/build/tmp/work/armv6-openbmc-linux-gnueabi/pflash/v6.1-r0/temp/log.do_fetch.10559<br>ERROR: Task (/home/kunlun/rxsunSource/openbmc-origin/meta-openpower/recipes-bsp/skiboot/pflash.bb:do_fetch) failed with exit code ‘1’</p>
+<h3 id="4-发现问题所在"><a href="#4-发现问题所在" class="headerlink" title="4.发现问题所在"></a>4.发现问题所在</h3><p>分析上面的fatal提示<br>发现download里除了我克隆下来github.com.open-power.skiboot,还多出来一个 github.com.open-power.skiboot.git,但是这里没有refs/heads/master文件,结合报错提示,想到可能是编译程序试图构建一个带.git后缀的目录失败.<br>也就是git库的目录名称错了,干脆把目录重命名.不知道为什么以前不报这个错?<br>目前为止,已知的bmcweb.git webui.git skiboot.git 一共有三个库是带.git后缀的,其它不用.</p>
+<h3 id="5-还发现一个问题"><a href="#5-还发现一个问题" class="headerlink" title="5.还发现一个问题"></a>5.还发现一个问题</h3><p>当报错的时候 试图通过gitSource 里的源代码pull origin 再push到local的做法是行不通的  ,除非用shell脚本先检查该库是否还存在, 因为刚刚的出错行为会删掉这个库 .<br>这种情况还需要用. openbmc-env重新生成conf目录 </p>
+<h3 id="6-事后分析"><a href="#6-事后分析" class="headerlink" title="6.事后分析"></a>6.事后分析</h3><p>查找文件bitbake/lib/bb/tests/fetch.py中有一行代码:<br>self.git(‘update-ref refs/heads/master refs/heads/master~1’, cwd=ud.clonedir)<br>应该就是这个操作导致的,大概bitbake认为不带.git后缀的库不是bare 仓库.可是其它不带.git后缀的库为什么能编译过去呢,还是skiboot这个库的配置文件有什么特别的?以及webui库的配置文件?<br>这些代码需要仔细研究.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sunleaf2002.github.io/2019/08/24/填补openbmc编译过程中的一个坑/" data-id="cjzpl3oa6000kzcsl8y2gmul2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bitbake/">bitbake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-自动化构建工具的需求描述" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/08/23/自动化构建工具的需求描述/" class="article-date">
@@ -119,7 +168,7 @@ exit</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/23/自动化构建工具的需求描述/" data-id="cjznsieum000gu9sl19u61z5a" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/23/自动化构建工具的需求描述/" data-id="cjzpl3oa7000mzcsls1mfrwvd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
@@ -182,7 +231,7 @@ ln -s /home/rxsunTools/Python-3.7.4/python /usr/bin/python3</code></pre><p>命�
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/22/Redhat上openbmc构建步骤/" data-id="cjznsieul000eu9slz84wwmu9" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/22/Redhat上openbmc构建步骤/" data-id="cjzpl3oa5000gzcslzylfik3x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redhat/">redhat</a></li></ul>
@@ -266,7 +315,7 @@ wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/python-urlgrabber-3.
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/21/Redhat7-5新机器开箱记/" data-id="cjznsieu20006u9slu028yk9n" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/21/Redhat7-5新机器开箱记/" data-id="cjzpl3oa2000bzcsl0r1jcq6a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redhat/">redhat</a></li></ul>
@@ -322,7 +371,7 @@ w          #保存分区结果</code></pre><p>7.让系统重新读取分区表�
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/21/虚拟机硬盘扩容步骤/" data-id="cjznsieuj000au9slqhutd1p1" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/21/虚拟机硬盘扩容步骤/" data-id="cjzpl3oa4000fzcsl7uzgl59u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/disk/">disk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/virtulbox/">virtulbox</a></li></ul>
@@ -574,7 +623,7 @@ kunlun@bmcCompileBak:~/rxsunSource/tmp/tttt$ ll
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/17/使用git支撑构建过程之代码同步/" data-id="cjznsievk002mu9slx3d0wb6j" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/17/使用git支撑构建过程之代码同步/" data-id="cjzpl3oaq002szcslpb1n8sn5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
@@ -658,7 +707,7 @@ ERROR: Failed to parse recipe: /home/kunlun/rxsunSource/openbmc/meta/recipes-cor
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileSecond/" data-id="cjznsieu20005u9sl72jh5zzv" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileSecond/" data-id="cjzpl3oa1000azcslr01n62bb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bitbake/">bitbake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
@@ -728,7 +777,7 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileProcess/" data-id="cjznsievg002gu9slh2sug3ft" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileProcess/" data-id="cjzpl3o9y0005zcslb0fj1om2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bitbake/">bitbake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
@@ -774,7 +823,7 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/15/nfs-FileServer/" data-id="cjznsieu10004u9slcistjqps" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/15/nfs-FileServer/" data-id="cjzpl3o9z0006zcsl9zmgfern" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nfs/">nfs</a></li></ul>
@@ -845,59 +894,10 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/14/Install-Centos-and-Ubuntu-OS/" data-id="cjznsieus000su9slsotxk1yi" class="article-share-link">Share</a>
+      <a data-url="https://sunleaf2002.github.io/2019/08/14/Install-Centos-and-Ubuntu-OS/" data-id="cjzpl3o9o0000zcslitiq24ps" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/os/">os</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-masteBranchRename" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/13/masteBranchRename/" class="article-date">
-  <time datetime="2019-08-13T06:37:56.000Z" itemprop="datePublished">2019-08-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/git/">git</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/13/masteBranchRename/">masteBranchRename</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="maste分支重命名惊险记"><a href="#maste分支重命名惊险记" class="headerlink" title="maste分支重命名惊险记"></a>maste分支重命名惊险记</h1><h2 id="一、当前问题"><a href="#一、当前问题" class="headerlink" title="一、当前问题"></a>一、当前问题</h2><p>做完联想海光后，要将代码应用到同方产品中，产品logo图片和文字不同，要求尽量能共用代码，只将有差异的部分放到单独的分支上。</p>
-<h2 id="二、基本思路"><a href="#二、基本思路" class="headerlink" title="二、基本思路"></a>二、基本思路</h2><p>生成tongfang分支，在这之上不仅改了图片，还改了登录界面的代码，而且将来的登录界面都将与同方的一致。<br>这就意味着可将同方分支作为将来的master分支，而将原来的master分支重命名为联想分支即可。<br>当前的本地和远程都有master分支和tongfang分支。</p>
-<h2 id="三、重命名master分支的操作过程"><a href="#三、重命名master分支的操作过程" class="headerlink" title="三、重命名master分支的操作过程"></a>三、重命名master分支的操作过程</h2><p>1.本地切换分支到tongfang分支，不能让当前分支是master分支 git checkout tongfang<br>2.本地重命名 git branch -m master lenovo  //将原来的master分支重命名为lenovo分支<br>3.在远程gitlab里，将当前的default分支改为tongfang分支<br>4.删除远程分支：git push origin :master<br>5.将重命名过的新分支提交：git push origin lenovo</p>
-<h2 id="四、发现问题"><a href="#四、发现问题" class="headerlink" title="四、发现问题"></a>四、发现问题</h2><p>试图将远程gitlab的当前分支切换到lenovo分支上，目的是将本地和远程的tongfang分支重命名为master，<br>发现新命名的lenovo分支gitlab上看不到，master分支能看到，点击后提示404找不到,只能看到tongfang分支，<br>试图将当前的default分支改为tongfang分支，不成功。</p>
-<h2 id="五、解决办法，在远程创建master分支"><a href="#五、解决办法，在远程创建master分支" class="headerlink" title="五、解决办法，在远程创建master分支"></a>五、解决办法，在远程创建master分支</h2><p>远程gitlab里，在git库的commit-&gt;branch页面，new branch创建一个名为master的分支，开始位置是tongfang分支的最后一次提交点，将当前的default分支改为lenovo分支，成功。<br>创建master分支后，一切操作都正常了，看来master分支是必须存在的。</p>
-<h2 id="六、本地找回master分支"><a href="#六、本地找回master分支" class="headerlink" title="六、本地找回master分支"></a>六、本地找回master分支</h2><p>git branch -a<br>可以看到远程的master分支，没有本地的master分支<br>git checkout master<br>git branch -a<br>本地分支结构与远程完全一样。</p>
-<h2 id="七、后续"><a href="#七、后续" class="headerlink" title="七、后续"></a>七、后续</h2><p>以后的共性修改都在master分支上，个性的改动在各厂商分支上。<br>共性修改合并到厂商分支的方法：<br>先git checkout 厂商分支<br>再git merge master </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/13/masteBranchRename/" data-id="cjznsieui0009u9slv7jca60o" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gitlab/">gitlab</a></li></ul>
 
     </footer>
   </div>
@@ -941,7 +941,7 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/bitbake/" style="font-size: 12px;">bitbake</a> <a href="/tags/bmc/" style="font-size: 16px;">bmc</a> <a href="/tags/build/" style="font-size: 16px;">build</a> <a href="/tags/disk/" style="font-size: 12px;">disk</a> <a href="/tags/filerun/" style="font-size: 10px;">filerun</a> <a href="/tags/fileshare/" style="font-size: 10px;">fileshare</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/git/" style="font-size: 12px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/nfs/" style="font-size: 10px;">nfs</a> <a href="/tags/openbmc/" style="font-size: 18px;">openbmc</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redhat/" style="font-size: 12px;">redhat</a> <a href="/tags/selenium/" style="font-size: 10px;">selenium</a> <a href="/tags/ubuntu/" style="font-size: 14px;">ubuntu</a> <a href="/tags/virtulbox/" style="font-size: 10px;">virtulbox</a>
+      <a href="/tags/bitbake/" style="font-size: 15px;">bitbake</a> <a href="/tags/bmc/" style="font-size: 17.5px;">bmc</a> <a href="/tags/build/" style="font-size: 17.5px;">build</a> <a href="/tags/disk/" style="font-size: 12.5px;">disk</a> <a href="/tags/filerun/" style="font-size: 10px;">filerun</a> <a href="/tags/fileshare/" style="font-size: 10px;">fileshare</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/nfs/" style="font-size: 10px;">nfs</a> <a href="/tags/openbmc/" style="font-size: 20px;">openbmc</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redhat/" style="font-size: 12.5px;">redhat</a> <a href="/tags/selenium/" style="font-size: 10px;">selenium</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/virtulbox/" style="font-size: 10px;">virtulbox</a>
     </div>
   </div>
 
@@ -963,6 +963,10 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
       <ul>
         
           <li>
+            <a href="/2019/08/24/填补openbmc编译过程中的一个坑/">填补openbmc编译过程中的一个坑</a>
+          </li>
+        
+          <li>
             <a href="/2019/08/23/自动化构建工具的需求描述/">自动化构建工具的需求描述</a>
           </li>
         
@@ -976,10 +980,6 @@ git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-releas
         
           <li>
             <a href="/2019/08/21/虚拟机硬盘扩容步骤/">虚拟机硬盘扩容步骤</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/17/使用git支撑构建过程之代码同步/">使用git支撑构建过程之代码同步</a>
           </li>
         
       </ul>
