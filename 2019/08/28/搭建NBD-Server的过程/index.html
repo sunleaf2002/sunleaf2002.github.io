@@ -5,15 +5,20 @@
   
 
   
-  <title>Tag: redhat | Ruixia,Sun&#39;s Technique Blog</title>
+  <title>搭建NBD Server的过程 | Ruixia,Sun&#39;s Technique Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Ruixia,Sun&#39;s Technique Blog">
-<meta property="og:url" content="https://sunleaf2002.github.io/tags/redhat/index.html">
+  <meta name="description" content="服务器192.×.×.84，客户端192.×.×.86 在84机器上安装nbd-serversudo apt install nbd-server 创建一个300MB的文件当做块设备/home/kunlun/rxsunSource/tmp下执行dd if=/dev/zero of=nbd-disk0 bs=104857600 count=3 启动nbd-server，监听9999端口，挂载刚刚创建">
+<meta name="keywords" content="linux,nbdserver">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建NBD Server的过程">
+<meta property="og:url" content="https://sunleaf2002.github.io/2019/08/28/搭建NBD-Server的过程/index.html">
 <meta property="og:site_name" content="Ruixia,Sun&#39;s Technique Blog">
+<meta property="og:description" content="服务器192.×.×.84，客户端192.×.×.86 在84机器上安装nbd-serversudo apt install nbd-server 创建一个300MB的文件当做块设备/home/kunlun/rxsunSource/tmp下执行dd if=/dev/zero of=nbd-disk0 bs=104857600 count=3 启动nbd-server，监听9999端口，挂载刚刚创建">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-28T06:30:41.547Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ruixia,Sun&#39;s Technique Blog">
+<meta name="twitter:title" content="搭建NBD Server的过程">
+<meta name="twitter:description" content="服务器192.×.×.84，客户端192.×.×.86 在84机器上安装nbd-serversudo apt install nbd-server 创建一个300MB的文件当做块设备/home/kunlun/rxsunSource/tmp下执行dd if=/dev/zero of=nbd-disk0 bs=104857600 count=3 启动nbd-server，监听9999端口，挂载刚刚创建">
   
     <link rel="alternate" href="/atom.xml" title="Ruixia,Sun&#39;s Technique Blog" type="application/atom+xml">
   
@@ -64,59 +69,86 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/08/22/Redhat上openbmc构建步骤/" class="archive-article-date">
-  <time datetime="2019-08-22T00:51:45.000Z" itemprop="datePublished">Aug 22</time>
+        <section id="main"><article id="post-搭建NBD-Server的过程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/28/搭建NBD-Server的过程/" class="article-date">
+  <time datetime="2019-08-28T05:43:48.000Z" itemprop="datePublished">2019-08-28</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/22/Redhat上openbmc构建步骤/">Redhat上openbmc构建步骤</a>
+    <h1 class="article-title" itemprop="name">
+      搭建NBD Server的过程
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/08/21/Redhat7-5新机器开箱记/" class="archive-article-date">
-  <time datetime="2019-08-21T07:39:43.000Z" itemprop="datePublished">Aug 21</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/21/Redhat7-5新机器开箱记/">Redhat7.5新机器开箱记</a>
-    </h1>
-  
+        <p>服务器192.×.×.84，客户端192.×.×.86</p>
+<h2 id="在84机器上"><a href="#在84机器上" class="headerlink" title="在84机器上"></a>在84机器上</h2><p>安装nbd-server<br>sudo apt install nbd-server</p>
+<p>创建一个300MB的文件当做块设备<br>/home/kunlun/rxsunSource/tmp下执行<br>dd if=/dev/zero of=nbd-disk0 bs=104857600 count=3</p>
+<p>启动nbd-server，监听9999端口，挂载刚刚创建的nbd-disk0设备<br>kunlun@kunlunsec:~/rxsunSource/tmp$ sudo nbd-server 9999 /home/kunlun/rxsunSource/tmp/nbd-disk0</p>
+<pre><code>** (process:22663): WARNING **: Specifying an export on the command line no longer uses the oldstyle protocol.</code></pre><p>查看nbd端口和进程：<br>kunlun@kunlunsec:~/rxsunSource/tmp$ sudo netstat -antpl | grep 9999</p>
+<pre><code>tcp6       0      0 :::9999                 :::*                    LISTEN      13444/nbd-server</code></pre><p>kunlun@kunlunsec:~/rxsunSource/tmp$ ps -ef | grep nbd</p>
+<pre><code>nbd      13444 13922  0 15:46 ?        00:00:00 nbd-server 9999 /home/kunlun/rxsunSource/tmp/nbd-disk0
+kunlun   13474 32318  0 15:47 pts/25   00:00:00 grep --color=auto nbd</code></pre><h2 id="在86机器上"><a href="#在86机器上" class="headerlink" title="在86机器上"></a>在86机器上</h2><p>sudo apt install nbd-client<br>modprobe nbd  载入模块<br>$ lsmod | grep nbd  查看nbd设备是否建立.</p>
+<pre><code>nbd                    20480  0</code></pre><p>$ ls /dev/nbd* -hl 查看设备</p>
+<pre><code>brw-rw---- 1 root disk 43,   0 8月  28 14:02 /dev/nbd0
+.........
+brw-rw---- 1 root disk 43, 240 8月  28 14:02 /dev/nbd15
+.........
+brw-rw---- 1 root disk 43, 144 8月  28 14:02 /dev/nbd9</code></pre><p>$ sudo nbd-client 192.168.200.84 9999 /dev/nbd0  将nbd设备关联到nbd服务器端</p>
+<pre><code>Warning: the oldstyle protocol is no longer supported.
+This method now uses the newstyle protocol with a default export
+Negotiation: ..size = 300MB
+bs=1024, sz=314572800 bytes</code></pre><p>$ ps -ef | grep nbd  查看nbd-client进程. </p>
+<pre><code>root      4957     1  0 14:04 ?        00:00:00 nbd-client 192.168.200.84 9999 /dev/nbd0
+root      4959     2  0 14:04 ?        00:00:00 [nbd0]</code></pre><p>$ mkdir /mnt/nbd0<br>$ mount /dev/nbd0 /mnt/nbd0  将/dev/nbd0设备挂载到/mnt/nbd0目录下，不理睬提示信息</p>
+<pre><code>mount: /dev/nbd0 is write-protected, mounting read-only
+mount: wrong fs type, bad option, bad superblock on /dev/nbd0,
+       missing codepage or helper program, or other error
+       In some cases useful info is found in syslog - try
+       dmesg | tail or so.</code></pre><p>$ cd /mnt/nbd0/  进入目录<br>root@bmcCompileBak:/mnt/nbd0# touch a.txt 创建一个文件<br>root@bmcCompileBak:/mnt/nbd0# ll  验证文件创建成功</p>
+<pre><code>total 8
+drwxr-xr-x 2 root root 4096 8月  28 14:13 ./
+drwxr-xr-x 3 root root 4096 8月  28 14:10 ../
+-rw-r--r-- 1 root root    0 8月  28 14:13 a.txt</code></pre><p>执行以下命令结束nbd设备和连接<br>$ umount /mnt/nbd0/<br>$ nbd-client -d /dev/nbd0 用于断开到nbd server的连接</p>
 
-    </header>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://sunleaf2002.github.io/2019/08/28/搭建NBD-Server的过程/" data-id="cjzuvqg5n000rywslsuqwmwh7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nbdserver/">nbdserver</a></li></ul>
+
+    </footer>
   </div>
-</article>
+  
+    
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/08/24/填补openbmc编译过程中的一个坑/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">填补openbmc编译过程中的一个坑</div>
+    </a>
   
+</nav>
 
+  
+</article>
 
 </section>
         
