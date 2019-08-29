@@ -1,346 +1,950 @@
 <!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="utf-8">
-  
+
+
 
   
-  <title>Ruixia,Sun&#39;s Technique Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="bmc linux">
+<meta property="og:type" content="website">
 <meta property="og:title" content="Ruixia,Sun&#39;s Technique Blog">
 <meta property="og:url" content="https://sunleaf2002.github.io/index.html">
 <meta property="og:site_name" content="Ruixia,Sun&#39;s Technique Blog">
-<meta property="og:locale" content="default">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ruixia,Sun&#39;s Technique Blog">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sunleaf2002.github.io/">
+
+
+
+
+
+  <title>Ruixia,Sun's Technique Blog</title>
   
-    <link rel="alternate" href="/atom.xml" title="Ruixia,Sun&#39;s Technique Blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+
+
+
 </head>
-</html>
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Ruixia,Sun&#39;s Technique Blog</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Record the step of upgrading......</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://sunleaf2002.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-搭建NBD-Server的过程" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/28/搭建NBD-Server的过程/" class="article-date">
-  <time datetime="2019-08-28T05:43:48.000Z" itemprop="datePublished">2019-08-28</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/28/搭建NBD-Server的过程/">搭建NBD Server的过程</a>
-    </h1>
+  
+    
   
 
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ruixia,Sun's Technique Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Record the step of upgrading......</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunleaf2002.github.io/2019/08/28/搭建NBD-Server的过程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ruixia,sun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruixia,Sun's Technique Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/28/搭建NBD-Server的过程/" itemprop="url">搭建NBD Server的过程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-28T13:43:48+08:00">
+                2019-08-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>服务器192.×.×.84，客户端192.×.×.86</p>
+      
+
+      
+        
+          <p>服务器192.×.×.84，客户端192.×.×.86</p>
 <h2 id="在84机器上"><a href="#在84机器上" class="headerlink" title="在84机器上"></a>在84机器上</h2><p>安装nbd-server<br>sudo apt install nbd-server</p>
 <p>创建一个300MB的文件当做块设备<br>/home/kunlun/rxsunSource/tmp下执行<br>dd if=/dev/zero of=nbd-disk0 bs=104857600 count=3</p>
-<p>启动nbd-server，监听9999端口，挂载刚刚创建的nbd-disk0设备<br>kunlun@kunlunsec:~/rxsunSource/tmp$ sudo nbd-server 9999 /home/kunlun/rxsunSource/tmp/nbd-disk0</p>
-<pre><code>** (process:22663): WARNING **: Specifying an export on the command line no longer uses the oldstyle protocol.</code></pre><p>查看nbd端口和进程：<br>kunlun@kunlunsec:~/rxsunSource/tmp$ sudo netstat -antpl | grep 9999</p>
-<pre><code>tcp6       0      0 :::9999                 :::*                    LISTEN      13444/nbd-server</code></pre><p>kunlun@kunlunsec:~/rxsunSource/tmp$ ps -ef | grep nbd</p>
-<pre><code>nbd      13444 13922  0 15:46 ?        00:00:00 nbd-server 9999 /home/kunlun/rxsunSource/tmp/nbd-disk0
-kunlun   13474 32318  0 15:47 pts/25   00:00:00 grep --color=auto nbd</code></pre><h2 id="在86机器上"><a href="#在86机器上" class="headerlink" title="在86机器上"></a>在86机器上</h2><p>sudo apt install nbd-client<br>modprobe nbd  载入模块<br>$ lsmod | grep nbd  查看nbd设备是否建立.</p>
-<pre><code>nbd                    20480  0</code></pre><p>$ ls /dev/nbd* -hl 查看设备</p>
-<pre><code>brw-rw---- 1 root disk 43,   0 8月  28 14:02 /dev/nbd0
-.........
-brw-rw---- 1 root disk 43, 240 8月  28 14:02 /dev/nbd15
-.........
-brw-rw---- 1 root disk 43, 144 8月  28 14:02 /dev/nbd9</code></pre><p>$ sudo nbd-client 192.168.200.84 9999 /dev/nbd0  将nbd设备关联到nbd服务器端</p>
-<pre><code>Warning: the oldstyle protocol is no longer supported.
-This method now uses the newstyle protocol with a default export
-Negotiation: ..size = 300MB
-bs=1024, sz=314572800 bytes</code></pre><p>$ ps -ef | grep nbd  查看nbd-client进程. </p>
-<pre><code>root      4957     1  0 14:04 ?        00:00:00 nbd-client 192.168.200.84 9999 /dev/nbd0
-root      4959     2  0 14:04 ?        00:00:00 [nbd0]</code></pre><p>$ mkdir /mnt/nbd0<br>$ mount /dev/nbd0 /mnt/nbd0  将/dev/nbd0设备挂载到/mnt/nbd0目录下，不理睬提示信息</p>
-<pre><code>mount: /dev/nbd0 is write-protected, mounting read-only
-mount: wrong fs type, bad option, bad superblock on /dev/nbd0,
-       missing codepage or helper program, or other error
-       In some cases useful info is found in syslog - try
-       dmesg | tail or so.</code></pre><p>$ cd /mnt/nbd0/  进入目录<br>$ touch a.txt 创建一个文件<br>$ ll  验证文件创建成功</p>
-<pre><code>total 8
-drwxr-xr-x 2 root root 4096 8月  28 14:13 ./
-drwxr-xr-x 3 root root 4096 8月  28 14:10 ../
--rw-r--r-- 1 root root    0 8月  28 14:13 a.txt</code></pre><p>执行以下命令结束nbd设备和连接<br>$ umount /mnt/nbd0/<br>$ nbd-client -d /dev/nbd0 用于断开到nbd server的连接</p>
-
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/28/搭建NBD-Server的过程/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/28/搭建NBD-Server的过程/" data-id="cjzw0mr3f000ukosllws6ovlq" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nbdserver/">nbdserver</a></li></ul>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
     </footer>
   </div>
   
-</article>
+  
+  
+  </article>
 
+
+    
+      
 
   
-    <article id="post-填补openbmc编译过程中的一个坑" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/24/填补openbmc编译过程中的一个坑/" class="article-date">
-  <time datetime="2019-08-24T13:17:49.000Z" itemprop="datePublished">2019-08-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bmc/">bmc</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunleaf2002.github.io/2019/08/24/填补openbmc编译过程中的一个坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ruixia,sun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruixia,Sun's Technique Blog">
+    </span>
+
     
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/24/填补openbmc编译过程中的一个坑/">填补openbmc编译过程中的一个坑</a>
-    </h1>
-  
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/24/填补openbmc编译过程中的一个坑/" itemprop="url">填补openbmc编译过程中的一个坑</a></h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-24T21:17:49+08:00">
+                2019-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bmc/" itemprop="url" rel="index">
+                    <span itemprop="name">bmc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>编译老版本同方代码:</p>
+      
+
+      
+        
+          <p>编译老版本同方代码:</p>
 <h3 id="1-注意要替换为meta-haiguang2的环境变量"><a href="#1-注意要替换为meta-haiguang2的环境变量" class="headerlink" title="1.注意要替换为meta-haiguang2的环境变量"></a>1.注意要替换为meta-haiguang2的环境变量</h3><p>export TEMPLATECONF=meta-haiguang/meta-haiguang2/conf/</p>
 <h3 id="2-报错"><a href="#2-报错" class="headerlink" title="2.报错"></a>2.报错</h3><p>pflash的库就是skiboot库  是skiboot中的一部分<br>WARNING: pflash-v6.1-r0 do_fetch: Failed to fetch URL git://github.com/open-power/skiboot.git;nobranch=1, attempting MIRRORS if available<br>ERROR: pflash-v6.1-r0 do_fetch: Fetcher failure: Unable to find revision bb7ae1ade9e06a854771b8ed1e26f7d58b508e84 in branch master even from upstream<br>ERROR: pflash-v6.1-r0 do_fetch: Fetcher failure for URL: ‘git://github.com/open-power/skiboot.git;nobranch=1’. Unable to fetch URL from any source.<br>ERROR: pflash-v6.1-r0 do_fetch: Function failed: base_do_fetch<br>ERROR: Logfile of failure stored in: /home/kunlun/rxsunSource/openbmc-origin/build/tmp/work/armv6-openbmc-linux-gnueabi/pflash/v6.1-r0/temp/log.do_fetch.65823<br>ERROR: Task (/home/kunlun/rxsunSource/openbmc-origin/meta-openpower/recipes-bsp/skiboot/pflash.bb:do_fetch) failed with exit code ‘1’<br>一直报错 核实各文件内容的一致性没有问题 </p>
-<h3 id="3-删掉build下的tmp-cache-sstate-cache三个临时目录"><a href="#3-删掉build下的tmp-cache-sstate-cache三个临时目录" class="headerlink" title="3.删掉build下的tmp cache sstate-cache三个临时目录"></a>3.删掉build下的tmp cache sstate-cache三个临时目录</h3><p>重编译 报错改为<br>fatal: Refusing to fetch into current branch refs/heads/master of non-bare repository<br>ERROR: pflash-v6.1-r0 do_fetch: Fetcher failure for URL: ‘git://github.com/open-power/skiboot.git;nobranch=1’. Unable to fetch URL from any source.<br>ERROR: pflash-v6.1-r0 do_fetch: Function failed: base_do_fetch<br>ERROR: Logfile of failure stored in: /home/kunlun/rxsunSource/openbmc-origin/build/tmp/work/armv6-openbmc-linux-gnueabi/pflash/v6.1-r0/temp/log.do_fetch.10559<br>ERROR: Task (/home/kunlun/rxsunSource/openbmc-origin/meta-openpower/recipes-bsp/skiboot/pflash.bb:do_fetch) failed with exit code ‘1’</p>
-<h3 id="4-发现问题所在"><a href="#4-发现问题所在" class="headerlink" title="4.发现问题所在"></a>4.发现问题所在</h3><p>分析上面的fatal提示<br>发现download里除了我克隆下来github.com.open-power.skiboot,还多出来一个 github.com.open-power.skiboot.git,但是这里没有refs/heads/master文件,结合报错提示,想到可能是编译程序试图构建一个带.git后缀的目录失败.<br>也就是git库的目录名称错了,干脆把目录重命名.不知道为什么以前不报这个错?<br>目前为止,已知的bmcweb.git webui.git skiboot.git 一共有三个库是带.git后缀的,其它不用.</p>
-<h3 id="5-还发现一个问题"><a href="#5-还发现一个问题" class="headerlink" title="5.还发现一个问题"></a>5.还发现一个问题</h3><p>当报错的时候 试图通过gitSource 里的源代码pull origin 再push到local的做法是行不通的  ,除非用shell脚本先检查该库是否还存在, 因为刚刚的出错行为会删掉这个库 .<br>这种情况还需要用. openbmc-env重新生成conf目录 </p>
-<h3 id="6-事后分析"><a href="#6-事后分析" class="headerlink" title="6.事后分析"></a>6.事后分析</h3><p>查找文件bitbake/lib/bb/tests/fetch.py中有一行代码:<br>self.git(‘update-ref refs/heads/master refs/heads/master~1’, cwd=ud.clonedir)<br>应该就是这个操作导致的,大概bitbake认为不带.git后缀的库不是bare 仓库.可是其它不带.git后缀的库为什么能编译过去呢,还是skiboot这个库的配置文件有什么特别的?以及webui库的配置文件?<br>这些代码需要仔细研究.</p>
-
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/24/填补openbmc编译过程中的一个坑/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/24/填补openbmc编译过程中的一个坑/" data-id="cjzw0mr3d000rkosl6k934wim" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bitbake/">bitbake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
     </footer>
   </div>
   
-</article>
+  
+  
+  </article>
 
+
+    
+      
 
   
-    <article id="post-自动化构建工具的需求描述" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/23/自动化构建工具的需求描述/" class="article-date">
-  <time datetime="2019-08-23T07:22:11.000Z" itemprop="datePublished">2019-08-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bmc/">bmc</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunleaf2002.github.io/2019/08/23/自动化构建工具的需求描述/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ruixia,sun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruixia,Sun's Technique Blog">
+    </span>
+
     
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/23/自动化构建工具的需求描述/">自动化构建工具的需求描述</a>
-    </h1>
-  
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/23/自动化构建工具的需求描述/" itemprop="url">自动化构建工具的需求描述</a></h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-23T15:22:11+08:00">
+                2019-08-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bmc/" itemprop="url" rel="index">
+                    <span itemprop="name">bmc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <h3 id="一-环境"><a href="#一-环境" class="headerlink" title="一.环境:"></a>一.环境:</h3><p>1.gitlab代码库是中心代码服务器<br>2.编译服务器bmcCompileBak的openbmc/build/downloads/git2目录下是裸库<br>3.编译服务器bmcCompileBak的gitSource目录下是源代码,源代码库里的每一个.git/config文件中都有两个remote push地址,一个是缺省的master,指向中心代码库,另一个是手工增加的,命名为local,指向openbmc/build/downloads/git2里对应的裸库地址</p>
+      
+
+      
+        
+          <h3 id="一-环境"><a href="#一-环境" class="headerlink" title="一.环境:"></a>一.环境:</h3><p>1.gitlab代码库是中心代码服务器<br>2.编译服务器bmcCompileBak的openbmc/build/downloads/git2目录下是裸库<br>3.编译服务器bmcCompileBak的gitSource目录下是源代码,源代码库里的每一个.git/config文件中都有两个remote push地址,一个是缺省的master,指向中心代码库,另一个是手工增加的,命名为local,指向openbmc/build/downloads/git2里对应的裸库地址</p>
 <h3 id="二-思路"><a href="#二-思路" class="headerlink" title="二.思路"></a>二.思路</h3><p>1.开发机器,例如kunlunsec上的改动能通过192.168.120.200中心代码服务器同步到编译服务器bmcCompileBak上的源代码库里<br>2.编译服务器bmcCompileBak上同步后的源代码库能推送(git push)到编译服务器bmcCompileBak下的/home/kunlun/rxsunSource/openbmc/build/downloads/git2</p>
-<h3 id="三-所需要参数"><a href="#三-所需要参数" class="headerlink" title="三.所需要参数:"></a>三.所需要参数:</h3><p>1.一级版本: 如下文中的meta-haiguang<br>2.二级版本: 如下文中的meta-haiguang1<br>3.一个数组input_repo[]: 库名repo_name;分支名branch_name; 提交号commit_id; 文件名file_name;</p>
-<h3 id="四-代码同步的脚本"><a href="#四-代码同步的脚本" class="headerlink" title="四.代码同步的脚本"></a>四.代码同步的脚本</h3><p>在编译服务器的gitSource目录下,循环数组input_repo</p>
-<pre><code>cd input_repo[i].repo_name
-git pull origin input_repo[i].branch_name
-git push local input_repo[i].branch_name
-cd ..</code></pre><h3 id="五-传递commit变更的脚本"><a href="#五-传递commit变更的脚本" class="headerlink" title="五.传递commit变更的脚本"></a>五.传递commit变更的脚本</h3><p>在编译服务器的openbmc目录下,循环数组input_repo<br>修改file_name,如meta-phosphor/recipes-phosphor/datetime/phosphor-time-manager_git.bb 中的两个参数:<br>KBRANCH ?= input_repo[i].branch_name<br>SRCREV =  input_repo[i].commit_id</p>
-<h3 id="六-构建的脚本"><a href="#六-构建的脚本" class="headerlink" title="六.构建的脚本"></a>六.构建的脚本</h3><p>在openbmc目录下运行这个sh文件:</p>
-<pre><code>cd build
-rm conf/ -rf
-export TEMPLATECONF=meta-haiguang/meta-haiguang1/conf/
-cd ..
-. openbmc-env
-bitbake obmc-phosphor-image  </code></pre><h3 id="七-传到服务器的脚本"><a href="#七-传到服务器的脚本" class="headerlink" title="七.传到服务器的脚本"></a>七.传到服务器的脚本</h3><p>要将地址路径和日期作为参数传入.</p>
-<pre><code>lftp  192.168.200.***
-cd rxsun/openbmc-v28
-mput ~/rxsunSource/openbmc-v28/build/tmp/deploy/images/haiguang1/obmc-phosphor-image-haiguang1-20190822*.static.mtd .
-exit
-
-lftp bmc:***@192.168.120.***
-cd openbmc/tmp/rxsun/openbmc-v28
-mput ~/rxsunSource/openbmc-v28/build/tmp/deploy/images/haiguang1/obmc-phosphor-image-haiguang1-20190822*.static.mtd  .
-exit</code></pre>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/23/自动化构建工具的需求描述/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/23/自动化构建工具的需求描述/" data-id="cjzw0mr3a000mkosls3m0qsuj" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
     </footer>
   </div>
   
-</article>
+  
+  
+  </article>
 
+
+    
+      
 
   
-    <article id="post-Redhat上openbmc构建步骤" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/22/Redhat上openbmc构建步骤/" class="article-date">
-  <time datetime="2019-08-22T00:51:45.000Z" itemprop="datePublished">2019-08-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bmc/">bmc</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunleaf2002.github.io/2019/08/22/Redhat上openbmc构建步骤/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ruixia,sun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruixia,Sun's Technique Blog">
+    </span>
+
     
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/22/Redhat上openbmc构建步骤/">Redhat上openbmc构建步骤</a>
-    </h1>
-  
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/22/Redhat上openbmc构建步骤/" itemprop="url">Redhat上openbmc构建步骤</a></h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-22T08:51:45+08:00">
+                2019-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bmc/" itemprop="url" rel="index">
+                    <span itemprop="name">bmc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>redhat7 自带git</p>
+      
+
+      
+        
+          <p>redhat7 自带git</p>
 <p>生成公钥并放到git服务器上<br>ssh-keygen<br>cat ~/.ssh/id_rsa.pub  拷贝到gitlab服务器的用户ssh key下</p>
 <p>克隆openbmc构建所用的库<br>mkdir ~/rxsunSource<br>cd rxsunSource<br>git clone <a href="mailto:git@192.168" target="_blank" rel="noopener">git@192.168</a>.*.200:openbmc/openbmc.git<br>cd openbmc</p>
 <p>准备构建,报缺少python3的错,根据错误提示,总结出需要提前安装以下支撑软件</p>
-<pre><code>yum -y install http://mirror.centos.org/centos/7/os/x86_64/Packages/libffi-devel-3.0.13-18.el7.x86_64.rpm
-yum -y install openssl-devel bzip2-devel expat-devel gdbm-devel readline-devel sqlite-devel gcc gcc-c++ zlib*
-yum install  sqlite3   
-yum install  sqlite-devel.x86_64
-yum install chrpath.x86_64
-yum install texinfo</code></pre><p>再装python3.7</p>
-<pre><code>mkdir ~/rxsunTools
-cd rxsunTools
-wget https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tgz
-tar -xzvf Python-3.7.4.tgz
-cd Python-3.7.4
-./configure 
-make
-make install
-ln -s /home/rxsunTools/Python-3.7.4/python /usr/bin/python3</code></pre><p>命令行执行python3  ,看到版本为python3.7.4</p>
-<p>继续构建步骤:<br>在openbmc/build下<br>1.创建目录dowonloads/git2 拷贝裸库<br>2.删除原来的配置文件目录 rm conf/ -rf  只有环境变量改变 就要删除<br>3.设置环境变量  export TEMPLATECONF=meta-haiguang/meta-haiguang1/conf/<br>4.生成配置文件目录 在openbmc下 . openbmc-env  会生成conf目录<br>5.自动进入build目录,执行 bitbake obmc-phosphor-image  —不能是root用户</p>
-<p>往dowonloads/git2 拷贝裸库 一般会用git clone –bare命令,比较慢, 最好用scp命令,这需要解决口令问题:<br>在120.200上 vim <del>/.ssh/authorized_keys 将刚刚ssh-keygen生成的</del>/.ssh/id_rsa.pub内容拷贝到末尾,即可无口令拷贝</p>
-
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/22/Redhat上openbmc构建步骤/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/22/Redhat上openbmc构建步骤/" data-id="cjzw0mr37000gkoslcrx61tzm" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redhat/">redhat</a></li></ul>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
     </footer>
   </div>
   
-</article>
+  
+  
+  </article>
 
+
+    
+      
 
   
-    <article id="post-Redhat7-5新机器开箱记" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/21/Redhat7-5新机器开箱记/" class="article-date">
-  <time datetime="2019-08-21T07:39:43.000Z" itemprop="datePublished">2019-08-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunleaf2002.github.io/2019/08/21/Redhat7-5新机器开箱记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ruixia,sun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruixia,Sun's Technique Blog">
+    </span>
+
     
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/21/Redhat7-5新机器开箱记/">Redhat7.5新机器开箱记</a>
-    </h1>
-  
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/21/Redhat7-5新机器开箱记/" itemprop="url">Redhat7.5新机器开箱记</a></h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-21T15:39:43+08:00">
+                2019-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>改ip地址:192.168.0.18<br>用cat /etc/sysconfig/network-scripts/ifcfg-em1  查看修改结果<br>在工作机器上 ssh <a href="mailto:root@192.168.0.18" target="_blank" rel="noopener">root@192.168.0.18</a><br><a href="mailto:root@192.168.0.18" target="_blank" rel="noopener">root@192.168.0.18</a>‘s password:<br>[root@localhost ~]#passwd 改root口令<br>[root@localhost ~]#  hostnamectl status  –查看机器名</p>
+      
+
+      
+        
+          <p>改ip地址:192.168.0.18<br>用cat /etc/sysconfig/network-scripts/ifcfg-em1  查看修改结果<br>在工作机器上 ssh <a href="mailto:root@192.168.0.18" target="_blank" rel="noopener">root@192.168.0.18</a><br><a href="mailto:root@192.168.0.18" target="_blank" rel="noopener">root@192.168.0.18</a>‘s password:<br>[root@localhost ~]#passwd 改root口令<br>[root@localhost ~]#  hostnamectl status  –查看机器名</p>
 <pre><code> Static hostname: localhost.localdomain
        Icon name: computer-server
          Chassis: server
@@ -349,687 +953,1118 @@ ln -s /home/rxsunTools/Python-3.7.4/python /usr/bin/python3</code></pre><p>命�
 Operating System: Red Hat Enterprise Linux Server 7.5 (Maipo)
      CPE OS Name: cpe:/o:redhat:enterprise_linux:7.5:GA:server
           Kernel: Linux 3.10.0-862.el7.x86_64
-    Architecture: x86-64</code></pre><p>[root@localhost ~]# cat /proc/cpuinfo –看cpu<br>[root@localhost ~]# cat /proc/meminfo –看内存<br>[root@localhost ~]#  hostnamectl set-hostname bmcCompileMst  —改机器名<br>[root@localhost ~]# cat /etc/hostname<br>bmccompilemst<br>登出,再进入<br>[root@bmccompilemst ~]# cat /proc/scsi/scsi  —查看raid5 不知道什么意思<br>Attached devices:<br>Host: scsi0 Channel: 02 Id: 00 Lun: 00<br>  Vendor: DELL     Model: PERC H730P Mini  Rev: 4.29<br>  Type:   Direct-Access                    ANSI  SCSI revision: 05<br>Host: scsi10 Channel: 00 Id: 00 Lun: 00<br>  Vendor: HL-DT-ST Model: DVD+-RW GTA0N    Rev: A3C0<br>  Type:   CD-ROM                           ANSI  SCSI revision: 05<br>[kunlun@bmccompilemst openbmc]$ cat /etc/os-release –看os版本</p>
-<pre><code>NAME=&quot;Red Hat Enterprise Linux Server&quot;
-VERSION=&quot;7.5 (Maipo)&quot;
-ID=&quot;rhel&quot;
-ID_LIKE=&quot;fedora&quot;
-VARIANT=&quot;Server&quot;
-VARIANT_ID=&quot;server&quot;
-VERSION_ID=&quot;7.5&quot;
-PRETTY_NAME=&quot;Red Hat Enterprise Linux Server 7.5 (Maipo)&quot;
-ANSI_COLOR=&quot;0;31&quot;
-CPE_NAME=&quot;cpe:/o:redhat:enterprise_linux:7.5:GA:server&quot;
-HOME_URL=&quot;https://www.redhat.com/&quot;
-BUG_REPORT_URL=&quot;https://bugzilla.redhat.com/&quot;
-REDHAT_BUGZILLA_PRODUCT=&quot;Red Hat Enterprise Linux 7&quot;
-REDHAT_BUGZILLA_PRODUCT_VERSION=7.5
-REDHAT_SUPPORT_PRODUCT=&quot;Red Hat Enterprise Linux&quot;
-REDHAT_SUPPORT_PRODUCT_VERSION=&quot;7.5&quot;</code></pre><p>[kunlun@bmccompilemst openbmc]$useradd -d /home/kunlun -m -s /bin/bash kunlun –增加用户<br>[kunlun@bmccompilemst openbmc]$vim /etc/sudoers 权限不够   给kunlun用户加管理权限  –失败<br>[root@bmccompilemst ~]# ll  /etc/sudoers<br>-r–r—–. 1 root root 3938 11月 30 2017 /etc/sudoers<br>[root@bmccompilemst ~]# chmod u+w /etc/sudoers  —给sudoers文件加w的权限<br>[root@bmccompilemst ~]# passwd –改口令<br>[root@bmccompilemst ~]# vim /etc/sudoers<br>[root@bmccompilemst ~]# chmod u-w /etc/sudoers  取消sudoers文件w权限<br>在root行下增加kunlun用户:<br>root    ALL=(ALL)       ALL<br>kunlun  ALL=(ALL)       ALL</p>
-<img src="/img/sudoersFile.png" title="[100] [80] [title ftp [alt ftp]]">
-
-<p>以下处理yum源的问题,因为redhat源是收费的,网上建议用阿里云的<br>[root@bmccompilemst ~]# mkdir /home/yum/ 并进入<br>[kunlun@bmccompilemst yum]$ rpm -qa | grep yum</p>
-<pre><code>yum-langpacks-0.4.2-7.el7.noarch
-yum-3.4.3-158.el7.noarch
-yum-metadata-parser-1.1.4-10.el7.x86_64
-yum-utils-1.1.31-45.el7.noarch
-PackageKit-yum-1.1.5-1.el7.x86_64
-yum-rhn-plugin-2.0.1-10.el7.noarch</code></pre><p>[kunlun@bmccompilemst yum]$ sudo su<br>[sudo] kunlun 的密码：<br>[root@bmccompilemst yum]# rpm -qa | grep yum | xargs rpm -e –nodeps  –删除yum<br>从阿里云下载yum需要的软件:</p>
-<pre><code>wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-metadata-parser-1.1.4-10.el7.x86_64.rpm
-wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-utils-1.1.31-50.el7.noarch.rpm
-wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-3.4.3-161.el7.centos.noarch.rpm
-wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/yum-plugin-fastestmirror-1.1.31-50.el7.noarch.rpm
-wget https://mirrors.aliyun.com/centos/7/os/x86_64/Packages/python-urlgrabber-3.10-9.el7.noarch.rpm</code></pre><p>[root@bmccompilemst yum]# wget -O /etc/yum.repos.d/CentOS-Base.repo <a href="http://mirrors.aliyun.com/repo/Centos-7.repo" target="_blank" rel="noopener">http://mirrors.aliyun.com/repo/Centos-7.repo</a><br>正在保存至: “/etc/yum.repos.d/CentOS-Base.repo”<br>[root@bmccompilemst yum]# vim /etc/yum.repos.d/CentOS-Base.repo<br>:%s/$releasever/7/g  —将$releasever替换为7</p>
-<p>[root@bmccompilemst yum]# rpm -ivh  yum-metadata-parser-1.1.4-10.el7.x86_64.rpm   yum-utils-1.1.31-50.el7.noarch.rpm  yum-3.4.3-161.el7.centos.noarch.rpm yum-plugin-fastestmirror-1.1.31-50.el7.noarch.rpm  python-urlgrabber-3.10-9.el7.noarch.rpm –force –nodeps</p>
-<p>yum 可用了,再执行一下命令<br>yum clear all<br>yum makecache<br>yum update</p>
-
+    Architecture: x86-64</code></pre>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/21/Redhat7-5新机器开箱记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/21/Redhat7-5新机器开箱记/" data-id="cjzw0mr35000ekoslihbo8vt3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redhat/">redhat</a></li></ul>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
     </footer>
   </div>
   
-</article>
+  
+  
+  </article>
 
+
+    
+      
 
   
-    <article id="post-虚拟机硬盘扩容步骤" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/21/虚拟机硬盘扩容步骤/" class="article-date">
-  <time datetime="2019-08-21T00:53:59.000Z" itemprop="datePublished">2019-08-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunleaf2002.github.io/2019/08/21/虚拟机硬盘扩容步骤/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ruixia,sun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruixia,Sun's Technique Blog">
+    </span>
+
     
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/21/虚拟机硬盘扩容步骤/">虚拟机硬盘扩容步骤</a>
-    </h1>
-  
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/21/虚拟机硬盘扩容步骤/" itemprop="url">虚拟机硬盘扩容步骤</a></h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-21T08:53:59+08:00">
+                2019-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>昨天看到80.82机器上的运行redmine服务器的虚拟机rxsunweb的空间不够,原来创建的时候只有30G,太小.<br>依次执行以下步骤进行扩容.</p>
+      
+
+      
+        
+          <p>昨天看到80.82机器上的运行redmine服务器的虚拟机rxsunweb的空间不够,原来创建的时候只有30G,太小.<br>依次执行以下步骤进行扩容.</p>
 <p>1.先关闭虚拟机<br>2.为了确保虚拟机的安全,另存一份进行操作.<br>拷贝rxsunweb虚拟机 从C:\Users\Administrator\VirtualBox VMs\rxsunweb到D:\virtualBox_redmine\rxsunweb<br>3.到虚拟机窗口的设置-存储-控制器菜单中添加一个磁盘文件 100G ，文件名为<br>D:\virtualBox_redmine\rxsunweb\redmine_disk_2.vdi，<br>原来的D:\virtualBox_redmine\rxsunweb\rxsunweb-disk2.vmdk 只有30G左右<br>4.启动虚拟机，进去看df –h</p>
-<img src="/img/virtualbox-11.png" title="[100] [80] [title ftp [alt ftp]]">
-<p>5．fdisk -l查看新硬盘/dev/sdb 已经识别到</p>
-<img src="/img/virtualbox-22.png" title="[100] [80] [title ftp [alt ftp]]">
-<p>6.对新硬盘分区fdisk /dev/sdb<br>依次输入：</p>
-<pre><code>n          #新分区
-p          #选择分区类型
-t           #更改分区类型
-Hex code (type L to list codes): 8e
-w          #保存分区结果</code></pre><p>7.让系统重新读取分区表：# partprobe /dev/sdb<br>8.创建物理卷（PV） # pvcreate /dev/sdb1<br>9.查看物理卷信息： pvdisplay<br>10.将pv加到vg中 vgextend cl  /dev/sdb1<br>11.将所有剩余空间全部划入LV  lvextend -l +100%FREE /dev/mapper/cl-root<br>12.最后一步 关键是最后一步 用 xfs_growfs   /dev/mapper/cl-root 然后df –h 看到根目录空间已经变大</p>
-<p>以上虚拟机扩容及挂载 参考了<a href="https://yq.aliyun.com/articles/486074" target="_blank" rel="noopener">https://yq.aliyun.com/articles/486074</a><br>最后一步参考了<a href="https://blog.csdn.net/qq_33932782/article/details/76612965" target="_blank" rel="noopener">https://blog.csdn.net/qq_33932782/article/details/76612965</a></p>
-<p>启动redmine<br>83机器上 cd  /usr/local/redmine<br>执行启动redmine 的命令： ruby script/rails server webrick –e development<br>systemctl  stop firewalld 关闭防火墙<br>参考了<a href="https://blog.csdn.net/Honnyee/article/details/81535464的firewalld命令" target="_blank" rel="noopener">https://blog.csdn.net/Honnyee/article/details/81535464的firewalld命令</a> 后来发现直接在虚拟机里关闭防火墙最简单</p>
-<p>从其它机器上访问83机器的3000端口,可看到redmine页面,操作成功.</p>
-
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/21/虚拟机硬盘扩容步骤/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/21/虚拟机硬盘扩容步骤/" data-id="cjzw0mr39000kkosls2w82z68" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/disk/">disk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/virtulbox/">virtulbox</a></li></ul>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
     </footer>
   </div>
   
-</article>
+  
+  
+  </article>
 
+
+    
+      
 
   
-    <article id="post-使用git支撑构建过程之代码同步" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/17/使用git支撑构建过程之代码同步/" class="article-date">
-  <time datetime="2019-08-17T14:00:46.000Z" itemprop="datePublished">2019-08-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bmc/">bmc</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunleaf2002.github.io/2019/08/17/使用git支撑构建过程之代码同步/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ruixia,sun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruixia,Sun's Technique Blog">
+    </span>
+
     
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/17/使用git支撑构建过程之代码同步/">使用git支撑构建过程之代码同步</a>
-    </h1>
-  
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/17/使用git支撑构建过程之代码同步/" itemprop="url">使用git支撑构建过程之代码同步</a></h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-17T22:00:46+08:00">
+                2019-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bmc/" itemprop="url" rel="index">
+                    <span itemprop="name">bmc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明:"></a>环境说明:</h2><p>中心代码库在192.168.120.200的gitlab上,以刚刚克隆下来的tttt库为例<br>开发机器kunlunsec,用来修改tttt库的代码<br>编译服务器bmcCompileBak,其中的目录/home/kunlun/rxsunSource/gitSource是用来存放源代码库的,目录/home/kunlun/rxsunSource/openbmc/build/downloads/git2是为构建工具准备的裸库存放的位置.</p>
+      
+
+      
+        
+          <h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明:"></a>环境说明:</h2><p>中心代码库在192.168.120.200的gitlab上,以刚刚克隆下来的tttt库为例<br>开发机器kunlunsec,用来修改tttt库的代码<br>编译服务器bmcCompileBak,其中的目录/home/kunlun/rxsunSource/gitSource是用来存放源代码库的,目录/home/kunlun/rxsunSource/openbmc/build/downloads/git2是为构建工具准备的裸库存放的位置.</p>
 <h2 id="试验目标"><a href="#试验目标" class="headerlink" title="试验目标:"></a>试验目标:</h2><p>1.开发机器kunlunsec上的改动能通过192.168.120.200服务器同步到编译服务器bmcCompileBak上的源代码库里<br>2.编译服务器bmcCompileBak上同步后的源代码库能推送(git push)到编译服务器bmcCompileBak本地的构建目录下/home/kunlun/rxsunSource/openbmc/build/downloads/git2</p>
 <img src="/img/dataFlow.png" title="[100] [80]">
-
-
-<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路:"></a>基本思路:</h2><p>在编译服务器bmcCompileBak的源代码库/home/kunlun/rxsunSource/gitSource/tttt中设置两个remote仓库,一个是中心代码库192.168.120.200上的tttt.git裸库,命名为origin,另一个是/home/kunlun/rxsunSource/openbmc/build/downloads/git2里的tttt.git裸库,命名为local.然后从origin拉取(git pull)代码变更,推送(git push)到local上.</p>
-<h2 id="步骤一-在编译服务器bmcCompileBak上克隆源代码库和裸库到各自的目的地"><a href="#步骤一-在编译服务器bmcCompileBak上克隆源代码库和裸库到各自的目的地" class="headerlink" title="步骤一:在编译服务器bmcCompileBak上克隆源代码库和裸库到各自的目的地"></a>步骤一:在编译服务器bmcCompileBak上克隆源代码库和裸库到各自的目的地</h2><p>克隆下来试验用的源代码库,在home/kunlun/rxsunSource/gitSource下<br>cd /home/kunlun/rxsunSource/gitSource<br>git clone <a href="mailto:git@192.168.120.200" target="_blank" rel="noopener">git@192.168.120.200</a>:qa/tttt.git</p>
-<p>到存放所有的裸库的文件夹,克隆裸库下来.<br>cd /home/kunlun/rxsunSource/openbmc/build/downloads/git2/<br>git clone –bare <a href="mailto:git@192.168.120.200" target="_blank" rel="noopener">git@192.168.120.200</a>:qa/tttt.git<br>这里的库是为构建所用的.</p>
-<h2 id="步骤二-在编译服务器bmcCompileBak上为源代码库添加第二个远程库-就是刚刚克隆下来的裸库"><a href="#步骤二-在编译服务器bmcCompileBak上为源代码库添加第二个远程库-就是刚刚克隆下来的裸库" class="headerlink" title="步骤二:在编译服务器bmcCompileBak上为源代码库添加第二个远程库,就是刚刚克隆下来的裸库"></a>步骤二:在编译服务器bmcCompileBak上为源代码库添加第二个远程库,就是刚刚克隆下来的裸库</h2><p>进入目录 cd  /home/kunlun/rxsunSource/gitSource/tttt/<br>git remote add local /home/kunlun/rxsunSource/openbmc/build/downloads/git2/tttt.git<br>查看一下,第一种是命令行查看,第二种是查看config文件,看到增加了一个名为”local”的远程库</p>
-<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git remote
-local
-origin    
-kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ cat .git/config 
-[core]
-    repositoryformatversion = 0
-    filemode = true
-    bare = false
-    logallrefupdates = true
-[remote &quot;origin&quot;]
-    url = git@192.168.120.200:qa/tttt.git
-    fetch = +refs/heads/*:refs/remotes/origin/*
-[branch &quot;master&quot;]
-    remote = origin
-    merge = refs/heads/master
-[remote &quot;local&quot;]
-    url = /home/kunlun/rxsunSource/openbmc/build/downloads/git2/tttt.git
-    fetch = +refs/heads/*:refs/remotes/local/*</code></pre><h2 id="步骤三-在开发机kunlunsec上模拟开发过程中两个分支的代码提交"><a href="#步骤三-在开发机kunlunsec上模拟开发过程中两个分支的代码提交" class="headerlink" title="步骤三:在开发机kunlunsec上模拟开发过程中两个分支的代码提交"></a>步骤三:在开发机kunlunsec上模拟开发过程中两个分支的代码提交</h2><p>换到开发机kunlunsec上tttt进行操作并提交</p>
-<pre><code>kunlun@kunlunsec:~/tmp$ git clone git@192.168.120.200:qa/tttt.git
-正克隆到 &apos;tttt&apos;...  
-接收对象中: 100% (20/20), 完成.
-检查连接... 完成。
-kunlun@kunlunsec:~/tmp$ cd tttt/
-kunlun@kunlunsec:~/tmp/tttt$ ll
--rw-rw-r-- 1 kunlun kunlun   21 8月  17 18:55 a.txt</code></pre><p>查看当前分支</p>
-<pre><code>kunlun@kunlunsec:~/tmp/tttt$ git branch -a
-* master
-  remotes/origin/HEAD -&gt; origin/master
-  remotes/origin/master
-  remotes/origin/test
-为master分支添加文件b.txt,并commit,push
-kunlun@kunlunsec:~/tmp/tttt$ touch b.txt
-kunlun@kunlunsec:~/tmp/tttt$ echo &quot;test next remote repo&quot;&gt;b.txt
-kunlun@kunlunsec:~/tmp/tttt$ cat b.txt 
-test next remote repo
-kunlun@kunlunsec:~/tmp/tttt$ git add .
-kunlun@kunlunsec:~/tmp/tttt$ git commit -m &quot;next remote test&quot;
-[master 310edf3] next remote test
- 1 file changed, 1 insertion(+)
- create mode 100644 b.txt
-kunlun@kunlunsec:~/tmp/tttt$ git push</code></pre><p>切换到tttt库的另一个分支test,模拟实际开发中的另一个厂商代码:</p>
-<pre><code>kunlun@kunlunsec:~/tmp/tttt$ git checkout test
-分支 test 设置为跟踪来自 origin 的远程分支 test。
-切换到一个新分支 &apos;test&apos;
-kunlun@kunlunsec:~/tmp/tttt$ git branch -a
-  master
-* test
-  remotes/origin/HEAD -&gt; origin/master
-  remotes/origin/master
-  remotes/origin/test
-kunlun@kunlunsec:~/tmp/tttt$ ll
-总用量 16
-drwxrwxr-x 4 kunlun kunlun 4096 8月  17 19:03 ./
-drwxrwxr-x 3 kunlun kunlun 4096 8月  17 18:55 ../
--rw-rw-r-- 1 kunlun kunlun    0 8月  17 19:03 ddd.txt</code></pre><p>看到test分支下的文件与master分支的文件是不同的.<br>为test分支添加文件eee.txt,并commit,push</p>
-<pre><code>kunlun@kunlunsec:~/tmp/tttt$ echo &quot;another file to test branch&quot;&gt;eee.txt
-kunlun@kunlunsec:~/tmp/tttt$ cat eee.txt 
-another file to test branch
-kunlun@kunlunsec:~/tmp/tttt$ git add .
-kunlun@kunlunsec:~/tmp/tttt$ git commit -m &quot;another file to test branch&quot;
-[test d983cbf] another file to test branch
- 1 file changed, 1 insertion(+)
- create mode 100644 eee.txt
-kunlun@kunlunsec:~/tmp/tttt$ git push</code></pre><p>以上操作是在tttt库的master分支上增加了文件b.txt,在test分支上增加了文件eee.txt,并推送到192.168.120.200中心代码服务器上.</p>
-<h2 id="步骤四-在bmcCompileBak编译服务器上依次拉取master分支和test分支的代码"><a href="#步骤四-在bmcCompileBak编译服务器上依次拉取master分支和test分支的代码" class="headerlink" title="步骤四:在bmcCompileBak编译服务器上依次拉取master分支和test分支的代码"></a>步骤四:在bmcCompileBak编译服务器上依次拉取master分支和test分支的代码</h2><p>回到bmcCompileBak编译服务器上 </p>
-<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git branch -a //查看当前分支
-* master
-  remotes/origin/HEAD -&gt; origin/master
-  remotes/origin/master
-  remotes/origin/test
-
-kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git pull origin master //与名为origin的远程库,即192.168.120.200中心代码服务器同步master分支的代码
-From 192.168.120.200:qa/tttt
- * branch            master     -&gt; FETCH_HEAD
-Updating fce3d3b..310edf3
-Fast-forward
- b.txt | 1 +
- 1 file changed, 1 insertion(+)
- create mode 100644 b.txt
-
-kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ ll   //看到新增加的b.txt文件被同步下来
-total 24
-drwxrwxr-x 4 kunlun kunlun 4096 8月  17 19:24 ./
-drwxrwxr-x 8 kunlun kunlun 4096 8月  17 18:32 ../
--rw-rw-r-- 1 kunlun kunlun   21 8月  17 18:29 a.txt
--rw-rw-r-- 1 kunlun kunlun   22 8月  17 19:24 b.txt</code></pre><p>再同步test分支的代码</p>
-<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git pull origin test  //这时git给出一个merge操作,确定
-remote: Counting objects: 6, done.
-remote: Compressing objects: 100% (2/2), done.
-remote: Total 3 (delta 0), reused 0 (delta 0)
-Unpacking objects: 100% (3/3), done.
-From 192.168.120.200:qa/tttt
- * branch            test       -&gt; FETCH_HEAD
-   2f18328..d983cbf  test       -&gt; origin/test
-Merge made by the &apos;recursive&apos; strategy.
- ddd.txt | 0
- eee.txt | 1 +
- 2 files changed, 1 insertion(+)
- create mode 100644 ddd.txt
- create mode 100644 eee.txt</code></pre><p>查看log,发现本地库里包括了在开发机器上两个分支上的提交,并记录了刚刚的合并动作</p>
-<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git log  
-commit 9d816d31f5244890927ab1c3b5a846a5bcb651ca
-Merge: 310edf3 d983cbf
-Author: rxsun &lt;rxsun@bios.zd-tech.com.cn&gt;
-Date:   Sat Aug 17 19:24:52 2019 +0800
-    Merge branch &apos;test&apos; of 192.168.120.200:qa/tttt
-commit d983cbf670c31d58cde88da7371f71a6bad7f846
-Author: rxsun &lt;“rxsun@zd-tech.com.cn&gt;
-Date:   Sat Aug 17 19:21:44 2019 +0800
-    another file to test branch
-commit 310edf371ad05051308aa49601d709064403909e
-Author: rxsun &lt;“rxsun@zd-tech.com.cn&gt;
-Date:   Sat Aug 17 18:56:55 2019 +0800
-    next remote test</code></pre><p>查看工作区状态,当前工作区是干净的</p>
-<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git status  
-On branch master
-Your branch is ahead of &apos;origin/master&apos; by 3 commits.
-  (use &quot;git push&quot; to publish your local commits)
-nothing to commit, working directory clean</code></pre><p>确认当前所在的分支,还是master</p>
-<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git branch -a  
-* master
-  remotes/origin/HEAD -&gt; origin/master
-  remotes/origin/master
-  remotes/origin/test</code></pre><p>查看本地文件,包括了master分支的a.txt,b.txt, 以及test分支的ddd.txt和eee.txt.</p>
-<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ ll
-drwxrwxr-x 4 kunlun kunlun 4096 8月  17 19:24 ./
-drwxrwxr-x 8 kunlun kunlun 4096 8月  17 18:32 ../
--rw-rw-r-- 1 kunlun kunlun   21 8月  17 18:29 a.txt
--rw-rw-r-- 1 kunlun kunlun   22 8月  17 19:24 b.txt
--rw-rw-r-- 1 kunlun kunlun    0 8月  17 19:24 ddd.txt
--rw-rw-r-- 1 kunlun kunlun   28 8月  17 19:24 eee.txt</code></pre><p>可见,在master分支上, git pull origin master和 git pull origin test  都执行的话,会将test分支的内容也拉取到master分支里面 ,这明显不符合要求.</p>
-<p>回退到拉取代码之前的commit号</p>
-<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git reset --hard fbf549d38c71d56171a2cb23cfc4a5218953e943  这是本次操作之前的一个commit号</code></pre><p>查看当前内容</p>
-<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ ll  
--rw-rw-r-- 1 kunlun kunlun   16 8月  17 19:58 a.txt</code></pre><p>就回到了本次拉取操作之前的状态</p>
-<h2 id="步骤五-在bmcCompileBak编译服务器上只拉取master分支"><a href="#步骤五-在bmcCompileBak编译服务器上只拉取master分支" class="headerlink" title="步骤五:在bmcCompileBak编译服务器上只拉取master分支"></a>步骤五:在bmcCompileBak编译服务器上只拉取master分支</h2><p>只同步master分支,查看结果,这个结果是符合预期的 </p>
-<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git pull origin master  
-kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ ll
--rw-rw-r-- 1 kunlun kunlun   21 8月  17 20:00 a.txt
--rw-rw-r-- 1 kunlun kunlun   22 8月  17 20:00 b.txt</code></pre><h2 id="步骤六-在bmcCompileBak编译服务器上将master分支推送到local的远程仓库里master分支上"><a href="#步骤六-在bmcCompileBak编译服务器上将master分支推送到local的远程仓库里master分支上" class="headerlink" title="步骤六:在bmcCompileBak编译服务器上将master分支推送到local的远程仓库里master分支上"></a>步骤六:在bmcCompileBak编译服务器上将master分支推送到local的远程仓库里master分支上</h2><p>执行push,推送的目的地是本地的名为local的远程仓库里master分支上,就是步骤一中克隆下来的裸库/home/kunlun/rxsunSource/openbmc/build/downloads/git2/tttt.git</p>
-<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git push local master
-Counting objects: 3, done.
-Delta compression using up to 8 threads.
-Compressing objects: 100% (2/2), done.
-Writing objects: 100% (3/3), 336 bytes | 0 bytes/s, done.
-Total 3 (delta 0), reused 0 (delta 0)
-To /home/kunlun/rxsunSource/openbmc/build/downloads/git2/tttt.git
-   fce3d3b..310edf3  master -&gt; master</code></pre><p>进入裸库看一下branch和log,已经同步成功</p>
-<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ cd /home/kunlun/rxsunSource/openbmc/build/downloads/git2/tttt.git
-kunlun@bmcCompileBak:~/rxsunSource/openbmc/build/downloads/git2/tttt.git$ git branch -a
-* master
-  test
-kunlun@bmcCompileBak:~/rxsunSource/openbmc/build/downloads/git2/tttt.git$ git log
-commit 310edf371ad05051308aa49601d709064403909e
-Author: rxsun &lt;“rxsun@zd-tech.com.cn&gt;
-Date:   Sat Aug 17 18:56:55 2019 +0800
-    next remote test</code></pre><h2 id="步骤七-在bmcCompileBak编译服务器上同步origin的远程仓库里test分支变化源代码库里"><a href="#步骤七-在bmcCompileBak编译服务器上同步origin的远程仓库里test分支变化源代码库里" class="headerlink" title="步骤七:在bmcCompileBak编译服务器上同步origin的远程仓库里test分支变化源代码库里"></a>步骤七:在bmcCompileBak编译服务器上同步origin的远程仓库里test分支变化源代码库里</h2><p>再回到tttt的源代码库里,切换到tset分支.</p>
-<pre><code>kunlun@bmcCompileBak:cd ~/rxsunSource/gitSource/tttt
-kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ git checkout test
-Branch test set up to track remote branch test from origin.
-Switched to a new branch &apos;test&apos;
-kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ ll
--rw-rw-r-- 1 kunlun kunlun    0 8月  17 20:06 ddd.txt
--rw-rw-r-- 1 kunlun kunlun   28 8月  17 20:06 eee.txt</code></pre><p>发现这种checkout操作会自动拉下远程origin仓库test分支的所有内容.</p>
-<p>复习一下,origin和local远程库的地址,origin是中心代码库,在192.168.120.200上,local在bmcCompileBak编译服务器上,是供构建使用的</p>
-<pre><code>[remote &quot;origin&quot;]
-    url = git@192.168.120.200:qa/tttt.git
-[remote &quot;local&quot;]
-    url = /home/kunlun/rxsunSource/openbmc/build/downloads/git2/tttt.git</code></pre><h2 id="步骤八-在bmcCompileBak编译服务器上同步test分支的变化到local的远程仓库里test分支上"><a href="#步骤八-在bmcCompileBak编译服务器上同步test分支的变化到local的远程仓库里test分支上" class="headerlink" title="步骤八:在bmcCompileBak编译服务器上同步test分支的变化到local的远程仓库里test分支上"></a>步骤八:在bmcCompileBak编译服务器上同步test分支的变化到local的远程仓库里test分支上</h2><p>将源代码库里test分支的内容push到本地的名为local的远程仓库里test分支上</p>
-<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$  git push local test
-Counting objects: 3, done.
-Delta compression using up to 8 threads.
-Compressing objects: 100% (2/2), done.
-Writing objects: 100% (3/3), 355 bytes | 0 bytes/s, done.
-Total 3 (delta 0), reused 0 (delta 0)
-To /home/kunlun/rxsunSource/openbmc/build/downloads/git2/tttt.git
-   2f18328..d983cbf  test -&gt; test</code></pre><p>查看当前分支</p>
-<pre><code>kunlun@bmcCompileBak:~/rxsunSource/gitSource/tttt$ cd /home/kunlun/rxsunSource/openbmc/build/downloads/git2/tttt.git
-kunlun@bmcCompileBak:~/rxsunSource/openbmc/build/downloads/git2/tttt.git$ git branch -a
-* master
-  test</code></pre><p>试图在裸库里切换到test分支,发现不能操作,这种方法没法验证test分支是否被推送上来了.</p>
-<pre><code>kunlun@bmcCompileBak:~/rxsunSource/openbmc/build/downloads/git2/tttt.git$ git checkout test  
-fatal: This operation must be run in a work tree</code></pre><h2 id="步骤九-在bmcCompileBak编译服务器上验证test分支的变化被推送到了local远程仓库"><a href="#步骤九-在bmcCompileBak编译服务器上验证test分支的变化被推送到了local远程仓库" class="headerlink" title="步骤九:在bmcCompileBak编译服务器上验证test分支的变化被推送到了local远程仓库"></a>步骤九:在bmcCompileBak编译服务器上验证test分支的变化被推送到了local远程仓库</h2><p>在bmcCompileBak编译服务器上,到另一个目录再clone一份test分支的内容,从/home/kunlun/rxsunSource/openbmc/build/downloads/git2/tttt.git ,看看结果</p>
-<pre><code>kunlun@bmcCompileBak:~/rxsunSource$ mkdir tmp
-kunlun@bmcCompileBak:~/rxsunSource$ cd tmp
-kunlun@bmcCompileBak:~/rxsunSource/tmp$ git clone /home/kunlun/rxsunSource/openbmc/build/downloads/git2/tttt.git
-Cloning into &apos;tttt&apos;...
-done.
-kunlun@bmcCompileBak:~/rxsunSource/tmp$ cd tttt/
-kunlun@bmcCompileBak:~/rxsunSource/tmp/tttt$ git branch -a
-* master
-  remotes/origin/HEAD -&gt; origin/master
-  remotes/origin/master
-  remotes/origin/test
-kunlun@bmcCompileBak:~/rxsunSource/tmp/tttt$ git checkout test
-Branch test set up to track remote branch test from origin.
-Switched to a new branch &apos;test&apos;
-kunlun@bmcCompileBak:~/rxsunSource/tmp/tttt$ ll
--rw-rw-r-- 1 kunlun kunlun    0 8月  17 20:14 ddd.txt
--rw-rw-r-- 1 kunlun kunlun   28 8月  17 20:14 eee.txt</code></pre><p>结果是符合预期的,证明test分支到local远程库的推送是成功的.</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h2><p>编译服务器bmcCompileBak上的源代码库可以设置两个远程仓库,一个对应着中心代码库,从这里拉取下来代码,另一个对应着本地的构建代码库,推送代码到这个库.并且,可以实现不同分支的拉取和推送.<br>这种机制是能够为构建服务的.</p>
-
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/17/使用git支撑构建过程之代码同步/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/17/使用git支撑构建过程之代码同步/" data-id="cjzw0mr3z0036kosln1t1x473" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
     </footer>
   </div>
   
-</article>
+  
+  
+  </article>
 
+
+    
+      
 
   
-    <article id="post-openBmcCompileSecond" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/16/openBmcCompileSecond/" class="article-date">
-  <time datetime="2019-08-16T09:39:49.000Z" itemprop="datePublished">2019-08-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bmc/">bmc</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunleaf2002.github.io/2019/08/16/openBmcCompileSecond/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ruixia,sun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruixia,Sun's Technique Blog">
+    </span>
+
     
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/16/openBmcCompileSecond/">openBmcCompileSecond</a>
-    </h1>
-  
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/16/openBmcCompileSecond/" itemprop="url">openBmcCompileSecond</a></h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-16T17:39:49+08:00">
+                2019-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bmc/" itemprop="url" rel="index">
+                    <span itemprop="name">bmc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <h1 id="构建openbmc另一个厂商的Release版本"><a href="#构建openbmc另一个厂商的Release版本" class="headerlink" title="构建openbmc另一个厂商的Release版本"></a>构建openbmc另一个厂商的Release版本</h1><h2 id="一、识别厂商和改动的库"><a href="#一、识别厂商和改动的库" class="headerlink" title="一、识别厂商和改动的库"></a>一、识别厂商和改动的库</h2><p>需要搞清楚哪个库的修改的commit号在哪里改,开发人员都已经在openbmc.git库里面改好，只有webui需要手工改，位置在：<br>vim meta-haiguang/meta-haiguang2/recipes-phosphor/webui/phosphor-webui_git.bb,其中 meta-haiguang2 是本次将要构建的厂商版本</p>
+      
+
+      
+        
+          <h1 id="构建openbmc另一个厂商的Release版本"><a href="#构建openbmc另一个厂商的Release版本" class="headerlink" title="构建openbmc另一个厂商的Release版本"></a>构建openbmc另一个厂商的Release版本</h1><h2 id="一、识别厂商和改动的库"><a href="#一、识别厂商和改动的库" class="headerlink" title="一、识别厂商和改动的库"></a>一、识别厂商和改动的库</h2><p>需要搞清楚哪个库的修改的commit号在哪里改,开发人员都已经在openbmc.git库里面改好，只有webui需要手工改，位置在：<br>vim meta-haiguang/meta-haiguang2/recipes-phosphor/webui/phosphor-webui_git.bb,其中 meta-haiguang2 是本次将要构建的厂商版本</p>
 <p>另外已知有温控git库做了改动, 它的修改 vim meta-phosphor/classes/skeleton-rev.bbclass可以看到,开发人员已经改好.</p>
 <h2 id="二、更新改动的库"><a href="#二、更新改动的库" class="headerlink" title="二、更新改动的库"></a>二、更新改动的库</h2><p>要删掉downloads/git2下面的webui和skeleton库,再git clone –bare 一下<br>还是选择在本地 rxsunSource/git下克隆一个源代码库 加一个remote为 downloads/git2下的库名称 ,push这里,为构建所用.</p>
-<h2 id="三、开始构建"><a href="#三、开始构建" class="headerlink" title="三、开始构建"></a>三、开始构建</h2><p>在build下 export TEMPLATECONF=meta-haiguang/meta-haiguang2/conf/<br>    rm conf/ -rf<br>在openbmc下 . openbmc-env  会生成conf目录<br>    cd conf vim local.conf  看一下</p>
-<p>git pull //获取开发人员对bitbake所用的.bb及.bbclass文件的修改<br>git tag -a v0.16.1 -m “Release v0.16 for tongfang”  //打tag 变动不大,注释上厂商名称<br>git status //看到刚刚改的webui的bb文件<br>git add ,git commit </p>
-<p>在build下,执行bitbake obmc-phosphor-image</p>
-<h2 id="四、构建报错"><a href="#四、构建报错" class="headerlink" title="四、构建报错:"></a>四、构建报错:</h2><p>找不到phosphor-hwmon库</p>
-<pre><code>ERROR: phosphor-hwmon-1.0+gitAUTOINC+7509bffc35-r1 do_fetch: Fetcher failure: Unable to find revision 7509bffc35ba141844d645533e0628ddd105551a in branch master even from upstream
-ERROR: phosphor-hwmon-1.0+gitAUTOINC+7509bffc35-r1 do_fetch: Fetcher failure for URL: &apos;git://github.com/openbmc/phosphor-hwmon&apos;. Unable to fetch URL from any source.
-ERROR: phosphor-hwmon-1.0+gitAUTOINC+7509bffc35-r1 do_fetch: Function failed: base_do_fetch
-ERROR: Logfile of failure stored in: /home/kunlun/rxsunSource/openbmc/build/tmp/work/armv6-openbmc-linux-gnueabi/phosphor-hwmon/1.0+gitAUTOINC+7509bffc35-r1/temp/log.do_fetch.26476
-ERROR: Task (/home/kunlun/rxsunSource/openbmc/meta-phosphor/recipes-phosphor/sensors/phosphor-hwmon_git.bb:do_fetch) failed with exit code &apos;1&apos;</code></pre><p>是因为改了这个库,bb文件已经修改,但是在本地的downloads/git2下没有找到里面的commit号,没有同步导致的,编译不过.<br>查看downloads/git2下该库已经被删掉了  ,再git clone –bare  到downloads/git2 里面.<br>在build下,执行bitbake obmc-phosphor-image又报错,是因为名字不该有.git后缀.</p>
-<p>重命名为没有.git后缀的目录,回到build下,执行bitbake obmc-phosphor-image,</p>
-<h2 id="五、又报错"><a href="#五、又报错" class="headerlink" title="五、又报错"></a>五、又报错</h2><p>还是找不到库,这次是内核linux库</p>
-<pre><code>ERROR: linux-aspeed-4.18.16+gitAUTOINC+72fbc47ed6-r0 do_fetch: Fetcher failure: Unable to find revision 72fbc47ed6c682c9ef362f622336221031dddf8d in branch dev-4.18 even from upstream
-ERROR: linux-aspeed-4.18.16+gitAUTOINC+72fbc47ed6-r0 do_fetch: Fetcher failure for URL: &apos;git://github.com/openbmc/linux;protocol=git;branch=dev-4.18&apos;. Unable to fetch URL from any source.
-ERROR: linux-aspeed-4.18.16+gitAUTOINC+72fbc47ed6-r0 do_fetch: Function failed: base_do_fetch
-ERROR: Logfile of failure stored in: /home/kunlun/rxsunSource/openbmc/build/tmp/work/haiguang2-openbmc-linux-gnueabi/linux-aspeed/4.18.16+gitAUTOINC+72fbc47ed6-r0/temp/log.do_fetch.11230
-ERROR: Task (/home/kunlun/rxsunSource/openbmc/meta-aspeed/recipes-kernel/linux/linux-aspeed_git.bb:do_fetch) failed with exit code &apos;1&apos;</code></pre><p>linux库有了变动 ,因为改了温控,是内核的,导致编译时间很久.<br>scp 后 重命名为没有.git后缀的目录,回到build下重新 执行bitbake obmc-phosphor-image,<br>成功.</p>
-<h2 id="六、构建后测试发现错误"><a href="#六、构建后测试发现错误" class="headerlink" title="六、构建后测试发现错误"></a>六、构建后测试发现错误</h2><p>开发人员提交修改的库,已经修改bb文件,只需要删掉后重新git clone –bare 并改名去掉.git<br>编译报错</p>
-<pre><code>ERROR: /home/kunlun/rxsunSource/openbmc/meta/recipes-core/os-release/os-release.bb: Error executing a python function in &lt;code&gt;:  --:--:--
-The stack trace of python calls that resulted in this exception/failure was:
-File: &apos;&lt;code&gt;&apos;, lineno: 12, function: &lt;module&gt;
-     0008:__anon_35__home_kunlun_rxsunSource_openbmc_meta_classes_devshell_bbclass(d)
-     0009:__anon_105__home_kunlun_rxsunSource_openbmc_meta_classes_sstate_bbclass(d)
-     0010:__anon_20__home_kunlun_rxsunSource_openbmc_meta_classes_blacklist_bbclass(d)
-     0011:__anon_50__home_kunlun_rxsunSource_openbmc_meta_classes_allarch_bbclass(d)
- *** 0012:__anon_28__home_kunlun_rxsunSource_openbmc_meta_phosphor_recipes_core_os_release_os_release_bbappend(d)
-File: &apos;/home/kunlun/rxsunSource/openbmc/meta-phosphor/recipes-core/os-release/os-release.bbappend&apos;, lineno: 23, function: __anon_28__home_kunlun_rxsunSource_openbmc_meta_phosphor_recipes_core_os_release_os_release_bbappend
-     0019:        d.setVar(&apos;VERSION_ID&apos;, version_id)
-     0020:        versionList = &quot;rc&quot;
-     0021:        versionList = version_id.split(&apos;-&apos;)
-     0022:        version = versionList[0] + &quot;-&quot; + versionList[1]
- *** 0023:        d.setVar(&apos;VERSION&apos;, version)
-     0024:
-     0025:    build_id = run_git(d, &apos;describe --abbrev=0&apos;)
-     0026:    if build_id:
-     0027:        d.setVar(&apos;BUILD_ID&apos;, build_id)
-Exception: IndexError: list index out of range
-
-ERROR: Failed to parse recipe: /home/kunlun/rxsunSource/openbmc/meta/recipes-core/os-release/os-release.bb</code></pre><p>解决办法,回退openbmc库到之前某个版本<br>git reset –hard 到 8f0bc988f7924e11899d64b48290a2bdad62891d  ,再git pull<br>bitbake又报错<br>git status  add commit  –可能还是打tag引起的问题,有时间修改一下这个文件<br>再bitbake</p>
-<h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><p>学会读openbmc里面的变更中提到的库名,及时同步更新.<br>最好还是建立一个本地库,否则被删除后只能重新scp ,而本地库可以只git pull变更的内容,然后再push到到底的裸库中.<br>编译某个版本之前要在群里先问一下谁改动了哪个库,编译好后要发给相关开发人员,让各个人分别验证一下<br>添加远程库可以用命令行:<br>git remote add local ~/rxsunSource/openbmc/build/downloads/git2/github.com.openbmc.phosphor-webui.git</p>
-
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/16/openBmcCompileSecond/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileSecond/" data-id="cjzw0mr34000akoslrte95li6" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bitbake/">bitbake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
     </footer>
   </div>
   
-</article>
+  
+  
+  </article>
 
+
+    
+      
 
   
-    <article id="post-openBmcCompileProcess" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/16/openBmcCompileProcess/" class="article-date">
-  <time datetime="2019-08-16T05:49:37.000Z" itemprop="datePublished">2019-08-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/bmc/">bmc</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunleaf2002.github.io/2019/08/16/openBmcCompileProcess/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ruixia,sun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruixia,Sun's Technique Blog">
+    </span>
+
     
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/16/openBmcCompileProcess/">openBmcCompileProcess</a>
-    </h1>
-  
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/16/openBmcCompileProcess/" itemprop="url">openBmcCompileProcess</a></h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-16T13:49:37+08:00">
+                2019-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bmc/" itemprop="url" rel="index">
+                    <span itemprop="name">bmc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <h1 id="在ubuntu-server16-04上构建openbmc的Release版本"><a href="#在ubuntu-server16-04上构建openbmc的Release版本" class="headerlink" title="在ubuntu server16.04上构建openbmc的Release版本"></a>在ubuntu server16.04上构建openbmc的Release版本</h1><h2 id="一、基本过程"><a href="#一、基本过程" class="headerlink" title="一、基本过程"></a>一、基本过程</h2><p>服务器环境准备好，用bitbake编译远程和本地的git库，维护各个git库将要被编入的commit号。</p>
+      
+
+      
+        
+          <h1 id="在ubuntu-server16-04上构建openbmc的Release版本"><a href="#在ubuntu-server16-04上构建openbmc的Release版本" class="headerlink" title="在ubuntu server16.04上构建openbmc的Release版本"></a>在ubuntu server16.04上构建openbmc的Release版本</h1><h2 id="一、基本过程"><a href="#一、基本过程" class="headerlink" title="一、基本过程"></a>一、基本过程</h2><p>服务器环境准备好，用bitbake编译远程和本地的git库，维护各个git库将要被编入的commit号。</p>
 <h2 id="二、环境准备工作"><a href="#二、环境准备工作" class="headerlink" title="二、环境准备工作"></a>二、环境准备工作</h2><p>bmcCompileBak上装ubuntu server16.04，所有服务器选项都勾上，配好网络地址。<br>为了运行bitbake，要先安装build-essential，这需要先apt update和 upgrade。</p>
-<h2 id="三、资料准备"><a href="#三、资料准备" class="headerlink" title="三、资料准备"></a>三、资料准备</h2><p>新建目录openbmc，在openbmc下 mkdir donwlowds ，在donwlowds下mkdir git2<br>用scp命令将本地gitlab服务器上openbmc组里除了“openbmc.git”以外的git库全部拷贝到git2目录下，这一步相当于git clone –bare，都是拷贝裸库的文件。<br>以后如果某个git库有变化，都要先删除它，再从gitlab服务器上 git clone –bare 一下，或者git pull一次。<br>回到openbmc目录下 git clone openbmc.git  ,这次克隆的是源代码，是要修改的。</p>
-<h2 id="四、第一次构建"><a href="#四、第一次构建" class="headerlink" title="四、第一次构建"></a>四、第一次构建</h2><p>在openbmc目录下<br>export TEMPLATECONF=meta-haiguang/meta-haiguang1/conf/<br>在openbmc下，执行. openbmc-env命令，会生成conf目录，可以cd conf进去， vim local.conf  看一下<br>也会生成build目录，cd 到此目录下 执行bitbake obmc-phosphor-image  ，注意，不能是root用户</p>
-<h2 id="五、编译过程中的问题一"><a href="#五、编译过程中的问题一" class="headerlink" title="五、编译过程中的问题一"></a>五、编译过程中的问题一</h2><pre><code>ERROR: phosphor-webui-1.0+gitAUTOINC+aacd2a572a-r1 do_fetch: Fetcher failure: Unable to find revision aacd2a572a36abc511da08b9a7b671e1265f7299 in branch master even from upstream</code></pre><p>是找不到某个分支上的某个commit号，<br>打开我们准备编译的版本中的这个文件，<br>vim meta-haiguang/meta-haiguang1/recipes-phosphor/webui/phosphor-webui_git.bb<br>改分支和commit号为正确的值。</p>
-<h2 id="六、编译过程中的问题二"><a href="#六、编译过程中的问题二" class="headerlink" title="六、编译过程中的问题二"></a>六、编译过程中的问题二</h2><pre><code>ERROR: pflash-v6.1-r0 do_fetch: Fetcher failure: Unable to find revision bb7ae1ade9e06a854771b8ed1e26f7d58b508e84 in branch master even from upstream
-
-ERROR: obmc-phosphor-image-1.0-r0 do_generate_static: Error executing a python function in exec_python_func() autogenerated:
-The stack trace of python calls that resulted in this exception/failure was:
-File: &apos;exec_python_func() autogenerated&apos;, lineno: 2, function: &lt;module&gt;
-     0001:
- *** 0002:do_generate_static(d) </code></pre><p> 好像是python环境没有   ubuntu server16.04 默认装2.7和3.5  切换一下就行 alias python=python3 也可以 echo alias python=python3 &gt;&gt; /home/kunlun/.bashrc   source /home/kunlun/.bashrc<br>执行bitbake obmc-phosphor-image ，仍然不对，再读错误信息，是找不到文件u-boot.bin</p>
-<pre><code>Exception: FileNotFoundError: [Errno 2] No such file or directory: &apos;/home/kunlun/rxsunSource/openbmc/build/tmp/deploy/images/haiguang1/u-boot.bin&apos;</code></pre><p>find ./ -name u-boot.bin</p>
-<pre><code>./tmp/work/haiguang1-openbmc-linux-gnueabi/u-boot-aspeed/1_v2016.07+gitAUTOINC+fc8646ea8a-r0/packages-split/u-boot-aspeed/boot/u-boot.bin
-./tmp/work/haiguang1-openbmc-linux-gnueabi/u-boot-aspeed/1_v2016.07+gitAUTOINC+fc8646ea8a-r0/package/boot/u-boot.bin
-./tmp/work/haiguang1-openbmc-linux-gnueabi/u-boot-aspeed/1_v2016.07+gitAUTOINC+fc8646ea8a-r0/build/u-boot.bin
-./tmp/work/haiguang1-openbmc-linux-gnueabi/u-boot-aspeed/1_v2016.07+gitAUTOINC+fc8646ea8a-r0/image/boot/u-boot.bin</code></pre><p>cp 第三个到 cp ./tmp/work/haiguang1-openbmc-linux-gnueabi/u-boot-aspeed/1_v2016.07+gitAUTOINC+fc8646ea8a-r0/build/u-boot.bin /home/kunlun/rxsunSource/openbmc/build/tmp/deploy/images/haiguang1/u-boot.bin<br>执行 bitbake obmc-phosphor-image编译不过去，提示需要python2.7,只好又改回来python2.7  </p>
-<h2 id="七、编译成功"><a href="#七、编译成功" class="headerlink" title="七、编译成功"></a>七、编译成功</h2><p>build下执行bitbake obmc-phosphor-image，编译成功，结果存放在/openbmc/build/tmp/deploy/images/haiguang1</p>
-<pre><code>-rw-rw-r-- 2 kunlun kunlun 33554432 8月  15 10:11 obmc-phosphor-image-haiguang1-20190815021143.static.mtd  烧录器所用
--rw-rw-r-- 2 kunlun kunlun 33566720 8月  15 10:13 obmc-phosphor-image-haiguang1-20190815021143.static.mtd.all.tar 带配置文件的
--rw-rw-r-- 2 kunlun kunlun 27637760 8月  15 10:12 obmc-phosphor-image-haiguang1-20190815021143.static.mtd.tar 不带配置文件的</code></pre><h2 id="八、改network库的commit号："><a href="#八、改network库的commit号：" class="headerlink" title="八、改network库的commit号："></a>八、改network库的commit号：</h2><p>有一个需求是network包要使用上一次的提交commit号，在vim meta-phosphor/classes/phosphor-networkd-rev.bbclass 中改，这是一个公共的库。<br>build下执行bitbake obmc-phosphor-image，编译成功,ftp到ftp服务器上。</p>
-<h2 id="九、测试人员发现没有版本，需要打标签"><a href="#九、测试人员发现没有版本，需要打标签" class="headerlink" title="九、测试人员发现没有版本，需要打标签"></a>九、测试人员发现没有版本，需要打标签</h2><p>先在openbmc目录下git tag查看一下，已经有v0.15之前的所有tag，再vim ./meta-phosphor/recipes-core/os-release/os-release.bbappend看到版本上上一次生成的v0.15，需要更新。<br>git describe –dirty=-release 也可以查看，已经到了v0.15<br>用git tag -a v0.16 -m “Release V0.16” 生成tag。</p>
-<h2 id="十、测试人员发现bios版本是0-0"><a href="#十、测试人员发现bios版本是0-0" class="headerlink" title="十、测试人员发现bios版本是0.0"></a>十、测试人员发现bios版本是0.0</h2><p>这是一个bug 打过tag后要再提交一次 </p>
-<pre><code>git status 
-    modified:   meta-haiguang/meta-haiguang1/recipes-phosphor/webui/phosphor-webui_git.bb
-    modified:   meta-phosphor/classes/phosphor-networkd-rev.bbclass
-git add . ,git commit</code></pre><p>vim ./tmp/sysroots-components/all/os-release/  查看结果<br>find ./ -name os-release<br>build下执行bitbake obmc-phosphor-image，编译成功,ftp到ftp服务器上。</p>
-<h2 id="十一、后续处理"><a href="#十一、后续处理" class="headerlink" title="十一、后续处理"></a>十一、后续处理</h2><p>写ReleaseNote.txt，包括本版本解决的所有bug。bug的解决方式可以是代码也可以是手册，手册修改对应的bug是哪一个，应该在发布版本时也加以说明。<br>ReleaseNote.txt,以及测试人员的用户手册和测试报告，都放到ftp服务器上。<br>为了易于分发，要分包压缩20m以下<br>做一个md5  将分包的文件解包为单个文件，用md5sum生成密码，再用“certulti -hashfile 文件名 md5” 验证md5码是否正确，发给用户。</p>
-
+<h2 id="三、资料准备"><a href="#三、资料准备" class="headerlink" title="三、资料准备"></a>三、资料准备</h2>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/16/openBmcCompileProcess/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/16/openBmcCompileProcess/" data-id="cjzw0mr330009kosl635oa52x" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bitbake/">bitbake</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bmc/">bmc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openbmc/">openbmc</a></li></ul>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
     </footer>
   </div>
   
-</article>
+  
+  
+  </article>
 
+
+    
+      
 
   
-    <article id="post-nfs-FileServer" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/15/nfs-FileServer/" class="article-date">
-  <time datetime="2019-08-15T06:13:23.000Z" itemprop="datePublished">2019-08-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunleaf2002.github.io/2019/08/15/nfs-FileServer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ruixia,sun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruixia,Sun's Technique Blog">
+    </span>
+
     
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/15/nfs-FileServer/">nfs-FileServer</a>
-    </h1>
-  
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/15/nfs-FileServer/" itemprop="url">nfs-FileServer</a></h1>
+        
 
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-15T14:13:23+08:00">
+                2019-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="nfs文件共享服务器配置过程"><a href="#nfs文件共享服务器配置过程" class="headerlink" title="nfs文件共享服务器配置过程"></a>nfs文件共享服务器配置过程</h1><h2 id="服务器端200-86-bmcCompileBak"><a href="#服务器端200-86-bmcCompileBak" class="headerlink" title="服务器端200.86 bmcCompileBak"></a>服务器端200.86 bmcCompileBak</h2><p>因为要用bmcCompileBak服务器上的openbmc目录<br>sudo apt install nfs-kernel-server<br>sudo vim /etc/exports<br>增加一行 /home/kunlun/rxsunSource/openbmc 192.168.200.84 (rw,sync,no_root_squash,no_subtree_check) //200.2是客户端地址</p>
-<p>sudo service rpcbind start<br>sudo service nfs-kernel-server start    //没有开机自启动<br>sudo /etc/init.d/nfs-kernel-server restart</p>
-<h2 id="客户端200-84"><a href="#客户端200-84" class="headerlink" title="客户端200.84"></a>客户端200.84</h2><p>sudo apt install nfs-common<br>sudo showmount -e 192.168.200.86 显示<br>Export list for 192.168.200.1:<br>/home/kunlun/rxsunSource/openbmc *  表示成功<br>sudo mount 192.168.200.86:/home/kunlun/rxsunSource/openbmc /home/kunlun/rxsunSource/openbmc //将服务端目录挂载到本地<br>sudo vim /etc/fstab   //添加开机自动挂载<br>增加一行 192.168.200.86:/home/kunlun/rxsunSource/openbmc /home/kunlun/rxsunSource/openbmc nfs rw 0 0<br>注意:/home/kunlun/rxsunSource/openbmc必须爱客户端是存在的,否则会报错:<br>mount.nfs: mount point /home/kunlun/rxsunSource/openbmc does not exist</p>
-<h2 id="ls-本地"><a href="#ls-本地" class="headerlink" title="ls 本地"></a>ls 本地</h2><p>可在本地的/home/kunlun/rxsunSource/openbmc看到服务器上的内容</p>
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="nfs文件共享服务器配置过程"><a href="#nfs文件共享服务器配置过程" class="headerlink" title="nfs文件共享服务器配置过程"></a>nfs文件共享服务器配置过程</h1><h2 id="服务器端200-86-bmcCompileBak"><a href="#服务器端200-86-bmcCompileBak" class="headerlink" title="服务器端200.86 bmcCompileBak"></a>服务器端200.86 bmcCompileBak</h2><p>因为要用bmcCompileBak服务器上的openbmc目录<br>sudo apt install nfs-kernel-server<br>sudo vim /etc/exports<br>增加一行 /home/kunlun/rxsunSource/openbmc 192.168.200.84 (rw,sync,no_root_squash,no_subtree_check) //200.2是客户端地址</p>
+<p>sudo service rpcbind start<br>sudo service nfs-kernel-server start    //没有开机自启动<br>sudo /etc/init.d/nfs-kernel-server restart</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/08/15/nfs-FileServer/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://sunleaf2002.github.io/2019/08/15/nfs-FileServer/" data-id="cjzw0mr310006kosl7f3gdey3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nfs/">nfs</a></li></ul>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
     </footer>
   </div>
   
-</article>
+  
+  
+  </article>
 
+
+    
+  </section>
 
   
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
-</section>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
         
-          <aside id="sidebar">
+          
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/bmc/">bmc</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/os/">os</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li></ul>
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
   </div>
 
-
-  
+  <aside id="sidebar" class="sidebar">
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitbake/">bitbake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bmc/">bmc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/build/">build</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disk/">disk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filerun/">filerun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fileshare/">fileshare</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitlab/">gitlab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbdserver/">nbdserver</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nfs/">nfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openbmc/">openbmc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redhat/">redhat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtulbox/">virtulbox</a></li></ul>
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ruixia,sun</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/sunleaf2002" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:sunleaf2002@126.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
     </div>
-  </div>
+  </aside>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/bitbake/" style="font-size: 14px;">bitbake</a> <a href="/tags/bmc/" style="font-size: 16px;">bmc</a> <a href="/tags/build/" style="font-size: 16px;">build</a> <a href="/tags/disk/" style="font-size: 12px;">disk</a> <a href="/tags/filerun/" style="font-size: 10px;">filerun</a> <a href="/tags/fileshare/" style="font-size: 10px;">fileshare</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/git/" style="font-size: 12px;">git</a> <a href="/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/nbdserver/" style="font-size: 10px;">nbdserver</a> <a href="/tags/nfs/" style="font-size: 10px;">nfs</a> <a href="/tags/openbmc/" style="font-size: 18px;">openbmc</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/redhat/" style="font-size: 12px;">redhat</a> <a href="/tags/selenium/" style="font-size: 10px;">selenium</a> <a href="/tags/ubuntu/" style="font-size: 14px;">ubuntu</a> <a href="/tags/virtulbox/" style="font-size: 10px;">virtulbox</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2019/08/28/搭建NBD-Server的过程/">搭建NBD Server的过程</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/24/填补openbmc编译过程中的一个坑/">填补openbmc编译过程中的一个坑</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/23/自动化构建工具的需求描述/">自动化构建工具的需求描述</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/22/Redhat上openbmc构建步骤/">Redhat上openbmc构建步骤</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/21/Redhat7-5新机器开箱记/">Redhat7.5新机器开箱记</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
         
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2019 ruixia,sun
-      <!--统计start-->
-      <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
-      </script>
-      <span id="busuanzi_container_site_pv">
-    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
   </span>
-      <span id="busuanzi_container_site_uv">
-  总访客数<span id="busuanzi_value_site_uv"></span>人次
-  </span>
-      <!--统计end-->
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
+  <span class="author" itemprop="copyrightHolder">ruixia,sun</span>
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+    <span class="site-uv">
+      <i class="fa fa-user"></i>Totally Visitors
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
   
-</nav>
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>Totally Visits
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
-
+    
 
   </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>
