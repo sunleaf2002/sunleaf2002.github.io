@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Ruixia,Sun&#39;s Technique Blog">
 <meta property="og:description" content="nfs文件共享服务器配置过程服务器端200.86 bmcCompileBak因为要用bmcCompileBak服务器上的openbmc目录sudo apt install nfs-kernel-serversudo vim /etc/exports增加一行 /home/kunlun/rxsunSource/openbmc 192.168.200.84 (rw,sync,no_root_squash">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-29T07:45:37.378Z">
+<meta property="og:updated_time" content="2019-09-04T01:15:37.159Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nfs-FileServer">
 <meta name="twitter:description" content="nfs文件共享服务器配置过程服务器端200.86 bmcCompileBak因为要用bmcCompileBak服务器上的openbmc目录sudo apt install nfs-kernel-serversudo vim /etc/exports增加一行 /home/kunlun/rxsunSource/openbmc 192.168.200.84 (rw,sync,no_root_squash">
@@ -392,7 +392,7 @@
         <h1 id="nfs文件共享服务器配置过程"><a href="#nfs文件共享服务器配置过程" class="headerlink" title="nfs文件共享服务器配置过程"></a>nfs文件共享服务器配置过程</h1><h2 id="服务器端200-86-bmcCompileBak"><a href="#服务器端200-86-bmcCompileBak" class="headerlink" title="服务器端200.86 bmcCompileBak"></a>服务器端200.86 bmcCompileBak</h2><p>因为要用bmcCompileBak服务器上的openbmc目录<br>sudo apt install nfs-kernel-server<br>sudo vim /etc/exports<br>增加一行 /home/kunlun/rxsunSource/openbmc 192.168.200.84 (rw,sync,no_root_squash,no_subtree_check) //200.2是客户端地址</p>
 <p>sudo service rpcbind start<br>sudo service nfs-kernel-server start    //没有开机自启动<br>sudo /etc/init.d/nfs-kernel-server restart</p>
 <a id="more"></a>
-<h2 id="客户端200-84"><a href="#客户端200-84" class="headerlink" title="客户端200.84"></a>客户端200.84</h2><p>sudo apt install nfs-common<br>sudo showmount -e 192.168.200.86 显示<br>Export list for 192.168.200.1:<br>/home/kunlun/rxsunSource/openbmc *  表示成功<br>sudo mount 192.168.200.86:/home/kunlun/rxsunSource/openbmc /home/kunlun/rxsunSource/openbmc //将服务端目录挂载到本地<br>sudo vim /etc/fstab   //添加开机自动挂载<br>增加一行 192.168.200.86:/home/kunlun/rxsunSource/openbmc /home/kunlun/rxsunSource/openbmc nfs rw 0 0<br>注意:/home/kunlun/rxsunSource/openbmc必须爱客户端是存在的,否则会报错:<br>mount.nfs: mount point /home/kunlun/rxsunSource/openbmc does not exist</p>
+<h2 id="客户端200-84"><a href="#客户端200-84" class="headerlink" title="客户端200.84"></a>客户端200.84</h2><p>sudo apt install nfs-common<br>sudo showmount -e 192.168.200.86 显示<br>Export list for 192.168.200.86:<br>/home/kunlun/rxsunSource/openbmc *  表示成功<br>sudo mount 192.168.200.86:/home/kunlun/rxsunSource/openbmc /home/kunlun/rxsunSource/openbmc //将服务端目录挂载到本地<br>sudo vim /etc/fstab   //添加开机自动挂载<br>增加一行 192.168.200.86:/home/kunlun/rxsunSource/openbmc /home/kunlun/rxsunSource/openbmc nfs rw 0 0<br>注意:/home/kunlun/rxsunSource/openbmc必须在客户端是存在的,否则会报错:<br>mount.nfs: mount point /home/kunlun/rxsunSource/openbmc does not exist</p>
 <h2 id="ls-本地"><a href="#ls-本地" class="headerlink" title="ls 本地"></a>ls 本地</h2><p>可在本地的/home/kunlun/rxsunSource/openbmc看到服务器上的内容</p>
 <p>=====================================================================================================     </p>
 
@@ -522,7 +522,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

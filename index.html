@@ -292,6 +292,309 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunleaf2002.github.io/2019/09/30/在-6服务器上改ftpServer配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ruixia,sun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruixia,Sun's Technique Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/30/在-6服务器上改ftpServer配置/" itemprop="url">在.6服务器上改ftpServer配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-30T15:50:44+08:00">
+                2019-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>为bmc在0.6上开一个用户:</p>
+<p>useradd -d /home/bmc -s /sbin/nologin bmc<br>usermod -g ftpuser bmc<br>以及  zkxiao  jdzhang  htliu</p>
+<p>vi /etc/vsftpd/vsftpd.conf<br>主要参数:<br>chroot_local_user=YES  —只能访问自己的目录<br>chroot_list_enable=YES  可以跃出自己的目录<br>chroot_list_file=/etc/vsftpd/chroot_list  (但是chroot_list 的内容为空)<br>userlist_enable=YES  —-写每个用户的固有目录<br>user_config_dir=/etc/vsftpd/userconfig<br>在userconfig目录下 vim  zhaoxin 写一行 local_root=/home/zhaoxin<br>同样vim bmc 写一行 local_root=/home/bmc</p>
+<p>systemctl restart vsftpd</p>
+<p>以下是为了改为默认的被动模式:<br>vi /etc/vsftpd/vsftpd.conf<br>pasv_enable=YES<br>pasv_min_port=10060<br>pasv_max_port=10090<br>再开放端口<br>[root@kunlunweb userconfig]# firewall-cmd –permanent –zone=public –add-port=10060-10090/tcp<br>success<br>[root@kunlunweb userconfig]# firewall-cmd –reload<br>success</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunleaf2002.github.io/2019/08/30/为openbmc生成认证文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ruixia,sun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruixia,Sun's Technique Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/30/为openbmc生成认证文件/" itemprop="url">为openbmc生成认证文件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-30T15:20:38+08:00">
+                2019-08-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>openbmc的新版webui有<br>升级openssl、如何自己创建证书、配置证书到服务器和自建CA。</p>
+<h2 id="验证版本"><a href="#验证版本" class="headerlink" title="验证版本"></a>验证版本</h2><p>kunlun@kunlunsec:<del>$ mkdir certificate_bmc<br>kunlun@kunlunsec:</del>$ cd certificate_bmc/<br>kunlun@kunlunsec:~/certificate_bmc$ openssl version -a<br>OpenSSL 1.1.0h  27 Mar 2018 (Library: OpenSSL 1.1.1c  28 May 2019)<br>built on: Fri May 31 12:25:41 2019 UTC<br>platform: debian-amd64<br>options:  bn(64,64) rc4(16x,int) des(int) blowfish(ptr)<br>compiler: gcc -fPIC -pthread -m64 -Wa,–noexecstack -Wall -Wa,–noexecstack -g -O2 -fstack-protector-strong -Wformat -Werror=format-security -DOPENSSL_USE_NODELETE -DL_ENDIAN -DOPENSSL_PIC -DOPENSSL_CPUID_OBJ -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_MONT5 -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DKECCAK1600_ASM -DRC4_ASM -DMD5_ASM -DAES_ASM -DVPAES_ASM -DBSAES_ASM -DGHASH_ASM -DECP_NISTZ256_ASM -DX25519_ASM -DPOLY1305_ASM -DNDEBUG -Wdate-time -D_FORTIFY_SOURCE=2<br>OPENSSLDIR: “/usr/lib/ssl”<br>ENGINESDIR: “/usr/lib/x86_64-linux-gnu/engines-1.1”</p>
+<p>要求版本大于1.0.1g，本机是OpenSSL 1.1.1c  </p>
+<h2 id="生成私钥"><a href="#生成私钥" class="headerlink" title="生成私钥"></a>生成私钥</h2><p>使用命名openssl genrsa -des3 -out private.key 2048<br>其中-des3代表加上了加密，后面的2048是代表生成的密钥的位数<br>kunlun@kunlunsec:~/certificate_bmc$ openssl genrsa -des3 -out private.key 2048<br>Generating RSA private key, 2048 bit long modulus<br>……+++++<br>……………+++++<br>e is 65537 (0x010001)<br>Enter pass phrase for private.key:<br>Verifying - Enter pass phrase for private.key:<br>这里的口令随意输入，比如dddd。</p>
+<p>kunlun@kunlunsec:~/certificate_bmc$ ll  –查看文件名<br>-rw——-  1 kunlun kunlun 1751 8月  30 15:32 private.key</p>
+<p>可见，private.key是个私钥文件。</p>
+<h2 id="生成证书请求"><a href="#生成证书请求" class="headerlink" title="生成证书请求"></a>生成证书请求</h2><p>kunlun@kunlunsec:~/certificate_bmc$ openssl req -new -key private.key -out server.cs<br>Enter pass phrase for private.key:<br>You are about to be asked to enter information that will be incorporated<br>into your certificate request.<br>What you are about to enter is what is called a Distinguished Name or a DN.<br>There are quite a few fields but you can leave some blank<br>For some fields there will be a default value,</p>
+<h2 id="If-you-enter-‘-’-the-field-will-be-left-blank"><a href="#If-you-enter-‘-’-the-field-will-be-left-blank" class="headerlink" title="If you enter ‘.’, the field will be left blank."></a>If you enter ‘.’, the field will be left blank.</h2><p>Country Name (2 letter code) [AU]:<br>State or Province Name (full name) [Some-State]:<br>Locality Name (eg, city) []:<br>Organization Name (eg, company) [Internet Widgits Pty Ltd]:<br>Organizational Unit Name (eg, section) []:<br>Common Name (e.g. server FQDN or YOUR name) []:192.168.200.40<br>Email Address []:</p>
+<p>Please enter the following ‘extra’ attributes<br>to be sent with your certificate request<br>A challenge password []:<br>An optional company name []:</p>
+<p>只有第一个输入口令“dddd”，以及Common Name输入了服务器地址，其它都回车了。</p>
+<p>kunlun@kunlunsec:~/certificate_bmc$ ll<br>-rw——-  1 kunlun kunlun 1751 8月  30 15:32 private.key<br>-rw-rw-r–  1 kunlun kunlun  993 8月  30 15:43 server.csr</p>
+<p>可见，server.csr是个请求文件。</p>
+<h2 id="生成服务器的私钥"><a href="#生成服务器的私钥" class="headerlink" title="生成服务器的私钥"></a>生成服务器的私钥</h2><p>kunlun@kunlunsec:<del>/certificate_bmc$ openssl rsa -in private.key -out server.key<br>Enter pass phrase for private.key:<br>writing RSA key<br>口令还是“dddd”<br>kunlun@kunlunsec:</del>/certificate_bmc$ ll<br>-rw——-  1 kunlun kunlun 1751 8月  30 15:32 private.key<br>-rw-rw-r–  1 kunlun kunlun  993 8月  30 15:43 server.csr<br>-rw——-  1 kunlun kunlun 1679 8月  30 15:46 server.key</p>
+<p>可见，server.key 是个服务器的私钥文件。</p>
+<h2 id="使用私钥为证书请求签名，生成给服务器签署的证书，格式是x509的PEM格式"><a href="#使用私钥为证书请求签名，生成给服务器签署的证书，格式是x509的PEM格式" class="headerlink" title="使用私钥为证书请求签名，生成给服务器签署的证书，格式是x509的PEM格式"></a>使用私钥为证书请求签名，生成给服务器签署的证书，格式是x509的PEM格式</h2><p>kunlun@kunlunsec:<del>/certificate_bmc$ openssl x509 -req -in server.csr -out server.crt -outform pem -signkey server.key -days 3650<br>Signature ok<br>subject=C = AU, ST = Some-State, O = Internet Widgits Pty Ltd, CN = 192.168.200.40<br>Getting Private key<br>kunlun@kunlunsec:</del>/certificate_bmc$ ll<br>-rw——-  1 kunlun kunlun 1751 8月  30 15:32 private.key<br>-rw-rw-r–  1 kunlun kunlun 1176 8月  30 15:49 server.crt<br>-rw-rw-r–  1 kunlun kunlun  993 8月  30 15:43 server.csr<br>-rw——-  1 kunlun kunlun 1679 8月  30 15:46 server.key</p>
+<p>可见，server.crt是给服务器的签过名的证书文件</p>
+<p>将这些文件移动到目录新创建的privateKey中。</p>
+<p>因为bmcserver只认可pem证书，而且要用CA证书进行签名，而不是用自己的私钥为证书请求签名，上面生成的server.crt不能用户bmcserver，能用于普通的http等服务器。</p>
+<p>下面使用CA.pl创建CA根证书</p>
+<h2 id="查找openssl-cnf文件"><a href="#查找openssl-cnf文件" class="headerlink" title="查找openssl.cnf文件"></a>查找openssl.cnf文件</h2><p>kunlun@kunlunsec:<del>/certificate_bmc$ ll /usr/lib/ssl/<br>总用量 20<br>drwxr-xr-x   3 root root  4096 10月 18  2018 ./<br>drwxr-xr-x 174 root root 12288 8月   8 14:43 ../<br>lrwxrwxrwx   1 root root    14 3月  17  2017 certs -&gt; /etc/ssl/certs/<br>drwxr-xr-x   2 root root  4096 10月 18  2018 misc/<br>lrwxrwxrwx   1 root root    20 5月  12  2018 openssl.cnf -&gt; /etc/ssl/openssl.cnf<br>lrwxrwxrwx   1 root root    16 3月  17  2017 private -&gt; /etc/ssl/private/<br>kunlun@kunlunsec:</del>/certificate_bmc$ vim /usr/lib/ssl/openssl.cnf<br>核实default_bits=2048</p>
+<h2 id="创建私钥和证书"><a href="#创建私钥和证书" class="headerlink" title="创建私钥和证书"></a>创建私钥和证书</h2><p>执行./CA.pl -newca命令<br>CA.pl会使用/usr/lib/ssl/openssl.cnf中的配置来创建私钥和证书。<br>创建CA证书过程中，不输入信息，直接回车，填写加密私钥的密码和生成CA证书的相关信息。<br>创建完之后会生成demoCA目录，查看</p>
+<p>kunlun@kunlunsec:~/certificate_bmc$ ./CA.pl  -newca<br>CA certificate filename (or enter to create)</p>
+<h1 id="Making-CA-certificate-…"><a href="#Making-CA-certificate-…" class="headerlink" title="Making CA certificate …"></a>Making CA certificate …</h1><p>openssl req  -new -keyout ./demoCA/private/cakey.pem -out ./demoCA/careq.pem<br>Generating a 2048 bit RSA private key<br>……………………………………………………………………………….+++++<br>…………+++++<br>writing new private key to ‘./demoCA/private/cakey.pem’<br>Enter PEM pass phrase:</p>
+<h2 id="Verifying-Enter-PEM-pass-phrase"><a href="#Verifying-Enter-PEM-pass-phrase" class="headerlink" title="Verifying - Enter PEM pass phrase:"></a>Verifying - Enter PEM pass phrase:</h2><p>You are about to be asked to enter information that will be incorporated<br>into your certificate request.<br>What you are about to enter is what is called a Distinguished Name or a DN.<br>There are quite a few fields but you can leave some blank<br>For some fields there will be a default value,</p>
+<h2 id="If-you-enter-‘-’-the-field-will-be-left-blank-1"><a href="#If-you-enter-‘-’-the-field-will-be-left-blank-1" class="headerlink" title="If you enter ‘.’, the field will be left blank."></a>If you enter ‘.’, the field will be left blank.</h2><p>Country Name (2 letter code) [AU]:CHINA<br>string is too long, it needs to be no more than 2 bytes long<br>Country Name (2 letter code) [AU]:CH<br>State or Province Name (full name) [Some-State]:BEIJING<br>Locality Name (eg, city) []:BEIJING<br>Organization Name (eg, company) [Internet Widgits Pty Ltd]:ZDKJ<br>Organizational Unit Name (eg, section) []:BIOS<br>Common Name (e.g. server FQDN or YOUR name) []:192.168.200.40<br>Email Address []:<a href="mailto:sunleaf2002@126.com" target="_blank" rel="noopener">sunleaf2002@126.com</a></p>
+<p>Please enter the following ‘extra’ attributes<br>to be sent with your certificate request<br>A challenge password []:dddd<br>An optional company name []:zdkj</p>
+<h1 id="gt-0"><a href="#gt-0" class="headerlink" title="==&gt; 0"></a>==&gt; 0</h1><p>====<br>openssl ca  -create_serial -out ./demoCA/cacert.pem -days 1095 -batch -keyfile ./demoCA/private/cakey.pem -selfsign -extensions v3_ca -infiles ./demoCA/careq.pem<br>Using configuration from /usr/lib/ssl/openssl.cnf<br>Enter pass phrase for ./demoCA/private/cakey.pem:<br>Can’t open ./demoCA/index.txt.attr for reading, No such file or directory<br>139984384927488:error:02001002:system library:fopen:No such file or directory:../crypto/bio/bss_file.c:72:fopen(‘./demoCA/index.txt.attr’,’r’)<br>139984384927488:error:2006D080:BIO routines:BIO_new_file:no such file:../crypto/bio/bss_file.c:79:<br>Check that the request matches the signature<br>Signature ok<br>Certificate Details:<br>        Serial Number:<br>            8b:a7:7b:6f:f9:07:db:81<br>        Validity<br>            Not Before: Aug 30 08:47:46 2019 GMT<br>            Not After : Aug 29 08:47:46 2022 GMT<br>        Subject:<br>            countryName               = CH<br>            stateOrProvinceName       = BEIJING<br>            organizationName          = ZDKJ<br>            organizationalUnitName    = BIOS<br>            commonName                = 192.168.200.40<br>            emailAddress              = <a href="mailto:sunleaf2002@126.com" target="_blank" rel="noopener">sunleaf2002@126.com</a><br>        X509v3 extensions:<br>            X509v3 Subject Key Identifier:<br>                9B:8F:B3:47:98:55:F8:42:3F:82:F3:C4:EF:55:19:E3:37:D2:AE:85<br>            X509v3 Authority Key Identifier:<br>                keyid:9B:8F:B3:47:98:55:F8:42:3F:82:F3:C4:EF:55:19:E3:37:D2:AE:85<br>            X509v3 Basic Constraints: critical<br>                CA:TRUE<br>Certificate is to be certified until Aug 29 08:47:46 2022 GMT (1095 days)</p>
+<p>Write out database with 1 new entries<br>Data Base Updated</p>
+<h1 id="gt-0-1"><a href="#gt-0-1" class="headerlink" title="==&gt; 0"></a>==&gt; 0</h1><p>CA certificate is in ./demoCA/cacert.pem</p>
+<p>输入口令的地方都是“dddd”。</p>
+<p>kunlun@kunlunsec:<del>/certificate_bmc$ sudo openssl genrsa -des3 -out private.key 2048<br>Generating RSA private key, 2048 bit long modulus<br>………………….+++++<br>…………………………………………………………………+++++<br>e is 65537 (0x010001)<br>Enter pass phrase for private.key:<br>Verifying - Enter pass phrase for private.key:<br>kunlun@kunlunsec:</del>/certificate_bmc$ sudo openssl req -new -key private.key -out server.csr<br>Enter pass phrase for private.key:<br>You are about to be asked to enter information that will be incorporated<br>into your certificate request.<br>What you are about to enter is what is called a Distinguished Name or a DN.<br>There are quite a few fields but you can leave some blank<br>For some fields there will be a default value,</p>
+<h2 id="If-you-enter-‘-’-the-field-will-be-left-blank-2"><a href="#If-you-enter-‘-’-the-field-will-be-left-blank-2" class="headerlink" title="If you enter ‘.’, the field will be left blank."></a>If you enter ‘.’, the field will be left blank.</h2><p>Country Name (2 letter code) [AU]:CH<br>State or Province Name (full name) [Some-State]:BEIJING<br>Locality Name (eg, city) []:BEIJING<br>Organization Name (eg, company) [Internet Widgits Pty Ltd]:ZDKJ<br>Organizational Unit Name (eg, section) []:BIOS<br>Common Name (e.g. server FQDN or YOUR name) []:192.168.200.40<br>Email Address []:<a href="mailto:sunleaf2002@126.com" target="_blank" rel="noopener">sunleaf2002@126.com</a></p>
+<p>Please enter the following ‘extra’ attributes<br>to be sent with your certificate request<br>A challenge password []:dddd<br>An optional company name []:zdkj</p>
+<p>kunlun@kunlunsec:<del>/certificate_bmc$ sudo openssl rsa -in private.key -out server.key<br>Enter pass phrase for private.key:<br>writing RSA key<br>kunlun@kunlunsec:</del>/certificate_bmc$ cp server.csr newreq.pem<br>kunlun@kunlunsec:~/certificate_bmc$ ll<br>总用量 40<br>drwxrwxr-x  4 kunlun kunlun 4096 8月  30 16:51 ./<br>drwxr-xr-x 54 kunlun kunlun 4096 8月  30 15:28 ../<br>-rwxrwxrwx  1 kunlun kunlun 6754 8月  30 16:00 CA.pl*<br>drwxrwxr-x  6 kunlun kunlun 4096 8月  30 16:47 demoCA/<br>-rw-r–r–  1 kunlun kunlun 1110 8月  30 16:51 newreq.pem<br>-rw——-  1 root   root   1751 8月  30 16:50 private.key<br>drwxrwxr-x  2 kunlun kunlun 4096 8月  30 16:35 privateKey/<br>-rw-r–r–  1 root   root   1110 8月  30 16:50 server.csr<br>-rw——-  1 root   root   1679 8月  30 16:51 server.key</p>
+<h1 id="kunlun-kunlunsec-certificate-bmc-CA-pl-sign"><a href="#kunlun-kunlunsec-certificate-bmc-CA-pl-sign" class="headerlink" title="kunlun@kunlunsec:~/certificate_bmc$ ./CA.pl -sign"></a>kunlun@kunlunsec:~/certificate_bmc$ ./CA.pl -sign</h1><p>openssl ca  -policy policy_anything -out newcert.pem -infiles newreq.pem<br>Using configuration from /usr/lib/ssl/openssl.cnf<br>Enter pass phrase for ./demoCA/private/cakey.pem:<br>Check that the request matches the signature<br>Signature ok<br>Certificate Details:<br>        Serial Number:<br>            8b:a7:7b:6f:f9:07:db:82<br>        Validity<br>            Not Before: Aug 30 08:51:43 2019 GMT<br>            Not After : Aug 29 08:51:43 2020 GMT<br>        Subject:<br>            countryName               = CH<br>            stateOrProvinceName       = BEIJING<br>            localityName              = BEIJING<br>            organizationName          = ZDKJ<br>            organizationalUnitName    = BIOS<br>            commonName                = 192.168.200.40<br>            emailAddress              = <a href="mailto:sunleaf2002@126.com" target="_blank" rel="noopener">sunleaf2002@126.com</a><br>        X509v3 extensions:<br>            X509v3 Basic Constraints:<br>                CA:FALSE<br>            Netscape Comment:<br>                OpenSSL Generated Certificate<br>            X509v3 Subject Key Identifier:<br>                B6:25:F8:1C:62:AC:23:0B:67:C2:E7:56:88:D4:1E:0D:BF:AE:F4:58<br>            X509v3 Authority Key Identifier:<br>                keyid:9B:8F:B3:47:98:55:F8:42:3F:82:F3:C4:EF:55:19:E3:37:D2:AE:85</p>
+<p>Certificate is to be certified until Aug 29 08:51:43 2020 GMT (365 days)<br>Sign the certificate? [y/n]:y<br>1 out of 1 certificate requests certified, commit? [y/n]y<br>Write out database with 1 new entries<br>Data Base Updated</p>
+<h1 id="gt-0-2"><a href="#gt-0-2" class="headerlink" title="==&gt; 0"></a>==&gt; 0</h1><p>Signed certificate is in newcert.pem<br>kunlun@kunlunsec:~/certificate_bmc$ ll<br>-rwxrwxrwx  1 kunlun kunlun 6754 8月  30 16:00 CA.pl*<br>drwxrwxr-x  6 kunlun kunlun 4096 8月  30 16:52 demoCA/<br>-rw-rw-r–  1 kunlun kunlun 4669 8月  30 16:52 newcert.pem<br>-rw-r–r–  1 kunlun kunlun 1110 8月  30 16:51 newreq.pem<br>-rw——-  1 root   root   1751 8月  30 16:50 private.key<br>drwxrwxr-x  2 kunlun kunlun 4096 8月  30 16:35 privateKey/<br>-rw-r–r–  1 root   root   1110 8月  30 16:50 server.csr<br>-rw——-  1 root   root   1679 8月  30 16:51 server.key</p>
+<p>以上参考了<br><a href="https://blog.csdn.net/pz0605/article/details/51954876" target="_blank" rel="noopener">https://blog.csdn.net/pz0605/article/details/51954876</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sunleaf2002.github.io/2019/08/28/搭建NBD-Server的过程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1469,301 +1772,6 @@ Operating System: Red Hat Enterprise Linux Server 7.5 (Maipo)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sunleaf2002.github.io/2019/08/16/openBmcCompileProcess/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ruixia,sun">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruixia,Sun's Technique Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/16/openBmcCompileProcess/" itemprop="url">openBmcCompileProcess</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-16T13:49:37+08:00">
-                2019-08-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bmc/" itemprop="url" rel="index">
-                    <span itemprop="name">bmc</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="在ubuntu-server16-04上构建openbmc的Release版本"><a href="#在ubuntu-server16-04上构建openbmc的Release版本" class="headerlink" title="在ubuntu server16.04上构建openbmc的Release版本"></a>在ubuntu server16.04上构建openbmc的Release版本</h1><h2 id="一、基本过程"><a href="#一、基本过程" class="headerlink" title="一、基本过程"></a>一、基本过程</h2><p>服务器环境准备好，用bitbake编译远程和本地的git库，维护各个git库将要被编入的commit号。</p>
-<h2 id="二、环境准备工作"><a href="#二、环境准备工作" class="headerlink" title="二、环境准备工作"></a>二、环境准备工作</h2><p>bmcCompileBak上装ubuntu server16.04，所有服务器选项都勾上，配好网络地址。<br>为了运行bitbake，要先安装build-essential，这需要先apt update和 upgrade。</p>
-<h2 id="三、资料准备"><a href="#三、资料准备" class="headerlink" title="三、资料准备"></a>三、资料准备</h2>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/08/16/openBmcCompileProcess/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sunleaf2002.github.io/2019/08/15/nfs-FileServer/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ruixia,sun">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruixia,Sun's Technique Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/15/nfs-FileServer/" itemprop="url">nfs-FileServer</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-15T14:13:23+08:00">
-                2019-08-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="nfs文件共享服务器配置过程"><a href="#nfs文件共享服务器配置过程" class="headerlink" title="nfs文件共享服务器配置过程"></a>nfs文件共享服务器配置过程</h1><h2 id="服务器端200-86-bmcCompileBak"><a href="#服务器端200-86-bmcCompileBak" class="headerlink" title="服务器端200.86 bmcCompileBak"></a>服务器端200.86 bmcCompileBak</h2><p>因为要用bmcCompileBak服务器上的openbmc目录<br>sudo apt install nfs-kernel-server<br>sudo vim /etc/exports<br>增加一行 /home/kunlun/rxsunSource/openbmc 192.168.200.84 (rw,sync,no_root_squash,no_subtree_check) //200.2是客户端地址</p>
-<p>sudo service rpcbind start<br>sudo service nfs-kernel-server start    //没有开机自启动<br>sudo /etc/init.d/nfs-kernel-server restart</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/08/15/nfs-FileServer/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1814,7 +1822,7 @@ Operating System: Red Hat Enterprise Linux Server 7.5 (Maipo)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
