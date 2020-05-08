@@ -292,6 +292,238 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunleaf2002.github.io/2020/05/08/一键同步git库和文本中commit号到编译服务器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ruixia,sun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruixia,Sun's Technique Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/08/一键同步git库和文本中commit号到编译服务器/" itemprop="url">一键同步git库和文本中commit号到编译服务器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-08T11:15:44+08:00">
+                2020-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>经常要将bmcweb的git库同步到编译服务器上，并更新服务器上的commit号，太繁琐，忍无可忍，拼凑了几个脚本，可以实现自动同步git库和更新commit号的功能，记下来，供大家参考。</p>
+<p>主体是4个脚本，不会写大脚本，分开写，再合并为一个脚本命令一键执行,所有脚本创建后都要chmod +x *.sh授予执行权限。</p>
+<p>脚本及以下操作都在本地的bmcweb目录中进行。</p>
+<p>先查看本地bmcweb中.git/config文件配置如下：</p>
+<pre><code>[core]
+
+        repositoryformatversion = 0
+
+        filemode = true
+
+        bare = false
+
+        logallrefupdates = true
+
+[remote &quot;origin&quot;]
+
+        url = git@192.168.x.x:openbmc-v28/github.com.openbmc.bmcweb.git
+
+        fetch = +refs/heads/*:refs/remotes/origin/*
+
+[remote &quot;v28&quot;]
+
+        url = kunlun@192.168.x.18:/home/kunlun/rxsunSource/openbmc-v28/build/downloads/git2/github.com.openbmc.bmcweb.git/
+
+        fetch = +refs/heads/*:refs/remotes/origin/*
+
+[branch &quot;master&quot;]
+
+        remote = origin
+
+        merge = refs/heads/master
+
+[credential]
+
+        helper = store
+```</code></pre><p>其中的v28远程库对应着编译服务器，origin对应着gitlab开发服务器，这里不用。</p>
+<hr>
+<p>第一个脚本01-git-push.sh 是将本地的git库push到服务器上，push的目的地v28，-f选项是强制提交，bios是v28远程库所在机器的用户kunlun的口令</p>
+<p>###01-git-push.sh </p>
+<pre><code>#!/usr/bin/expect
+
+spawn git push v28 master -f
+
+expect &quot;password&quot;
+
+send &quot;bios\r&quot;
+
+expect eof</code></pre><p>第二个脚本02-scp-from-18.sh 是将v28服务器上的bmcweb_git.bb复制到本地bmcweb目录下</p>
+<p>###02-scp-from-18.sh </p>
+<pre><code>#!/usr/bin/expect
+
+spawn scp kunlun@192.168.x.18:/home/kunlun/rxsunSource/openbmc-v28/meta-phosphor/recipes-phosphor/interfaces/bmcweb_git.bb .
+
+expect &quot;password&quot;
+
+send &quot;bios\r&quot;
+
+expect eof</code></pre><p>第三个脚本03-sed-commitId.sh 是将bmcweb_git.bb中commit号替换为最新的commit号，因为sed不能保存，所以重定向到临时文件再重命名</p>
+<p>###03-sed-commitId.sh  </p>
+<pre><code>#!/bin/bash
+
+newCommitId=`git rev-parse HEAD`
+
+originCommitId=`cat bmcweb_git.bb | grep SRCREV | gawk -F= &apos;{ print $2}&apos; | sed &apos;s/&quot;//g&apos;`
+
+echo change $originCommitId to  $newCommitId
+
+sed  &quot;s/$originCommitId/$newCommitId/g&quot;  bmcweb_git.bb &gt; bmcweb_git.bb.tmp
+
+mv bmcweb_git.bb.tmp bmcweb_git.bb</code></pre><p>第四个脚本04-scp-to-18.sh 是将改后的bmcweb_git.bb拷贝到远程服务器上，可以覆盖目的地的同名文件</p>
+<p>###04-scp-to-18.sh</p>
+<pre><code>#!/usr/bin/expect
+
+spawn scp   bmcweb_git.bb  kunlun@192.168.x.18:/home/kunlun/rxsunSource/openbmc-v28/meta-phosphor/recipes-phosphor/interfaces/
+
+expect &quot;password&quot;
+
+send &quot;bios\r&quot;
+
+expect eof</code></pre><hr>
+<p>将以上四个脚本的执行命令写到一个文件里，命名为a.sh ，记得执行chmod +x a.sh</p>
+<p>./01-git-push.sh &amp;&amp; ./02-scp-from-18.sh &amp;&amp; ./03-sed-commitId.sh &amp;&amp; ./04-scp-to-18.sh</p>
+<p>执行时只要./a.sh就可以完成以前的很多步操作。</p>
+<hr>
+<p>使用注意事项：</p>
+<p>1.配置本地的.git/config文件，添加编译服务器的目录为远程库;</p>
+<p>2.将01-git-push.sh中的“spawn git push v28 master -f”的“v28”改自己的远程库名称;</p>
+<p>3.在02-scp-from-18.sh、03-sed-commitId.sh和04-scp-to-18.sh中bb文件的位置和名称，要替换成自己工作文件的位置和名称;</p>
+<p>4.将所有send后面的bios替换为自己远程库用户的口令;</p>
+<p>5.我的有些服务器可接受客户端公钥文件内容到authorized_keys中，免口令scp，也可以先自己服务器上尝试一下；</p>
+<p>6.本地机器上需要有expect包，用apt-get install expect安装。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sunleaf2002.github.io/2019/09/30/在-6服务器上改ftpServer配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1624,154 +1856,6 @@ Operating System: Red Hat Enterprise Linux Server 7.5 (Maipo)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sunleaf2002.github.io/2019/08/16/openBmcCompileSecond/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ruixia,sun">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ruixia,Sun's Technique Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/16/openBmcCompileSecond/" itemprop="url">openBmcCompileSecond</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-16T17:39:49+08:00">
-                2019-08-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bmc/" itemprop="url" rel="index">
-                    <span itemprop="name">bmc</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="构建openbmc另一个厂商的Release版本"><a href="#构建openbmc另一个厂商的Release版本" class="headerlink" title="构建openbmc另一个厂商的Release版本"></a>构建openbmc另一个厂商的Release版本</h1><h2 id="一、识别厂商和改动的库"><a href="#一、识别厂商和改动的库" class="headerlink" title="一、识别厂商和改动的库"></a>一、识别厂商和改动的库</h2><p>需要搞清楚哪个库的修改的commit号在哪里改,开发人员都已经在openbmc.git库里面改好，只有webui需要手工改，位置在：<br>vim meta-haiguang/meta-haiguang2/recipes-phosphor/webui/phosphor-webui_git.bb,其中 meta-haiguang2 是本次将要构建的厂商版本</p>
-<p>另外已知有温控git库做了改动, 它的修改 vim meta-phosphor/classes/skeleton-rev.bbclass可以看到,开发人员已经改好.</p>
-<h2 id="二、更新改动的库"><a href="#二、更新改动的库" class="headerlink" title="二、更新改动的库"></a>二、更新改动的库</h2><p>要删掉downloads/git2下面的webui和skeleton库,再git clone –bare 一下<br>还是选择在本地 rxsunSource/git下克隆一个源代码库 加一个remote为 downloads/git2下的库名称 ,push这里,为构建所用.</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/08/16/openBmcCompileSecond/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1822,7 +1906,7 @@ Operating System: Red Hat Enterprise Linux Server 7.5 (Maipo)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1844,7 +1928,7 @@ Operating System: Red Hat Enterprise Linux Server 7.5 (Maipo)
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1897,7 +1981,7 @@ Operating System: Red Hat Enterprise Linux Server 7.5 (Maipo)
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
