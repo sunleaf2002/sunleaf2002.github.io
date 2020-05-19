@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="bmc,postman,">
 
 
 
@@ -79,14 +79,20 @@
 
 
 
-<meta name="keywords" content="bmc linux">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ruixia,Sun&#39;s Technique Blog">
-<meta property="og:url" content="https://sunleaf2002.github.io/tags/bmc/index.html">
+<meta name="description" content="一、用root账号登录并生成token1.创建一个用例，路径是 https://IP/login，post方法2.声明数据格式，在Header的Tab页中输入一组key/valueContent-Type/ application/json3.为登录口令创建加密串，openbmc登录用的加密串，将生成的串存储为参数。在pre-request-script的Tab页输入 var pw = Crypt">
+<meta name="keywords" content="bmc,postman">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Postman工具在openbmc中的使用举例">
+<meta property="og:url" content="https://sunleaf2002.github.io/2020/05/19/Postman工具在openbmc中的使用举例/index.html">
 <meta property="og:site_name" content="Ruixia,Sun&#39;s Technique Blog">
+<meta property="og:description" content="一、用root账号登录并生成token1.创建一个用例，路径是 https://IP/login，post方法2.声明数据格式，在Header的Tab页中输入一组key/valueContent-Type/ application/json3.为登录口令创建加密串，openbmc登录用的加密串，将生成的串存储为参数。在pre-request-script的Tab页输入 var pw = Crypt">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://sunleaf2002.github.io/img/postman-bmc-example.png">
+<meta property="og:updated_time" content="2020-05-19T03:09:34.403Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ruixia,Sun&#39;s Technique Blog">
+<meta name="twitter:title" content="Postman工具在openbmc中的使用举例">
+<meta name="twitter:description" content="一、用root账号登录并生成token1.创建一个用例，路径是 https://IP/login，post方法2.声明数据格式，在Header的Tab页中输入一组key/valueContent-Type/ application/json3.为登录口令创建加密串，openbmc登录用的加密串，将生成的串存储为参数。在pre-request-script的Tab页输入 var pw = Crypt">
+<meta name="twitter:image" content="https://sunleaf2002.github.io/img/postman-bmc-example.png">
 
 
 
@@ -116,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://sunleaf2002.github.io/tags/bmc/">
+  <link rel="canonical" href="https://sunleaf2002.github.io/2020/05/19/Postman工具在openbmc中的使用举例/">
 
 
 
 
 
-  <title>标签: bmc | Ruixia,Sun's Technique Blog</title>
+  <title>Postman工具在openbmc中的使用举例 | Ruixia,Sun's Technique Blog</title>
   
 
 
@@ -141,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-right ">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -277,208 +283,198 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>bmc<small>标签</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunleaf2002.github.io/2020/05/19/Postman工具在openbmc中的使用举例/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ruixia,sun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ruixia,Sun's Technique Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2020/05/19/Postman工具在openbmc中的使用举例/" itemprop="url">
-              
-                <span itemprop="name">Postman工具在openbmc中的使用举例</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Postman工具在openbmc中的使用举例</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-05-19T10:45:04+08:00" content="2020-05-19">
-          05-19
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-19T10:45:04+08:00">
+                2020-05-19
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bmc/" itemprop="url" rel="index">
+                    <span itemprop="name">bmc</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2020/05/08/一键同步git库和文本中commit号到编译服务器/" itemprop="url">
-              
-                <span itemprop="name">一键同步git库和文本中commit号到编译服务器</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-05-08T11:15:44+08:00" content="2020-05-08">
-          05-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
+        <h2 id="一、用root账号登录并生成token"><a href="#一、用root账号登录并生成token" class="headerlink" title="一、用root账号登录并生成token"></a>一、用root账号登录并生成token</h2><p>1.创建一个用例，路径是 <a href="https://IP/login，post方法" target="_blank" rel="noopener">https://IP/login，post方法</a><br>2.声明数据格式，在Header的Tab页中输入一组key/value<br>Content-Type/ application/json<br>3.为登录口令创建加密串，openbmc登录用的加密串，将生成的串存储为参数。<br>在pre-request-script的Tab页输入</p>
+<p>var pw = CryptoJS.enc.Utf8.parse(“xxx”)<br>var base64 = CryptoJS.enc.Base64.stringify(pw)<br>pm.environment.set(“originPassword”, base64)</p>
+<p>4.输入post方法的参数，使用上一步生成的originPassword参数<br>在Body的Tab页输入</p>
+<p>{“username” : “root”, “password” : “{ {originPassword} }” }</p>
+<p>5.完成测试代码，并生成root-token全局变量，这个变量可以在所有的用例中作为登录认证来使用<br>在Test的Tab页输入</p>
+<a id="more"></a>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/08/24/填补openbmc编译过程中的一个坑/" itemprop="url">
-              
-                <span itemprop="name">填补openbmc编译过程中的一个坑</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-24T21:17:49+08:00" content="2019-08-24">
-          08-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/08/23/自动化构建工具的需求描述/" itemprop="url">
-              
-                <span itemprop="name">自动化构建工具的需求描述</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-23T15:22:11+08:00" content="2019-08-23">
-          08-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/08/22/Redhat上openbmc构建步骤/" itemprop="url">
-              
-                <span itemprop="name">Redhat上openbmc构建步骤</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-22T08:51:45+08:00" content="2019-08-22">
-          08-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/08/16/openBmcCompileSecond/" itemprop="url">
-              
-                <span itemprop="name">openBmcCompileSecond</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-16T17:39:49+08:00" content="2019-08-16">
-          08-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/08/16/openBmcCompileProcess/" itemprop="url">
-              
-                <span itemprop="name">openBmcCompileProcess</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-16T13:49:37+08:00" content="2019-08-16">
-          08-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+<p>var data = JSON.parse(responseBody);<br>if (data.token) {<br>  tests[“Body has token”] = true;<br>  pm.globals.set(“root-token”, data.token);<br>}<br>else {<br>  tests[“Body has token”] = false;<br>}</p>
+<h2 id="二、在用例中使用root-token，以生成oper用户为例"><a href="#二、在用例中使用root-token，以生成oper用户为例" class="headerlink" title="二、在用例中使用root-token，以生成oper用户为例"></a>二、在用例中使用root-token，以生成oper用户为例</h2><p>1.创建一个用例，路径是 <a href="https://IP/redfish/v1/AccountService/Accounts,POST方法" target="_blank" rel="noopener">https://IP/redfish/v1/AccountService/Accounts,POST方法</a><br>2.在Header的Tab页除了声明数据格式Content-Type/ application/json，再输入一组key/value，X-Auth-Token：NaN<br>3.如果有加密数据，仍需要为加密后的串设置参数。如果post参数中没有加密串，可以跳过这一步<br>在pre-request-script的Tab页输入</p>
+<p>var pw = CryptoJS.enc.Utf8.parse(“xxx”)<br>var base64 = CryptoJS.enc.Base64.stringify(pw)<br>pm.environment.set(“password”, base64)</p>
+<p>4.输入post方法的参数，使用上一步生成的root-password参数<br>在Body的Tab页输入</p>
+<p>{“UserName”:”oper”,”RoleId”:”Operator”,”Enabled”:true,”Password”:”{ {password} }”}</p>
+<p>5.完成测试代码，确保输出信息中有成功信息<br>在Test的Tab页输入</p>
+<p>tests[“create oper “] = responseBody.has(“The resource has been created successfully”);</p>
+<h2 id="三、以此类推"><a href="#三、以此类推" class="headerlink" title="三、以此类推"></a>三、以此类推</h2><p>1.可以对root之外的用户生成token，不同角色的账号权限不同<br>2.POST\GET\PATCH\DELETE,只要是登录状态的用例，都要在Header的X-Auth-Tokentoken项输入对应的用户token</p>
+<img src="/img/postman-bmc-example.png">
       
     </div>
+    
+    
+    
 
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/img/qrcode_rxsun.jpg" alt="ruixia,sun wechat" style="width: 200px; max-width: 100%;">
+    <div>生活相关，请扫描wechat帐号获取更多精彩内容。。。。。。</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/bmc/" rel="tag"># bmc</a>
+          
+            <a href="/tags/postman/" rel="tag"># postman</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/08/一键同步git库和文本中commit号到编译服务器/" rel="next" title="一键同步git库和文本中commit号到编译服务器">
+                <i class="fa fa-chevron-left"></i> 一键同步git库和文本中commit号到编译服务器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -486,6 +482,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -506,8 +506,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -583,6 +592,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、用root账号登录并生成token"><span class="nav-number">1.</span> <span class="nav-text">一、用root账号登录并生成token</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、在用例中使用root-token，以生成oper用户为例"><span class="nav-number">2.</span> <span class="nav-text">二、在用例中使用root-token，以生成oper用户为例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、以此类推"><span class="nav-number">3.</span> <span class="nav-text">三、以此类推</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -746,6 +771,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
